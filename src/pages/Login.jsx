@@ -11,7 +11,7 @@ export default function Login() {
   const MIN_PASSWORD_LENGTH = 6;
 
   const setLocalStorage = () => {
-    const userInfo = JSON.stringify(userData);
+    const userInfo = JSON.stringify({ email: userData.email });
     localStorage.setItem('user', userInfo);
     history.push('/meals');
   };
@@ -46,7 +46,7 @@ export default function Login() {
         <button
           disabled={
             !(emailValidation.test(userData.email)
-            && userData.password.length >= MIN_PASSWORD_LENGTH)
+            && userData.password.length > MIN_PASSWORD_LENGTH)
           }
           data-testid="login-submit-btn"
           onClick={ setLocalStorage }
