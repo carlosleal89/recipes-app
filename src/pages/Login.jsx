@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom/';
 import './Login.css';
+import MealsContext from '../context/MealsContext';
 
 export default function Login() {
   const [userData, setUserData] = useState({
@@ -16,6 +17,10 @@ export default function Login() {
     localStorage.setItem('user', userInfo);
     history.push('/meals');
   };
+  const { mealList, setMealList } = useContext(MealsContext);
+  console.log(mealList);
+  setMealList('hi');
+  console.log(mealList);
 
   return (
     <div className="login-page-div">

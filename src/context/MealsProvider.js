@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import MealsContext from './MealsContext';
 
 export default function MealsProvider({ children }) {
-  const [mealList, setMealList] = useState([]);
-  console.log(typeof setMealList); // apenas pra agradar o lint;
+  const [mealList, setMealList] = useState('test');
+  const mealsContext = useMemo(() => (
+    { mealList, setMealList }), [mealList, setMealList]);
   return (
     <MealsContext.Provider
-      value={ mealList }
+      value={ mealsContext }
     >
       { children }
     </MealsContext.Provider>
