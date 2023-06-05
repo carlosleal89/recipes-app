@@ -6,7 +6,7 @@ import Login from './pages/Login';
 
 function App() {
   return (
-    <main>
+    <main className="main-div">
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={ Login } />
