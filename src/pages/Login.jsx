@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom/';
+
+export default function Login() {
+  const [userData, setUserData] = useState({
+    email: '',
+    password: '',
+  });
+  const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const history = useHistory();
+  const MIN_PASSWORD_LENGTH = 4;
+
+  const setLocalStorage = () => {
+    localStorage.setItem('user', userData);
+    history.push('/');
+  };
+
+  return (
+    <div className="login-page-div">
+      <h1>Recipes</h1>
+      <h2>Login</h2>
+      <div className="inputs-div">
+        <label htmlFor="email-input">
+          <input
+            type="text"
+            id="email-input"
+            value={ userData }
+            data-testid="email-input"
+            placeholder="Email"
+            onChange={ ({ target }) => setUserData({ ...userData, email: target.value }) }
+          />
+        </label>
+        <label htmlFor="password-input">
+          <input
+            type="text"
+            id="password-input"
+            value={ userPassword }
+            data-testid="password-input"
+            placeholder="Password"
+            onChange={ ({ target }) => setUserData({
+              ...userData, password: target.value,
+            }) }
+          />
+        </label>
+        <button
+          disabled={
+            (emailValidation.test(userData.email)
+            && userData.password.length >= MIN_PASSWORD_LENGTH)
+          }
+          data-testid="login-submit-btn"
+          onClick={ setLocalStorage }
+        >
+          Enter
+        </button>
+      </div>
+    </div>
+  );
+}
