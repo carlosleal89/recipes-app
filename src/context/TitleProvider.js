@@ -21,4 +21,4 @@ TitleProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default TitleContext;
+export default TitleProvider;
