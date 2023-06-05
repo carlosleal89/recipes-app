@@ -8,11 +8,12 @@ export default function Login() {
   });
   const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const history = useHistory();
-  const MIN_PASSWORD_LENGTH = 4;
+  const MIN_PASSWORD_LENGTH = 6;
 
   const setLocalStorage = () => {
-    localStorage.setItem('user', userData);
-    history.push('/');
+    const userInfo = JSON.stringify(userData);
+    localStorage.setItem('user', userInfo);
+    history.push('/meals');
   };
 
   return (
@@ -24,7 +25,7 @@ export default function Login() {
           <input
             type="text"
             id="email-input"
-            value={ userData }
+            value={ userData.email }
             data-testid="email-input"
             placeholder="Email"
             onChange={ ({ target }) => setUserData({ ...userData, email: target.value }) }
@@ -32,9 +33,9 @@ export default function Login() {
         </label>
         <label htmlFor="password-input">
           <input
-            type="text"
+            type="password"
             id="password-input"
-            value={ userPassword }
+            value={ userData.password }
             data-testid="password-input"
             placeholder="Password"
             onChange={ ({ target }) => setUserData({
@@ -44,7 +45,7 @@ export default function Login() {
         </label>
         <button
           disabled={
-            (emailValidation.test(userData.email)
+            !(emailValidation.test(userData.email)
             && userData.password.length >= MIN_PASSWORD_LENGTH)
           }
           data-testid="login-submit-btn"
