@@ -46,6 +46,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@trybe/eslint-config-frontend": "^1.7.1",
+    "@types/react-router-dom": "^5.3.3",
     "clipboardy": "^2.3.0",
     "cypress": "^10.11.0",
     "cypress-multi-reporters": "^1.6.2",
