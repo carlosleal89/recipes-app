@@ -21,8 +21,7 @@ function Footer() {
           src={ drinkIcon }
           alt="Drinks"
           style={ { width: '30px',
-            height: '30px',
-            hover:  } }
+            height: '30px' } }
         />
       </Link>
       <Link to="/meals">
