@@ -15,7 +15,6 @@ export default function MealsProvider({ children }) {
       const response = await fetch(url);
       const data = await response.json();
       setMealList(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
