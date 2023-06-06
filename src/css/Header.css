@@ -6,7 +6,7 @@
 .container__header-buttons {
   background-color: #fcdc36;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 button {
