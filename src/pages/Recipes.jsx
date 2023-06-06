@@ -20,7 +20,6 @@ function Recipes() {
   return (
     <div>
       <Header />
-      <h1>Recipes</h1>
       <Footer />
     </div>
   );

@@ -1,18 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import TitleContext from '../context/TitleContext';
+import SearchBar from './SearchBar';
+import '../css/Header.css';
 
 function Header() {
+  const [isShowInput, setIsShowInput] = useState(false);
   const { title } = useContext(TitleContext);
   const location = useLocation();
   const history = useHistory();
 
-  const showButton = location.pathname === '/meals' || location.pathname === '/drinks';
+  const isShowButton = location.pathname === '/meals'
+  || location.pathname === '/drinks';
 
   const handleSearchClick = () => {
-    console.log('clicou');
+    setIsShowInput(!isShowInput);
   };
 
   const handleProfileClick = () => {
@@ -20,37 +24,46 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className="container__header">
 
-      <span
-        data-testid="page-title"
-      >
-        { title }
-      </span>
+      <div className="container__header-buttons">
+        {isShowButton && (
+          <button
+            type="button"
+            onClick={ handleSearchClick }
+          >
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="searchIcon"
+            />
+          </button>
+        )}
 
-      {showButton && (
         <button
           type="button"
-          onClick={ handleSearchClick }
+          onClick={ handleProfileClick }
         >
           <img
-            data-testid="search-top-btn"
-            src={ searchIcon }
-            alt="searchIcon"
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="profileIcon"
           />
         </button>
-      )}
+      </div>
 
-      <button
-        type="button"
-        onClick={ handleProfileClick }
-      >
-        <img
-          data-testid="profile-top-btn"
-          src={ profileIcon }
-          alt="profileIcon"
-        />
-      </button>
+      <div className="container__header-title">
+        <h2
+          data-testid="page-title"
+        >
+          { title }
+        </h2>
+      </div>
+
+      <div className="container__header-search">
+        {isShowInput && (<SearchBar />)}
+      </div>
+
     </header>
   );
 }

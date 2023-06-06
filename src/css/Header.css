@@ -1,0 +1,24 @@
+.container__header {
+  display: flex;
+  flex-direction: column;
+}
+
+.container__header-buttons {
+  background-color: #fcdc36;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 15px;
+}
+
+.container__header-title, .container__header-search {
+  display: flex;
+  justify-content: center;
+}
+

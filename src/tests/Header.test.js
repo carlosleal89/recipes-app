@@ -31,6 +31,17 @@ describe('Teste do Header na rota /meals', () => {
 
     expect(history.location.pathname).toBe('/profile');
   });
+
+  it('Verifica se ao clicar no botão de pesquisa, o input é mostrado', () => {
+    renderWithRouter(<App />, { initialEntries: ['/meals'] });
+
+    const iconSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    fireEvent.click(iconSearch);
+
+    const searchInput = screen.getByPlaceholderText('Pesquisar');
+    expect(searchInput).toBeInTheDocument();
+  });
 });
 
 describe('Teste do Header na rota /drinks', () => {
