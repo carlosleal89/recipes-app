@@ -4,6 +4,8 @@ import DrinksContext from './DrinksContext';
 
 export default function DrinksProvider({ children }) {
   const [drinkList, setDrinkList] = useState([]);
+  // const [drinksById, setDrinksById] = useState([]);
+  // const [drinksByCategory, setDrinksByCategory] = useState([]);
   const drinksContext = useMemo(() => (
     { drinkList, setDrinkList }), [drinkList, setDrinkList]);
   return (

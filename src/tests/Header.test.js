@@ -56,7 +56,7 @@ describe('Teste do Header na rota /profile', () => {
   it('Verifica se possui o título Profile', () => {
     renderWithRouter(<App />, { initialEntries: ['/profile'] });
 
-    const titleProfile = screen.getByText(/profile/i);
+    const titleProfile = screen.getByRole('heading', { name: /profile/i });
     expect(titleProfile).toBeInTheDocument();
   });
 

@@ -1,21 +1,14 @@
 import React from 'react';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import App from '../App';
-import MealsProvider from '../context/MealsProvider';
-import DrinksProvider from '../context/DrinksProvider';
+import renderWithRouter from '../services/renderWithRouter';
 
 describe('Testa a tela de login.', () => {
   const emailTestId = 'email-input';
   const passwordTestId = 'password-input';
   beforeEach(() => {
-    render(
-      <MealsProvider>
-        <DrinksProvider>
-          <App />
-        </DrinksProvider>
-      </MealsProvider>,
-    );
+    renderWithRouter(<App />);
   });
 
   it('Testa se os elementos de titulo, inputs e button aparecem na tela.', () => {
