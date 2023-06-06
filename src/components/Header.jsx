@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import TitleContext from '../context/TitleContext';
@@ -7,11 +7,17 @@ import TitleContext from '../context/TitleContext';
 function Header() {
   const { title } = useContext(TitleContext);
   const location = useLocation();
-
-  console.log(location.pathname);
+  const history = useHistory();
 
   const showButton = location.pathname === '/meals' || location.pathname === '/drinks';
-  console.log(showButton);
+
+  const handleSearchClick = () => {
+    console.log('clicou');
+  };
+
+  const handleProfileClick = () => {
+    history.push('/profile');
+  };
 
   return (
     <header>
@@ -23,19 +29,28 @@ function Header() {
       </span>
 
       {showButton && (
-        <img
-          data-testid="search-top-btn"
-          src={ searchIcon }
-          alt="searchIcon"
-        />
+        <button
+          type="button"
+          onClick={ handleSearchClick }
+        >
+          <img
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            alt="searchIcon"
+          />
+        </button>
       )}
 
-      <img
-        data-testid="profile-top-btn"
-        src={ profileIcon }
-        alt="profileIcon"
-      />
-
+      <button
+        type="button"
+        onClick={ handleProfileClick }
+      >
+        <img
+          data-testid="profile-top-btn"
+          src={ profileIcon }
+          alt="profileIcon"
+        />
+      </button>
     </header>
   );
 }
