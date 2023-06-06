@@ -12,7 +12,6 @@ function DoneRecipes() {
   return (
     <div>
       <Header />
-      <h1>DoneRecipes</h1>
     </div>
   );
 }
