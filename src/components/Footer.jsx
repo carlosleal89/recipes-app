@@ -15,20 +15,17 @@ function Footer() {
         justifyContent: 'space-around',
         padding: '10px' } }
     >
-      <Link
-        to="/drinks"
-      >
+      <Link to="/drinks">
         <img
           data-testid="drinks-bottom-btn"
           src={ drinkIcon }
           alt="Drinks"
           style={ { width: '30px',
-            height: '30px' } }
+            height: '30px',
+            hover:  } }
         />
       </Link>
-      <Link
-        to="/meals"
-      >
+      <Link to="/meals">
         <img
           data-testid="meals-bottom-btn"
           src={ mealIcon }
