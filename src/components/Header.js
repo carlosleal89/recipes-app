@@ -13,9 +13,6 @@ function Header() {
   const showButton = location.pathname === '/meals' || location.pathname === '/drinks';
   console.log(showButton);
 
-  // const pathname = location.pathname.slice(1);
-  // const pageName = pathname.charAt(0).toUpperCase();
-
   return (
     <header>
 

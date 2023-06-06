@@ -8,7 +8,6 @@ import TitleProvider from './context/TitleProvider';
 import MealsProvider from './context/MealsProvider';
 import DrinksProvider from './context/DrinksProvider';
 
-
 ReactDOM
   .createRoot(document.getElementById('root'))
   .render(
@@ -18,7 +17,7 @@ ReactDOM
           <DrinksProvider>
             <App />
           </DrinksProvider>
-        </MealsProvider>,
+        </MealsProvider>
       </TitleProvider>
     </BrowserRouter>,
   );
