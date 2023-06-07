@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import TitleContext from '../context/TitleContext';
 import MealsContext from '../context/MealsContext';
@@ -24,16 +24,19 @@ function Meals() {
     <div>
       <MealsCategories />
       {mealListArray.slice(0, MEALS_LIST_MAX_LENGTH).map((recipe, index) => (
-        <div data-testid={ `${index}-recipe-card` } key={ index }>
-          <img
-            data-testid={ `${index}-card-img` }
-            alt={ recipe.srtMeal }
-            src={ recipe.strMealThumb }
-          />
-          <p data-testid={ `${index}-card-name` }>
-            { recipe.strMeal }
-          </p>
-        </div>))}
+        <Link to={ `/meals/${recipe.idMeal}` } key={ index }>
+          <div data-testid={ `${index}-recipe-card` }>
+            <img
+              data-testid={ `${index}-card-img` }
+              alt={ recipe.srtMeal }
+              src={ recipe.strMealThumb }
+            />
+            <p data-testid={ `${index}-card-name` }>
+              { recipe.strMeal }
+            </p>
+          </div>
+        </Link>
+      ))}
     </div>
   );
 }
