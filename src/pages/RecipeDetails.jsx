@@ -19,6 +19,7 @@ function RecipeDetails() {
   // }, []);
 
   // console.log(oneMeal);
+  // teste
 
   const getMeasuresAndIngredients = (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
