@@ -1,18 +1,18 @@
 import React, { useContext, useEffect } from 'react';
-import MealsContext from '../context/MealsContext';
+import DrinkContext from '../context/DrinksContext';
 import useFetch from '../hooks/useFetch';
 
-export default function MealsCategories() {
+export default function DrinksCategories() {
   const { fetchData } = useFetch();
-  const { mealsCategories, setMealsCategories } = useContext(MealsContext);
+  const { drinksCategories, setDrinksCategories } = useContext(DrinkContext);
 
   useEffect(() => {
-    fetchData('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setMealsCategories);
+    fetchData('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', setDrinksCategories);
   }, []);
   return (
     <div>
       {
-        mealsCategories.map((category, index) => (
+        drinksCategories.map((category, index) => (
           <button data-testid={ `${category.strCategory}-category-filter` } key={ index }>
             {category.strCategory}
           </button>

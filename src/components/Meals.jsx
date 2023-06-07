@@ -5,7 +5,7 @@ import MealsContext from '../context/MealsContext';
 import useFetch from '../hooks/useFetch';
 
 function Meals() {
-  const { mealListArray, fetchDataMeals, setMealList } = useContext(MealsContext);
+  const { mealListArray, setMealList } = useContext(MealsContext);
   const location = useLocation();
   const { setTitle } = useContext(TitleContext);
   const { fetchData } = useFetch();
