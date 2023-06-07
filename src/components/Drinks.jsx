@@ -2,17 +2,19 @@ import { useLocation } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import TitleContext from '../context/TitleContext';
 import DrinkContext from '../context/DrinksContext';
+import useFetch from '../hooks/useFetch';
 
 function Drinks() {
-  const { drinkListArray, fetchDataDrinks } = useContext(DrinkContext);
+  const { drinkListArray, setDrinkList } = useContext(DrinkContext);
   const location = useLocation();
   const { setTitle } = useContext(TitleContext);
+  const { fetchData } = useFetch();
 
   useEffect(() => {
     if (location.pathname === '/drinks') {
       setTitle('Drinks');
     }
-    fetchDataDrinks('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+    fetchData('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', setDrinkList);
   }, [setTitle, location]);
   return (
     drinkListArray.map((drink, index) => (

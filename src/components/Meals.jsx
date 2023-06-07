@@ -2,17 +2,19 @@ import { useLocation } from 'react-router-dom';
 import React, { useContext, useEffect } from 'react';
 import TitleContext from '../context/TitleContext';
 import MealsContext from '../context/MealsContext';
+import useFetch from '../hooks/useFetch';
 
 function Meals() {
-  const { mealListArray, fetchDataMeals } = useContext(MealsContext);
+  const { mealListArray, fetchDataMeals, setMealList } = useContext(MealsContext);
   const location = useLocation();
   const { setTitle } = useContext(TitleContext);
+  const { fetchData } = useFetch();
 
   useEffect(() => {
     if (location.pathname === '/meals') {
       setTitle('Meals');
     }
-    fetchDataMeals('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    fetchData('https://www.themealdb.com/api/json/v1/1/search.php?s=', setMealList);
   }, [setTitle, location]);
   return (
     mealListArray.map((recipe, index) => (

@@ -6,17 +6,17 @@ export default function DrinksProvider({ children }) {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkListArray, setDrinkListArray] = useState([]);
 
-  const fetchDataDrinks = async (url) => {
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setDrinkList(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchDataDrinks = async (url) => {
+  //   try {
+  //     const response = await fetch(url);
+  //     const data = await response.json();
+  //     setDrinkList(data);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const drinksContext = useMemo(() => (
-    { drinkListArray, fetchDataDrinks }), [drinkListArray]);
+    { drinkListArray, setDrinkList }), [drinkListArray]);
 
   useEffect(() => {
     const MAX_LENGTH = 12;
