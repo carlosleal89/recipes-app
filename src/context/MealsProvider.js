@@ -18,20 +18,6 @@ export default function MealsProvider({ children }) {
   //     console.log(error);
   //   }
   // };
-  const mealsContext = useMemo(
-    () => (
-      {
-        mealListArray,
-        setMealList,
-        mealsCategories,
-        setMealsCategories,
-        setMealsCategoriesFilter,
-        mealsCategoriesFilter,
-        showMealCategoriesFilter,
-        setShowMealCategoriesFilter,
-      }),
-    [mealListArray],
-  );
 
   useEffect(() => {
     const MEALS_LIST_MAX_LENGTH = 12;
@@ -46,6 +32,21 @@ export default function MealsProvider({ children }) {
       setMealsCategoriesFilter(mealsCategoriesFilter.meals);
     }
   }, [mealList, mealsCategories, mealsCategoriesFilter]);
+
+  const mealsContext = useMemo(
+    () => (
+      {
+        mealListArray,
+        setMealList,
+        mealsCategories,
+        setMealsCategories,
+        setMealsCategoriesFilter,
+        mealsCategoriesFilter,
+        showMealCategoriesFilter,
+        setShowMealCategoriesFilter,
+      }),
+    [mealListArray],
+  );
 
   return (
     <MealsContext.Provider

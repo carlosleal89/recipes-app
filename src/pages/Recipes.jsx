@@ -4,8 +4,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
-import MealsCategories from '../components/MealsCategories';
-import DrinksCategories from '../components/DrinksCategories';
+// import MealsCategories from '../components/MealsCategories';
+// import DrinksCategories from '../components/DrinksCategories';
 import MealsContext from '../context/MealsContext';
 import MealsCategoriesFiltered from '../components/MealsCategoriesFiltered';
 
@@ -19,11 +19,10 @@ function Recipes() {
       <div>
         <h1>
           {
-            showMealCategoriesFilter ? 
-            (location.pathname === '/meals'
+            showMealCategoriesFilter
+              ? (location.pathname === '/meals'
             && (
               <div>
-                <MealsCategories />
                 <Meals />
               </div>
             )) : (<MealsCategoriesFiltered />)
@@ -32,7 +31,6 @@ function Recipes() {
             location.pathname === '/drinks'
             && (
               <div>
-                <DrinksCategories />
                 <Drinks />
               </div>
             )

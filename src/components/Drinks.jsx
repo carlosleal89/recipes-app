@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import TitleContext from '../context/TitleContext';
 import DrinkContext from '../context/DrinksContext';
 import useFetch from '../hooks/useFetch';
+import DrinksCategories from './DrinksCategories';
 
 function Drinks() {
   const { drinkListArray, setDrinkList } = useContext(DrinkContext);
@@ -17,18 +18,21 @@ function Drinks() {
     fetchData('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', setDrinkList);
   }, [setTitle, location]);
   return (
-    drinkListArray.map((drink, index) => (
-      <div data-testid={ `${index}-recipe-card` } key={ index }>
-        <img
-          data-testid={ `${index}-card-img` }
-          alt={ drink.srtDrink }
-          src={ drink.strDrinkThumb }
-        />
-        <p data-testid={ `${index}-card-name` }>
-          { drink.strDrink }
-        </p>
-      </div>
-    )));
+    <div>
+      <DrinksCategories />
+      {drinkListArray.map((drink, index) => (
+        <div data-testid={ `${index}-recipe-card` } key={ index }>
+          <img
+            data-testid={ `${index}-card-img` }
+            alt={ drink.srtDrink }
+            src={ drink.strDrinkThumb }
+          />
+          <p data-testid={ `${index}-card-name` }>
+            { drink.strDrink }
+          </p>
+        </div>))}
+    </div>
+  );
 }
 
 export default Drinks;

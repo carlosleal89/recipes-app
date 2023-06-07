@@ -1,26 +1,26 @@
 import React, { useContext } from 'react';
-import MealsContext from '../context/MealsContext';
-import MealsCategories from './MealsCategories';
+import DrinksContext from '../context/DrinksContext';
+import DrinksCategories from './DrinksCategories';
 
 export default function MealsCategoriesFiltered() {
-  const { mealsCategoriesFilter } = useContext(MealsContext);
+  const { drinksCategoriesFilter } = useContext(DrinksContext);
 
   //   useEffect(() => {
   //     fetchData('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setMealsCategoriesFilter);
   //   }, []);
-  // console.log(mealsCategoriesFilter);
+  console.log(drinksCategoriesFilter);
   return (
     <div>
-      <MealsCategories />
-      {mealsCategoriesFilter.map((recipe, index) => (
+      <DrinksCategories />
+      {drinksCategoriesFilter.map((drink, index) => (
         <div data-testid={ `${index}-recipe-card` } key={ index }>
           <img
             data-testid={ `${index}-card-img` }
-            alt={ recipe.srtMeal }
-            src={ recipe.strMealThumb }
+            alt={ drink.srtDrink }
+            src={ drink.strDrinkThumb }
           />
           <p data-testid={ `${index}-card-name` }>
-            { recipe.strMeal }
+            { drink.strDrink }
           </p>
         </div>))}
     </div>
