@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { fetchMeals,
   fetchMealsName,
@@ -7,37 +7,60 @@ import { fetchMeals,
   fetchDrinksName,
   fetchDrinksFirstLetter,
 } from '../services/mealApi';
+import MealsContext from '../context/MealsContext';
+import DrinkContext from '../context/DrinksContext';
 
 function SearchBar() {
   const [activeRadio, setActieRadio] = useState('');
   const [search, setSearch] = useState('');
+  const { setMealListArray } = useContext(MealsContext);
+  const { setDrinkListArray } = useContext(DrinkContext);
   const history = useHistory();
   const page = history.location.pathname;
 
+  const handleIngridientSearch = async (id, MAX_LENGTH) => {
+    const url = page === '/meals'
+      ? await fetchMeals(id) : await fetchDrinks(id);
+    // eslint-disable-next-line no-unused-expressions
+    page === '/meals'
+      ? setMealListArray(url.meals.slice(0, MAX_LENGTH))
+      : setDrinkListArray(url.drinks.slice(0, MAX_LENGTH));
+  };
+
+  const handleNameSearch = async (id, MAX_LENGTH) => {
+    const urlMeal = page === '/meals';
+    if (urlMeal) {
+      const meal = await fetchMealsName(id);
+      // eslint-disable-next-line no-unused-expressions
+      meal.meals.length > 1 ? setMealListArray(meal.meals.slice(0, MAX_LENGTH))
+        : history.push(`/meals/${meal.meals[0].idMeal}`);
+    }
+    const urlDrink = page === '/drinks';
+    if (urlDrink) {
+      const drink = await fetchDrinksName(id);
+      // eslint-disable-next-line no-unused-expressions
+      drink.drinks.length > 1 ? setDrinkListArray(drink.drinks.slice(0, MAX_LENGTH))
+        : history.push(`/drinks/${drink.drinks[0].idDrink}`);
+    }
+  };
+
+  const handleFirstLetter = async (id, MAX_LENGTH) => {
+    const url = page === '/meals'
+      ? await fetchMealsFirstLetter(id) : await fetchDrinksFirstLetter(id);
+    // eslint-disable-next-line no-unused-expressions
+    page === '/meals'
+      ? setMealListArray(url.meals.slice(0, MAX_LENGTH))
+      : setDrinkListArray(url.drinks.slice(0, MAX_LENGTH));
+  };
+
   const handleSearchBtn = async (id) => {
+    const MAX_LENGTH = 12;
     switch (activeRadio) {
     case 'Ingredient':
-      {
-        const url = page === '/meals'
-          ? await fetchMeals(id) : await fetchDrinks(id);
-        console.log(url);
-      }
+      handleIngridientSearch(id, MAX_LENGTH);
       break;
     case 'Name':
-      {
-        const urlMeal = page === '/meals';
-        if (urlMeal) {
-          const meal = await fetchMealsName(id);
-          console.log(meal);
-          history.push(`/meals/${meal.meals[0].idMeal}`);
-        }
-        const urlDrink = page === '/drinks';
-        if (urlDrink) {
-          const drink = await fetchDrinksName(id);
-          console.log(drink);
-          history.push(`/drinks/${drink.drinks[0].idDrink}`);
-        }
-      }
+      handleNameSearch(id, MAX_LENGTH);
       break;
     case 'FirstLetter':
       if (search.length !== 1) {
@@ -45,11 +68,7 @@ function SearchBar() {
           'Your search must have only 1 (one) character',
         );
       }
-      {
-        const url = page === '/meals'
-          ? await fetchMealsFirstLetter(id) : await fetchDrinksFirstLetter(id);
-        console.log(url);
-      }
+      handleFirstLetter(id, MAX_LENGTH);
       break;
     default:
       return true;

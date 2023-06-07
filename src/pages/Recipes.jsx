@@ -1,25 +1,27 @@
-import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import TitleContext from '../context/TitleContext';
+import Meals from '../components/Meals';
+import Drinks from '../components/Drinks';
 
 function Recipes() {
-  const { setTitle } = useContext(TitleContext);
   const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname === '/meals') {
-      setTitle('Meals');
-    }
-    if (location.pathname === '/drinks') {
-      setTitle('Drinks');
-    }
-  }, [setTitle, location]);
 
   return (
     <div>
       <Header />
+      <div>
+        <h1>
+          {
+            location.pathname === '/meals'
+            && <Meals />
+          }
+          {
+            location.pathname === '/drinks'
+            && <Drinks />
+          }
+        </h1>
+      </div>
       <Footer />
     </div>
   );
