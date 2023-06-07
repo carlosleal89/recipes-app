@@ -6,25 +6,8 @@ export default function MealsProvider({ children }) {
   const [mealList, setMealList] = useState([]);
   const [mealListArray, setMealListArray] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
-
-  // const fetchDataMeals = async (url) => {
-  //   try {
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setMealList(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  const mealsContext = useMemo(
-    () => (
-      { mealListArray,
-        setMealList,
-        mealsCategories,
-        setMealsCategories,
-        setMealListArray }),
-    [mealListArray],
-  );
+  const [mealsCategoriesFilter, setMealsCategoriesFilter] = useState([]);
+  const [showMealCategoriesFilter, setShowMealCategoriesFilter] = useState(true);
 
   useEffect(() => {
     const MEALS_LIST_MAX_LENGTH = 12;
@@ -35,7 +18,26 @@ export default function MealsProvider({ children }) {
     if (mealsCategories.meals) {
       setMealsCategories(mealsCategories.meals.slice(0, MEALS_CATEGORIES_MAX_LENGTH));
     }
-  }, [mealList, mealsCategories]);
+    if (mealsCategoriesFilter.meals) {
+      setMealsCategoriesFilter(mealsCategoriesFilter.meals);
+    }
+  }, [mealList, mealsCategories, mealsCategoriesFilter]);
+
+  const mealsContext = useMemo(
+    () => (
+      {
+        mealListArray,
+        setMealListArray,
+        setMealList,
+        mealsCategories,
+        setMealsCategories,
+        mealsCategoriesFilter,
+        setMealsCategoriesFilter,
+        showMealCategoriesFilter,
+        setShowMealCategoriesFilter,
+      }),
+    [mealListArray, showMealCategoriesFilter],
+  );
 
   return (
     <MealsContext.Provider
