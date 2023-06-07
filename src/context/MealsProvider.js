@@ -6,6 +6,8 @@ export default function MealsProvider({ children }) {
   const [mealList, setMealList] = useState([]);
   const [mealListArray, setMealListArray] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
+  const [mealsCategoriesFilter, setMealsCategoriesFilter] = useState([]);
+  const [showMealCategoriesFilter, setShowMealCategoriesFilter] = useState(true);
 
   // const fetchDataMeals = async (url) => {
   //   try {
@@ -18,7 +20,16 @@ export default function MealsProvider({ children }) {
   // };
   const mealsContext = useMemo(
     () => (
-      { mealListArray, setMealList, mealsCategories, setMealsCategories }),
+      {
+        mealListArray,
+        setMealList,
+        mealsCategories,
+        setMealsCategories,
+        setMealsCategoriesFilter,
+        mealsCategoriesFilter,
+        showMealCategoriesFilter,
+        setShowMealCategoriesFilter,
+      }),
     [mealListArray],
   );
 
@@ -31,7 +42,10 @@ export default function MealsProvider({ children }) {
     if (mealsCategories.meals) {
       setMealsCategories(mealsCategories.meals.slice(0, MEALS_CATEGORIES_MAX_LENGTH));
     }
-  }, [mealList, mealsCategories]);
+    if (mealsCategoriesFilter.meals) {
+      setMealsCategoriesFilter(mealsCategoriesFilter.meals);
+    }
+  }, [mealList, mealsCategories, mealsCategoriesFilter]);
 
   return (
     <MealsContext.Provider
