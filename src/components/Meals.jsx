@@ -6,7 +6,7 @@ import useFetch from '../hooks/useFetch';
 import MealsCategories from './MealsCategories';
 
 function Meals() {
-  const { mealListArray, setMealList } = useContext(MealsContext);
+  const { mealListArray, setMealList, showMealCategoriesFilter } = useContext(MealsContext);
   const location = useLocation();
   const { setTitle } = useContext(TitleContext);
   const { fetchData } = useFetch();
@@ -17,7 +17,7 @@ function Meals() {
       setTitle('Meals');
     }
     fetchData('https://www.themealdb.com/api/json/v1/1/search.php?s=', setMealList);
-  }, [setTitle, location]);
+  }, [setTitle, location, showMealCategoriesFilter]);
 
   return (
     <div>

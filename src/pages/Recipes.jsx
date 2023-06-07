@@ -21,7 +21,7 @@ function Recipes() {
   } = useContext(DrinkContext);
 
   useEffect(() => {
-
+    console.log('hi');
   }, [showMealCategoriesFilter]);
 
   return (
