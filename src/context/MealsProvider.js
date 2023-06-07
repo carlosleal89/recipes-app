@@ -9,16 +9,6 @@ export default function MealsProvider({ children }) {
   const [mealsCategoriesFilter, setMealsCategoriesFilter] = useState([]);
   const [showMealCategoriesFilter, setShowMealCategoriesFilter] = useState(true);
 
-  // const fetchDataMeals = async (url) => {
-  //   try {
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setMealList(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   useEffect(() => {
     const MEALS_LIST_MAX_LENGTH = 12;
     const MEALS_CATEGORIES_MAX_LENGTH = 5;

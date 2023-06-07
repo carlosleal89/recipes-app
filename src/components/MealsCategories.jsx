@@ -24,6 +24,12 @@ export default function MealsCategories() {
 
   return (
     <div>
+      <button
+        onClick={ () => setShowMealCategoriesFilter(true) }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
       {
         mealsCategories.map((category, index) => (
           <button

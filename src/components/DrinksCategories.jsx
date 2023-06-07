@@ -11,7 +11,7 @@ export default function DrinksCategories() {
     setShowDrinkCategoriesFilter,
   } = useContext(DrinkContext);
 
-  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=';
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 
   const clickHandler = (category) => {
     fetchData(`${URL}${category}`, setDrinksCategoriesFilter);
@@ -25,6 +25,12 @@ export default function DrinksCategories() {
 
   return (
     <div>
+      <button
+        onClick={ () => setShowDrinkCategoriesFilter(true) }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
       {
         drinksCategories.map((category, index) => (
           <button

@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Meals from '../components/Meals';
@@ -7,6 +7,7 @@ import Drinks from '../components/Drinks';
 // import MealsCategories from '../components/MealsCategories';
 // import DrinksCategories from '../components/DrinksCategories';
 import MealsContext from '../context/MealsContext';
+import DrinkContext from '../context/DrinksContext';
 import MealsCategoriesFiltered from '../components/MealsCategoriesFiltered';
 import DrinksCategoriesFiltered from '../components/DrinksCategoriesFiltered';
 
@@ -14,9 +15,14 @@ function Recipes() {
   const location = useLocation();
   const {
     showMealCategoriesFilter,
-    showDrinkCategoriesFilter,
   } = useContext(MealsContext);
-  console.log(showDrinkCategoriesFilter);
+  const {
+    showDrinkCategoriesFilter,
+  } = useContext(DrinkContext);
+
+  useEffect(() => {
+
+  }, [showMealCategoriesFilter]);
 
   return (
     <div>
@@ -24,21 +30,20 @@ function Recipes() {
       <div>
         <h1>
           {
-            showMealCategoriesFilter
-              ? (location.pathname === '/meals'
+            location.pathname === '/meals'
             && (
-              <Meals />
-            )) : (<MealsCategoriesFiltered />)
+              showMealCategoriesFilter ? (
+                <Meals />
+              ) : (<MealsCategoriesFiltered />)
+            )
           }
-          {/* {location.pathname === '/drinks'
-          &&
-          (<Drinks />)} */}
           {
-            showDrinkCategoriesFilter
-              ? (location.pathname === '/drinks'
+            location.pathname === '/drinks'
           && (
-            <Drinks />
-          )) : (<DrinksCategoriesFiltered />)
+            showDrinkCategoriesFilter ? (
+              <Drinks />
+            ) : (<DrinksCategoriesFiltered />)
+          )
           }
         </h1>
       </div>
