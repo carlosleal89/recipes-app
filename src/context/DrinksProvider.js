@@ -6,6 +6,7 @@ export default function DrinksProvider({ children }) {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkListArray, setDrinkListArray] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
+  const [drinksCategoriesFilter, setDrinksCategoriesFilter] = useState([]);
   const [showDrinkCategoriesFilter, setShowDrinkCategoriesFilter] = useState(true);
 
   // const fetchDataDrinks = async (url) => {
@@ -17,14 +18,6 @@ export default function DrinksProvider({ children }) {
   //     console.log(error);
   //   }
   // };
-  const drinksContext = useMemo(() => (
-    {
-      drinkListArray,
-      setDrinkList,
-      drinksCategories,
-      setDrinksCategories,
-      showDrinkCategoriesFilter,
-      setShowDrinkCategoriesFilter }), [drinkListArray]);
 
   useEffect(() => {
     const DRINKS_LIST_MAX_LENGTH = 12;
@@ -35,8 +28,25 @@ export default function DrinksProvider({ children }) {
     if (drinksCategories.drinks) {
       setDrinksCategories(drinksCategories.drinks.slice(0, DRINKS_CATEGORIES_MAX_LENGTH));
     }
-  }, [drinkList]);
+    if (drinksCategoriesFilter.meals) {
+      setDrinksCategoriesFilter(drinksCategoriesFilter.meals);
+    }
+  }, [drinkList, drinksCategories, drinksCategoriesFilter]);
 
+  const drinksContext = useMemo(
+    () => (
+      {
+        drinkListArray,
+        setDrinkList,
+        drinksCategories,
+        setDrinksCategories,
+        drinksCategoriesFilter,
+        setDrinksCategoriesFilter,
+        showDrinkCategoriesFilter,
+        setShowDrinkCategoriesFilter,
+      }),
+    [drinkListArray],
+  );
   return (
     <DrinksContext.Provider
       value={ drinksContext }

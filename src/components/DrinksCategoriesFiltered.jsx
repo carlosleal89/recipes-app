@@ -8,7 +8,7 @@ export default function DrinksCategoriesFiltered() {
   //   useEffect(() => {
   //     fetchData('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setMealsCategoriesFilter);
   //   }, []);
-  console.log(drinksCategoriesFilter);
+  // console.log(drinksCategoriesFilter);
   return (
     <div>
       <DrinksCategories />

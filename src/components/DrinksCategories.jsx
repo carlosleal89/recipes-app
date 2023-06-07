@@ -4,16 +4,19 @@ import useFetch from '../hooks/useFetch';
 
 export default function DrinksCategories() {
   const { fetchData } = useFetch();
-  const { drinksCategories,
+  const {
+    drinksCategories,
     setDrinksCategories,
     setDrinksCategoriesFilter,
-    setShowDrinksCategoriesFilter,
+    setShowDrinkCategoriesFilter,
   } = useContext(DrinkContext);
-  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list';
+
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?c=';
 
   const clickHandler = (category) => {
     fetchData(`${URL}${category}`, setDrinksCategoriesFilter);
-    setShowDrinksCategoriesFilter(false);
+    setShowDrinkCategoriesFilter(false);
+    console.log('clicou');
   };
 
   useEffect(() => {

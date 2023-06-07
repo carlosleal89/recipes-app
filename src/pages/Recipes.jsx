@@ -12,9 +12,11 @@ import DrinksCategoriesFiltered from '../components/DrinksCategoriesFiltered';
 
 function Recipes() {
   const location = useLocation();
-  const { showMealCategoriesFilter,
-    showDrinksCategoriesFilter,
+  const {
+    showMealCategoriesFilter,
+    showDrinkCategoriesFilter,
   } = useContext(MealsContext);
+  console.log(showDrinkCategoriesFilter);
 
   return (
     <div>
@@ -25,18 +27,17 @@ function Recipes() {
             showMealCategoriesFilter
               ? (location.pathname === '/meals'
             && (
-              <div>
-                <Meals />
-              </div>
+              <Meals />
             )) : (<MealsCategoriesFiltered />)
           }
+          {/* {location.pathname === '/drinks'
+          &&
+          (<Drinks />)} */}
           {
-            showDrinksCategoriesFilter
+            showDrinkCategoriesFilter
               ? (location.pathname === '/drinks'
           && (
-            <div>
-              <Drinks />
-            </div>
+            <Drinks />
           )) : (<DrinksCategoriesFiltered />)
           }
         </h1>
