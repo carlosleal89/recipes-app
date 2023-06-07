@@ -1,15 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { useMemo, useState, useEffect } from 'react';
 import MealsContext from './MealsContext';
-// import useFetch from '../hooks/useFetch';
-// import { fetchRecipe } from '../helpers/API_URL';
 
 export default function MealsProvider({ children }) {
   const [mealList, setMealList] = useState([]);
   const [mealListArray, setMealListArray] = useState([]);
-  // const [mealsById, setMealsById] = useState([]);
-  // const [mealsByCategory, setMealsByCategory] = useState([]);
-  // const { fetchData } = useFetch();
+
   const fetchDataMeals = async (url) => {
     try {
       const response = await fetch(url);
