@@ -16,7 +16,6 @@ export default function DrinksCategories() {
   const clickHandler = (category) => {
     fetchData(`${URL}${category}`, setDrinksCategoriesFilter);
     setShowDrinkCategoriesFilter(false);
-    console.log('clicou');
   };
 
   useEffect(() => {

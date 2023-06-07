@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Meals from '../components/Meals';
@@ -19,10 +19,6 @@ function Recipes() {
   const {
     showDrinkCategoriesFilter,
   } = useContext(DrinkContext);
-
-  useEffect(() => {
-    console.log('hi');
-  }, [showMealCategoriesFilter]);
 
   return (
     <div>

@@ -35,7 +35,7 @@ export default function MealsProvider({ children }) {
         showMealCategoriesFilter,
         setShowMealCategoriesFilter,
       }),
-    [mealListArray],
+    [mealListArray, showMealCategoriesFilter],
   );
 
   return (

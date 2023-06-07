@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import MealsContext from '../context/MealsContext';
 import useFetch from '../hooks/useFetch';
-import { useHistory } from 'react-router-dom';
 
 export default function MealsCategories() {
   const { fetchData } = useFetch();
@@ -11,8 +10,6 @@ export default function MealsCategories() {
     setMealsCategoriesFilter,
     setShowMealCategoriesFilter,
   } = useContext(MealsContext);
-
-  const history = useHistory();
 
   const URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
@@ -30,7 +27,6 @@ export default function MealsCategories() {
       <button
         onClick={ () => {
           setShowMealCategoriesFilter(true);
-          history.push('/meals');
         } }
         data-testid="All-category-filter"
       >

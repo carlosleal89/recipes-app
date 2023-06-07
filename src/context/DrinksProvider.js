@@ -45,7 +45,7 @@ export default function DrinksProvider({ children }) {
         showDrinkCategoriesFilter,
         setShowDrinkCategoriesFilter,
       }),
-    [drinkListArray],
+    [drinkListArray, showDrinkCategoriesFilter],
   );
   return (
     <DrinksContext.Provider
