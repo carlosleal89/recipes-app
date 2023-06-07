@@ -27,10 +27,10 @@ function SearchBar() {
   const handleIngridientSearch = async (id, MAX_LENGTH) => {
     const url = page === '/meals'
       ? await fetchMeals(id) : await fetchDrinks(id);
-    // eslint-disable-next-line no-unused-expressions
-    page === '/meals'
+    const urlTeste = page === '/meals'
       ? setMealListArray(url.meals.slice(0, MAX_LENGTH))
       : setDrinkListArray(url.drinks.slice(0, MAX_LENGTH));
+    console.log(urlTeste);
   };
 
   const handleNameSearch = async (id, MAX_LENGTH) => {
@@ -40,9 +40,10 @@ function SearchBar() {
       if (!meal.meals) {
         return handleError();
       }
-      // eslint-disable-next-line no-unused-expressions
-      meal.meals.length > 1 ? setMealListArray(meal.meals.slice(0, MAX_LENGTH))
+      const mealTeste = meal.meals.length > 1
+        ? setMealListArray(meal.meals.slice(0, MAX_LENGTH))
         : history.push(`/meals/${meal.meals[0].idMeal}`);
+      console.log(mealTeste);
     }
     const urlDrink = page === '/drinks';
     if (urlDrink) {
@@ -50,19 +51,20 @@ function SearchBar() {
       if (!drink.drinks) {
         return handleError();
       }
-      // eslint-disable-next-line no-unused-expressions
-      drink.drinks.length > 1 ? setDrinkListArray(drink.drinks.slice(0, MAX_LENGTH))
+      const drinkTeste = drink.drinks.length > 1
+        ? setDrinkListArray(drink.drinks.slice(0, MAX_LENGTH))
         : history.push(`/drinks/${drink.drinks[0].idDrink}`);
+      console.log(drinkTeste);
     }
   };
 
   const handleFirstLetter = async (id, MAX_LENGTH) => {
     const url = page === '/meals'
       ? await fetchMealsFirstLetter(id) : await fetchDrinksFirstLetter(id);
-    // eslint-disable-next-line no-unused-expressions
-    page === '/meals'
+    const urlTeste = page === '/meals'
       ? setMealListArray(url.meals.slice(0, MAX_LENGTH))
       : setDrinkListArray(url.drinks.slice(0, MAX_LENGTH));
+    console.log(urlTeste);
   };
 
   const handleSearchBtn = async (id) => {
