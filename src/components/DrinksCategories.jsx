@@ -26,6 +26,14 @@ export default function DrinksCategories() {
   return (
     <div>
       <button
+        style={ {
+          fontSize: 15,
+          fontStyle: 'italic',
+          padding: 0,
+          margin: 0,
+          marginLeft: '1rem',
+          marginRight: '0.5rem',
+        } }
         onClick={ () => setShowDrinkCategoriesFilter(true) }
         data-testid="All-category-filter"
       >
@@ -34,6 +42,14 @@ export default function DrinksCategories() {
       {
         drinksCategories.map((category, index) => (
           <button
+            style={ {
+              fontSize: 15,
+              fontStyle: 'italic',
+              padding: 0,
+              margin: 0,
+              marginLeft: '0.5rem',
+              marginRight: '0.5rem',
+            } }
             key={ index }
             data-testid={ `${category.strCategory}-category-filter` }
             onClick={

@@ -13,20 +13,43 @@ export default function DrinksCategoriesFiltered() {
   return (
     <div>
       <DrinksCategories />
-      {drinksCategoriesFilter.slice(0, MEALS_LIST_MAX_LENGTH).map((drink, index) => (
-        <Link to={ `/drinks/${drink.idDrink}` } key={ index }>
-          <div data-testid={ `${index}-recipe-card` } key={ index }>
-            <img
-              data-testid={ `${index}-card-img` }
-              alt={ drink.srtDrink }
-              src={ drink.strDrinkThumb }
-            />
-            <p data-testid={ `${index}-card-name` }>
-              { drink.strDrink }
-            </p>
-          </div>
-        </Link>
-      ))}
+      <div
+        style={
+          {
+            marginLeft: '10px',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '20px' }
+        }
+      >
+        {drinksCategoriesFilter.slice(0, MEALS_LIST_MAX_LENGTH).map((drink, index) => (
+          <Link to={ `/drinks/${drink.idDrink}` } key={ index }>
+            <div data-testid={ `${index}-recipe-card` } key={ index }>
+              <p
+                style={ {
+                  fontSize: 20,
+                  fontStyle: 'italic',
+                  padding: 0,
+                  margin: 0,
+                  marginLeft: '2rem',
+                } }
+                data-testid={ `${index}-card-name` }
+              >
+                { drink.strDrink }
+              </p>
+              <img
+                style={ {
+                  width: '150px',
+                  height: '150px',
+                  marginBottom: '20px',
+                } }
+                data-testid={ `${index}-card-img` }
+                alt={ drink.srtDrink }
+                src={ drink.strDrinkThumb }
+              />
+            </div>
+          </Link>))}
+      </div>
     </div>
   );
 }
