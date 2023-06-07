@@ -1,0 +1,13 @@
+.container__recipes-details {
+  background-color: aliceblue;
+}
+
+.container__recipes-details--ingr {
+  display: flex;
+}
+
+.container__recipes-details--ingr > .column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
