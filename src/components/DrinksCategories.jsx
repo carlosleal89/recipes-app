@@ -4,16 +4,42 @@ import useFetch from '../hooks/useFetch';
 
 export default function DrinksCategories() {
   const { fetchData } = useFetch();
-  const { drinksCategories, setDrinksCategories } = useContext(DrinkContext);
+  const {
+    drinksCategories,
+    setDrinksCategories,
+    setDrinksCategoriesFilter,
+    setShowDrinkCategoriesFilter,
+    showDrinkCategoriesFilter,
+  } = useContext(DrinkContext);
+
+  const URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+
+  const clickHandler = (category) => {
+    fetchData(`${URL}${category}`, setDrinksCategoriesFilter);
+    setShowDrinkCategoriesFilter(!showDrinkCategoriesFilter);
+  };
 
   useEffect(() => {
     fetchData('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', setDrinksCategories);
   }, []);
+
   return (
     <div>
+      <button
+        onClick={ () => setShowDrinkCategoriesFilter(true) }
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
       {
         drinksCategories.map((category, index) => (
-          <button data-testid={ `${category.strCategory}-category-filter` } key={ index }>
+          <button
+            key={ index }
+            data-testid={ `${category.strCategory}-category-filter` }
+            onClick={
+              () => clickHandler(category.strCategory)
+            }
+          >
             {category.strCategory}
           </button>
         ))
