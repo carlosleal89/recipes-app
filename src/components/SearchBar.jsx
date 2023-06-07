@@ -18,6 +18,12 @@ function SearchBar() {
   const history = useHistory();
   const page = history.location.pathname;
 
+  const handleError = () => {
+    global.alert(
+      'Sorry, we haven\'t found any recipes for these filters.',
+    );
+  };
+
   const handleIngridientSearch = async (id, MAX_LENGTH) => {
     const url = page === '/meals'
       ? await fetchMeals(id) : await fetchDrinks(id);
@@ -31,6 +37,9 @@ function SearchBar() {
     const urlMeal = page === '/meals';
     if (urlMeal) {
       const meal = await fetchMealsName(id);
+      if (!meal.meals) {
+        return handleError();
+      }
       // eslint-disable-next-line no-unused-expressions
       meal.meals.length > 1 ? setMealListArray(meal.meals.slice(0, MAX_LENGTH))
         : history.push(`/meals/${meal.meals[0].idMeal}`);
@@ -38,6 +47,9 @@ function SearchBar() {
     const urlDrink = page === '/drinks';
     if (urlDrink) {
       const drink = await fetchDrinksName(id);
+      if (!drink.drinks) {
+        return handleError();
+      }
       // eslint-disable-next-line no-unused-expressions
       drink.drinks.length > 1 ? setDrinkListArray(drink.drinks.slice(0, MAX_LENGTH))
         : history.push(`/drinks/${drink.drinks[0].idDrink}`);
@@ -71,7 +83,9 @@ function SearchBar() {
       handleFirstLetter(id, MAX_LENGTH);
       break;
     default:
-      return true;
+      return global.alert(
+        'Sorry, we haven\'t found any recipes for these filters.',
+      );
     }
   };
 
