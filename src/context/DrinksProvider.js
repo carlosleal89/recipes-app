@@ -9,16 +9,6 @@ export default function DrinksProvider({ children }) {
   const [drinksCategoriesFilter, setDrinksCategoriesFilter] = useState([]);
   const [showDrinkCategoriesFilter, setShowDrinkCategoriesFilter] = useState(true);
 
-  // const fetchDataDrinks = async (url) => {
-  //   try {
-  //     const response = await fetch(url);
-  //     const data = await response.json();
-  //     setDrinkList(data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   useEffect(() => {
     const DRINKS_LIST_MAX_LENGTH = 12;
     const DRINKS_CATEGORIES_MAX_LENGTH = 5;
@@ -37,6 +27,7 @@ export default function DrinksProvider({ children }) {
     () => (
       {
         drinkListArray,
+        setDrinkListArray,
         setDrinkList,
         drinksCategories,
         setDrinksCategories,

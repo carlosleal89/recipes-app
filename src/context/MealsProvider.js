@@ -27,6 +27,7 @@ export default function MealsProvider({ children }) {
     () => (
       {
         mealListArray,
+        setMealListArray,
         setMealList,
         mealsCategories,
         setMealsCategories,
