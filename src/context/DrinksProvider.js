@@ -5,15 +5,12 @@ import DrinksContext from './DrinksContext';
 export default function DrinksProvider({ children }) {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkListArray, setDrinkListArray] = useState([]);
-  // const [drinksById, setDrinksById] = useState([]);
-  // const [drinksByCategory, setDrinksByCategory] = useState([]);
 
   const fetchDataDrinks = async (url) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
       setDrinkList(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }
