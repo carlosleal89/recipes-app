@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
+import MealsCategories from '../components/MealsCategories';
+import DrinksCategories from '../components/DrinksCategories';
 
 function Recipes() {
   const location = useLocation();
@@ -14,11 +16,21 @@ function Recipes() {
         <h1>
           {
             location.pathname === '/meals'
-            && <Meals />
+            && (
+              <div>
+                <MealsCategories />
+                <Meals />
+              </div>
+            )
           }
           {
             location.pathname === '/drinks'
-            && <Drinks />
+            && (
+              <div>
+                <DrinksCategories />
+                <Drinks />
+              </div>
+            )
           }
         </h1>
       </div>
