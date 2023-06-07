@@ -28,8 +28,8 @@ export default function DrinksProvider({ children }) {
     if (drinksCategories.drinks) {
       setDrinksCategories(drinksCategories.drinks.slice(0, DRINKS_CATEGORIES_MAX_LENGTH));
     }
-    if (drinksCategoriesFilter.meals) {
-      setDrinksCategoriesFilter(drinksCategoriesFilter.meals);
+    if (drinksCategoriesFilter.drinks) {
+      setDrinksCategoriesFilter(drinksCategoriesFilter.drinks);
     }
   }, [drinkList, drinksCategories, drinksCategoriesFilter]);
 
