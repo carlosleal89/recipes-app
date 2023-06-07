@@ -8,10 +8,13 @@ import Drinks from '../components/Drinks';
 // import DrinksCategories from '../components/DrinksCategories';
 import MealsContext from '../context/MealsContext';
 import MealsCategoriesFiltered from '../components/MealsCategoriesFiltered';
+import DrinksCategoriesFiltered from '../components/DrinksCategoriesFiltered';
 
 function Recipes() {
   const location = useLocation();
-  const { showMealCategoriesFilter } = useContext(MealsContext);
+  const { showMealCategoriesFilter,
+    showDrinksCategoriesFilter,
+  } = useContext(MealsContext);
 
   return (
     <div>
@@ -28,12 +31,13 @@ function Recipes() {
             )) : (<MealsCategoriesFiltered />)
           }
           {
-            location.pathname === '/drinks'
-            && (
-              <div>
-                <Drinks />
-              </div>
-            )
+            showDrinksCategoriesFilter
+              ? (location.pathname === '/drinks'
+          && (
+            <div>
+              <Drinks />
+            </div>
+          )) : (<DrinksCategoriesFiltered />)
           }
         </h1>
       </div>

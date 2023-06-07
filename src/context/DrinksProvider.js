@@ -6,6 +6,7 @@ export default function DrinksProvider({ children }) {
   const [drinkList, setDrinkList] = useState([]);
   const [drinkListArray, setDrinkListArray] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
+  const [showDrinkCategoriesFilter, setShowDrinkCategoriesFilter] = useState(true);
 
   // const fetchDataDrinks = async (url) => {
   //   try {
@@ -21,7 +22,9 @@ export default function DrinksProvider({ children }) {
       drinkListArray,
       setDrinkList,
       drinksCategories,
-      setDrinksCategories }), [drinkListArray]);
+      setDrinksCategories,
+      showDrinkCategoriesFilter,
+      setShowDrinkCategoriesFilter }), [drinkListArray]);
 
   useEffect(() => {
     const DRINKS_LIST_MAX_LENGTH = 12;

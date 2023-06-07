@@ -4,7 +4,7 @@ import MealsCategories from './MealsCategories';
 
 export default function MealsCategoriesFiltered() {
   const { mealsCategoriesFilter } = useContext(MealsContext);
-
+  const MEALS_LIST_MAX_LENGTH = 12;
   //   useEffect(() => {
   //     fetchData('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setMealsCategoriesFilter);
   //   }, []);
@@ -12,7 +12,7 @@ export default function MealsCategoriesFiltered() {
   return (
     <div>
       <MealsCategories />
-      {mealsCategoriesFilter.map((recipe, index) => (
+      {mealsCategoriesFilter.slice(0, MEALS_LIST_MAX_LENGTH).map((recipe, index) => (
         <div data-testid={ `${index}-recipe-card` } key={ index }>
           <img
             data-testid={ `${index}-card-img` }

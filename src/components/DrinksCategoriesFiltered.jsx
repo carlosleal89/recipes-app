@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import DrinksContext from '../context/DrinksContext';
 import DrinksCategories from './DrinksCategories';
 
-export default function MealsCategoriesFiltered() {
+export default function DrinksCategoriesFiltered() {
   const { drinksCategoriesFilter } = useContext(DrinksContext);
-
+  const MEALS_LIST_MAX_LENGTH = 12;
   //   useEffect(() => {
   //     fetchData('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setMealsCategoriesFilter);
   //   }, []);
@@ -12,7 +12,7 @@ export default function MealsCategoriesFiltered() {
   return (
     <div>
       <DrinksCategories />
-      {drinksCategoriesFilter.map((drink, index) => (
+      {drinksCategoriesFilter.slice(0, MEALS_LIST_MAX_LENGTH).map((drink, index) => (
         <div data-testid={ `${index}-recipe-card` } key={ index }>
           <img
             data-testid={ `${index}-card-img` }
