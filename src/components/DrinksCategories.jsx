@@ -9,13 +9,14 @@ export default function DrinksCategories() {
     setDrinksCategories,
     setDrinksCategoriesFilter,
     setShowDrinkCategoriesFilter,
+    showDrinkCategoriesFilter,
   } = useContext(DrinkContext);
 
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 
   const clickHandler = (category) => {
     fetchData(`${URL}${category}`, setDrinksCategoriesFilter);
-    setShowDrinkCategoriesFilter(false);
+    setShowDrinkCategoriesFilter(!showDrinkCategoriesFilter);
   };
 
   useEffect(() => {

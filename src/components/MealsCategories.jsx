@@ -9,13 +9,14 @@ export default function MealsCategories() {
     setMealsCategories,
     setMealsCategoriesFilter,
     setShowMealCategoriesFilter,
+    showMealCategoriesFilter,
   } = useContext(MealsContext);
 
   const URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
   const clickHandler = (category) => {
     fetchData(`${URL}${category}`, setMealsCategoriesFilter);
-    setShowMealCategoriesFilter(false);
+    setShowMealCategoriesFilter(!showMealCategoriesFilter);
   };
 
   useEffect(() => {
