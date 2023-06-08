@@ -21,6 +21,7 @@ export default function MealsCategories() {
 
   useEffect(() => {
     fetchData('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setMealsCategories);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

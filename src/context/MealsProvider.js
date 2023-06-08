@@ -36,6 +36,7 @@ export default function MealsProvider({ children }) {
         showMealCategoriesFilter,
         setShowMealCategoriesFilter,
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [mealListArray, showMealCategoriesFilter],
   );
 

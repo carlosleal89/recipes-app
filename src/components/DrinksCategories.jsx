@@ -21,6 +21,7 @@ export default function DrinksCategories() {
 
   useEffect(() => {
     fetchData('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', setDrinksCategories);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
