@@ -18,6 +18,7 @@ function Meals() {
       setTitle('Meals');
     }
     fetchData('https://www.themealdb.com/api/json/v1/1/search.php?s=', setMealList);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setTitle, location, showMealCategoriesFilter]);
 
   return (

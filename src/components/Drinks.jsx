@@ -17,6 +17,7 @@ function Drinks() {
       setTitle('Drinks');
     }
     fetchData('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', setDrinkList);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setTitle, location]);
 
   return (

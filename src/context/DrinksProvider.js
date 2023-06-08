@@ -36,6 +36,7 @@ export default function DrinksProvider({ children }) {
         showDrinkCategoriesFilter,
         setShowDrinkCategoriesFilter,
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [drinkListArray, showDrinkCategoriesFilter],
   );
   return (
