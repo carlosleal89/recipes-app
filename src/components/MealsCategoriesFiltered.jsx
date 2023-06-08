@@ -13,20 +13,43 @@ export default function MealsCategoriesFiltered() {
   return (
     <div>
       <MealsCategories />
-      {mealsCategoriesFilter.slice(0, MEALS_LIST_MAX_LENGTH).map((recipe, index) => (
-        <Link to={ `/meals/${recipe.idMeal}` } key={ index }>
-          <div data-testid={ `${index}-recipe-card` } key={ index }>
-            <img
-              data-testid={ `${index}-card-img` }
-              alt={ recipe.srtMeal }
-              src={ recipe.strMealThumb }
-            />
-            <p data-testid={ `${index}-card-name` }>
-              { recipe.strMeal }
-            </p>
-          </div>
-        </Link>
-      ))}
+      <div
+        style={
+          {
+            marginLeft: '10px',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '20px' }
+        }
+      >
+        {mealsCategoriesFilter.slice(0, MEALS_LIST_MAX_LENGTH).map((recipe, index) => (
+          <Link to={ `/meals/${recipe.idMeal}` } key={ index }>
+            <div data-testid={ `${index}-recipe-card` } key={ index }>
+              <p
+                style={ {
+                  fontSize: 20,
+                  fontStyle: 'italic',
+                  padding: 0,
+                  margin: 0,
+                  marginLeft: '2rem',
+                } }
+                data-testid={ `${index}-card-name` }
+              >
+                { recipe.strMeal }
+              </p>
+              <img
+                style={ {
+                  width: '150px',
+                  height: '150px',
+                  marginBottom: '20px',
+                } }
+                data-testid={ `${index}-card-img` }
+                alt={ recipe.srtMeal }
+                src={ recipe.strMealThumb }
+              />
+            </div>
+          </Link>))}
+      </div>
     </div>
   );
 }

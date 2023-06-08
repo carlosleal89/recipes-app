@@ -26,6 +26,14 @@ export default function MealsCategories() {
   return (
     <div>
       <button
+        style={ {
+          fontSize: 15,
+          fontStyle: 'italic',
+          padding: 0,
+          margin: 0,
+          marginLeft: '1rem',
+          marginRight: '0.5rem',
+        } }
         onClick={ () => {
           setShowMealCategoriesFilter(true);
         } }
@@ -36,6 +44,14 @@ export default function MealsCategories() {
       {
         mealsCategories.map((category, index) => (
           <button
+            style={ {
+              fontSize: 15,
+              fontStyle: 'italic',
+              padding: 0,
+              margin: 0,
+              marginLeft: '0.5rem',
+              marginRight: '0.5rem',
+            } }
             key={ index }
             data-testid={ `${category.strCategory}-category-filter` }
             onClick={
