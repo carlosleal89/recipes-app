@@ -7,6 +7,7 @@ export default function Login() {
     email: '',
     password: '',
   });
+  const [isButtonActive, setIsButtonActive] = useState(false);
   const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const history = useHistory();
   const MIN_PASSWORD_LENGTH = 6;
@@ -18,42 +19,55 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page-div">
-      <h1>Recipes</h1>
-      <h2>Login</h2>
-      <div className="inputs-div">
-        <label htmlFor="email-input">
-          <input
-            type="text"
-            id="email-input"
-            value={ userData.email }
-            data-testid="email-input"
-            placeholder="Email"
-            onChange={ ({ target }) => setUserData({ ...userData, email: target.value }) }
-          />
-        </label>
-        <label htmlFor="password-input">
-          <input
-            type="password"
-            id="password-input"
-            value={ userData.password }
-            data-testid="password-input"
-            placeholder="Password"
-            onChange={ ({ target }) => setUserData({
-              ...userData, password: target.value,
-            }) }
-          />
-        </label>
-        <button
-          disabled={
-            !(emailValidation.test(userData.email)
-            && userData.password.length > MIN_PASSWORD_LENGTH)
-          }
-          data-testid="login-submit-btn"
-          onClick={ setLocalStorage }
-        >
-          Enter
-        </button>
+    <div className="login-background">
+      <div className="login-page-div">
+        <h1 className="login-text">Recipes</h1>
+        <h2 className="login-text">Login</h2>
+        <div className="inputs-div">
+          <label htmlFor="email-input">
+            <input
+              className="login-input"
+              type="text"
+              id="email-input"
+              value={ userData.email }
+              data-testid="email-input"
+              placeholder="Email"
+              onChange={
+                ({ target }) => setUserData({ ...userData, email: target.value })
+              }
+            />
+          </label>
+          <label htmlFor="password-input">
+            <input
+              className="login-input"
+              type="password"
+              id="password-input"
+              value={ userData.password }
+              data-testid="password-input"
+              placeholder="Password"
+              onChange={ ({ target }) => setUserData({
+                ...userData, password: target.value,
+              }) }
+            />
+          </label>
+          <div>
+            <button
+              className={
+                isButtonActive ? 'login-submit-btn-active' : 'login-submit-btn'
+              }
+              disabled={
+                !(emailValidation.test(userData.email)
+                && userData.password.length > MIN_PASSWORD_LENGTH)
+              }
+              data-testid="login-submit-btn"
+              onClick={ setLocalStorage }
+              onMouseEnter={ () => setIsButtonActive(true) }
+              onMouseLeave={ () => setIsButtonActive(false) }
+            >
+              Enter
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
