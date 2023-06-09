@@ -17,3 +17,7 @@ export const fetchDrinksByCategory = async (category) => fetchData(`https://www.
 export const fetchDrinksById = async (id) => fetchData(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
 
 export const fetchRecipe = async (url) => fetchData(url);
+
+export const fetchRecommendationDrinks = async () => fetchData('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+
+export const fetchRecommendationMeals = async () => fetchData('https://www.themealdb.com/api/json/v1/1/search.php?s=');

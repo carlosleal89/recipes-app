@@ -9,7 +9,7 @@
   justify-content: flex-end;
 }
 
-button {
+.container__header-buttons button {
   background: none;
   border: none;
   cursor: pointer;

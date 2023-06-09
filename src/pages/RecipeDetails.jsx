@@ -1,25 +1,43 @@
-import React from 'react';
-// import React, { useEffect, useParams, useState } from 'react';
-import oneMeal from '../mocks/oneMeal';
-import oneDrink from '../mocks/oneDrink';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import MealDetail from '../components/recipesDetails/MealDetail';
 import DrinkDetail from '../components/recipesDetails/DrinkDetail';
+import { fetchMealsById,
+  fetchDrinksById,
+  fetchRecommendationDrinks,
+  fetchRecommendationMeals } from '../helpers/API_URL';
 import '../css/RecipesDetails.css';
 
 function RecipeDetails() {
-  // const [isMeal, setIsMeal] = useState(false);
-  // const { id } = useParams();
+  const [meal, setMeal] = useState(null);
+  const [drink, setDrink] = useState(null);
 
-  // console.log(id);
+  const [recommendationDrinks, setRecommendationDrinks] = useState(null);
+  const [recommendationMeals, setRecommendationMeals] = useState(null);
 
-  // useEffect(() => {
-  //   // request API, passando o id
-  //   // Meal: https://www.themealdb.com/api/json/v1/1/lookup.php?i={id-da-receita}
-  //   // Drink: https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={id-da-receita}
-  // }, []);
+  const { id } = useParams();
+  const location = useLocation();
 
-  // console.log(oneMeal);
-  // teste
+  console.log(id);
+
+  useEffect(() => {
+    const getMealOrDrink = async () => {
+      if (location.pathname === `/meals/${id}`) {
+        const mealById = await fetchMealsById(id);
+        setMeal(mealById);
+        const recommendation = await fetchRecommendationDrinks();
+        setRecommendationDrinks(recommendation);
+      }
+
+      if (location.pathname === `/drinks/${id}`) {
+        const drinkById = await fetchDrinksById(id);
+        setDrink(drinkById);
+        const recommendation = await fetchRecommendationMeals();
+        setRecommendationMeals(recommendation);
+      }
+    };
+    getMealOrDrink();
+  }, [id, location.pathname]);
 
   const getMeasuresAndIngredients = (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
@@ -40,15 +58,22 @@ function RecipeDetails() {
   };
 
   return (
-    <div className="container__recipes-details">
-      <MealDetail
-        meal={ oneMeal.meals }
-        getIngredients={ getMeasuresAndIngredients }
-      />
-      <DrinkDetail
-        drink={ oneDrink.drinks }
-        getIngredients={ getMeasuresAndIngredients }
-      />
+    <div className="container__recipe-details">
+      {meal && (
+        <MealDetail
+          meal={ meal.meals }
+          getIngredients={ getMeasuresAndIngredients }
+          recommendation={ recommendationDrinks }
+        />
+      )}
+
+      {drink && (
+        <DrinkDetail
+          drink={ drink.drinks }
+          getIngredients={ getMeasuresAndIngredients }
+          recommendation={ recommendationMeals }
+        />
+      )}
     </div>
   );
 }
