@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-function YoutubePlayer({ youtubeId }) {
+function YoutubePlayer({ youtubeLink }) {
   return (
-    <div>
+    <div className="container__youtube">
       <iframe
         width="560"
         height="315"
         data-testid="video"
-        src={ `https://www.youtube.com/embed/${youtubeId}` }
+        src={ youtubeLink.replace('watch?v=', 'embed/') }
         title="YouTube video player"
         allow="accelerometer;
                 autoplay; clipboard-write;
@@ -19,7 +19,7 @@ function YoutubePlayer({ youtubeId }) {
 }
 
 YoutubePlayer.propTypes = {
-  youtubeId: PropTypes.string.isRequired,
+  youtubeLink: PropTypes.string.isRequired,
 };
 
 export default YoutubePlayer;

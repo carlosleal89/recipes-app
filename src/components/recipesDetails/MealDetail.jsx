@@ -6,14 +6,7 @@ function MealDetail({ meal, getIngredients }) {
   // console.log(meal);
 
   const { measures, ingredients } = getIngredients(meal)[0];
-  console.log(measures, ingredients);
-
-  const getIdYoutube = () => {
-    const number = 11;
-    const youtubeLink = meal[0].strYoutube;
-    const id = youtubeLink.slice(youtubeLink.length - number);
-    return id;
-  };
+  // console.log(measures, ingredients);
 
   return (
     <div>
@@ -24,53 +17,61 @@ function MealDetail({ meal, getIngredients }) {
           strMeal,
           strCategory,
         }) => (
-          <div key={ idMeal }>
+          <div key={ idMeal } className="container__recipe-header">
 
             <img
+              className="recipe-photo"
               data-testid="recipe-photo"
               src={ strMealThumb }
               alt={ strMeal }
-              width="300px"
             />
 
-            <h2 data-testid="recipe-title">
+            <h2
+              className="recipe-title"
+              data-testid="recipe-title"
+            >
               { strMeal }
             </h2>
 
-            <p data-testid="recipe-category">
+            <p
+              className="recipe-category"
+              data-testid="recipe-category"
+            >
               { strCategory }
             </p>
           </div>
         ))
       }
 
-      <h3>Ingredients</h3>
-      <div className="container__recipes-details--ingr">
-        <div className="column">
-          { // Ingredients
-            measures.map((measure, index) => (
-              <p
-                key={ index }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                { measure }
-              </p>
-            ))
-          }
-        </div>
-        <div className="column">
-          {
-            ingredients.map((ingredient, index) => (
+      <div className="container__recipe-ingredients">
+        <h3>Ingredients</h3>
+        <div className="container__measure-ingredient">
+          <div className="column">
+            { // Ingredients
+              measures.map((measure, index) => (
+                <p
+                  key={ index }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  { measure }
+                </p>
+              ))
+            }
+          </div>
+          <div className="column">
+            {
+              ingredients.map((ingredient, index) => (
 
-              <p
-                key={ index }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {ingredient}
-              </p>
+                <p
+                  key={ index }
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {ingredient}
+                </p>
 
-            ))
-          }
+              ))
+            }
+          </div>
         </div>
       </div>
 
@@ -78,18 +79,22 @@ function MealDetail({ meal, getIngredients }) {
         meal.map(({
           idMeal,
           strInstructions,
+          strYoutube,
         }) => (
-          <div key={ idMeal }>
+          <div key={ idMeal } className="container__recipe-instructions">
             <h3>Instructions</h3>
 
-            <p data-testid="instructions">
+            <p
+              className="instructions"
+              data-testid="instructions"
+            >
               { strInstructions }
             </p>
+
+            <YoutubePlayer youtubeLink={ strYoutube } />
           </div>
         ))
       }
-
-      <YoutubePlayer youtubeId={ getIdYoutube() } />
 
     </div>
   );
