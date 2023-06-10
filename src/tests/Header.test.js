@@ -39,7 +39,7 @@ describe('Teste do Header na rota /meals', () => {
 
     fireEvent.click(iconSearch);
 
-    const searchInput = screen.getByPlaceholderText('Pesquisar');
+    const searchInput = screen.getByPlaceholderText('Search');
     expect(searchInput).toBeInTheDocument();
   });
 });

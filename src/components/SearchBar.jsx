@@ -97,7 +97,7 @@ function SearchBar() {
         type="text"
         data-testid="search-input"
         value={ search }
-        placeholder="Pesquisar"
+        placeholder="Search"
         onChange={ (event) => setSearch(event.target.value) }
       />
       <label htmlFor="radio">
