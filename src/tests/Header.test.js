@@ -4,6 +4,11 @@ import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
 
 describe('Teste do Header na rota /meals', () => {
+  beforeEach(() => {
+    const userInfo = JSON.stringify({ email: 'main-group7@trybe.com' });
+    localStorage.setItem('user', userInfo);
+  });
+
   it('Verifica se possui o título Meals', () => {
     renderWithRouter(<App />, { initialEntries: ['/meals'] });
 
