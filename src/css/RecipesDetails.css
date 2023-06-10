@@ -84,3 +84,18 @@
   justify-content: center;
   margin: 50px;
 }
+
+.recommendation-card img {
+  max-height: 300px;
+}
+
+.container__start-recipe-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.start-recipe-btn {
+  bottom: 0;
+  position: fixed;
+}
+

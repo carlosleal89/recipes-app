@@ -11,14 +11,12 @@ import '../css/RecipesDetails.css';
 function RecipeDetails() {
   const [meal, setMeal] = useState(null);
   const [drink, setDrink] = useState(null);
-
   const [recommendationDrinks, setRecommendationDrinks] = useState(null);
   const [recommendationMeals, setRecommendationMeals] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { id } = useParams();
   const location = useLocation();
-
-  console.log(id);
 
   useEffect(() => {
     const getMealOrDrink = async () => {
@@ -27,6 +25,7 @@ function RecipeDetails() {
         setMeal(mealById);
         const recommendation = await fetchRecommendationDrinks();
         setRecommendationDrinks(recommendation);
+        setIsLoading(true);
       }
 
       if (location.pathname === `/drinks/${id}`) {
@@ -34,6 +33,7 @@ function RecipeDetails() {
         setDrink(drinkById);
         const recommendation = await fetchRecommendationMeals();
         setRecommendationMeals(recommendation);
+        setIsLoading(true);
       }
     };
     getMealOrDrink();
@@ -60,19 +60,27 @@ function RecipeDetails() {
   return (
     <div className="container__recipe-details">
       {meal && (
-        <MealDetail
-          meal={ meal.meals }
-          getIngredients={ getMeasuresAndIngredients }
-          recommendation={ recommendationDrinks }
-        />
+        isLoading ? (
+          <MealDetail
+            meal={ meal.meals }
+            getIngredients={ getMeasuresAndIngredients }
+            recommendation={ recommendationDrinks.drinks }
+          />
+        ) : (
+          <p>Loading...</p>
+        )
       )}
 
       {drink && (
-        <DrinkDetail
-          drink={ drink.drinks }
-          getIngredients={ getMeasuresAndIngredients }
-          recommendation={ recommendationMeals }
-        />
+        isLoading ? (
+          <DrinkDetail
+            drink={ drink.drinks }
+            getIngredients={ getMeasuresAndIngredients }
+            recommendation={ recommendationMeals.meals }
+          />
+        ) : (
+          <p>Loading...</p>
+        )
       )}
     </div>
   );

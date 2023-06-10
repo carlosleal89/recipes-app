@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Carousel } from 'react-bootstrap';
 import YoutubePlayer from './YoutubePlayer';
 
-function MealDetail({ meal, getIngredients }) {
-  // console.log(meal);
-
+function MealDetail({ meal, getIngredients, recommendation }) {
+  // console.log(recommendation);
+  const DRINKS_LIST_MAX_LENGTH = 6;
   const { measures, ingredients } = getIngredients(meal)[0];
-  // console.log(measures, ingredients);
 
   return (
     <div>
@@ -96,6 +96,48 @@ function MealDetail({ meal, getIngredients }) {
         ))
       }
 
+      <div className="container__recipe-recommended">
+        <h3 className="text-center">Recommended</h3>
+        <Carousel>
+
+          { // card - recommendation
+            recommendation
+              .slice(0, DRINKS_LIST_MAX_LENGTH).map(({
+                strDrink,
+                strDrinkThumb,
+              }, index) => (
+                <Carousel.Item
+                  className="recommendation-card"
+                  data-testid={ `${index}-recommendation-card` }
+                  key={ index }
+                >
+                  <img
+                    className="d-block mx-auto"
+                    alt={ strDrink }
+                    src={ strDrinkThumb }
+                  />
+                  <p
+                    className="text-center"
+                    data-testid={ `${index}-recommendation-title` }
+                  >
+                    {strDrink}
+                  </p>
+                </Carousel.Item>
+              ))
+          }
+        </Carousel>
+      </div>
+
+      <div className="container__start-recipe-btn">
+        <button
+          className="start-recipe-btn"
+          type="button"
+          data-testid="start-recipe-btn"
+        >
+          Start Recipe
+        </button>
+      </div>
+
     </div>
   );
 }
@@ -103,6 +145,7 @@ function MealDetail({ meal, getIngredients }) {
 MealDetail.propTypes = {
   getIngredients: PropTypes.func.isRequired,
   meal: PropTypes.instanceOf(Object).isRequired,
+  recommendation: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
 };
 
 export default MealDetail;
