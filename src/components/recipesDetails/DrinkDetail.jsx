@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import copy from 'clipboard-copy';
 import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 function DrinkDetail({ drink, getIngredients, recommendation }) {
   // console.log(recommendation);
   const MEALS_LIST_MAX_LENGTH = 6;
   const { measures, ingredients } = getIngredients(drink)[0];
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const clipboardShare = (link) => {
     const clipboardLink = copy(link);
@@ -16,7 +19,22 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
     setClipBoardMsg(true);
   };
 
+  const checkFavorites = () => {
+    if (localStorage.favoriteRecipes) {
+      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+      const isFavoriteDrink = newFavoriteRecipesArray
+        .some((recipe) => recipe.id === drink[0].idDrink);
+      setIsFavorite(isFavoriteDrink);
+    }
+  };
+
+  useEffect(() => {
+    checkFavorites();
+  }, [isFavorite]);
+
   const handleDrinkFavorites = (drinkFav) => {
+    setIsFavorite(true);
     const newFavoriteDrink = {
       id: drinkFav.idDrink,
       type: 'drink',
@@ -175,10 +193,13 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
         </button>
         <button
           className="favorite-recipe-btn"
-          data-testid="favorite-btn"
           onClick={ () => handleDrinkFavorites(drink[0]) }
         >
-          Favorite
+          <img
+            data-testid="favorite-btn"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="favorite icon"
+          />
         </button>
         {
           clipBoardMsg && <p className="clipboard-msg">Link copied!</p>
