@@ -108,3 +108,8 @@
   position: absolute;
   right: 250px;
 }
+
+.clipboard-msg {
+  position: absolute;
+  right: 350px;
+}
