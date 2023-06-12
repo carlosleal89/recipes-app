@@ -16,6 +16,26 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
     setClipBoardMsg(true);
   };
 
+  const handleDrinkFavorites = (drinkFav) => {
+    const newFavoriteDrink = {
+      id: drinkFav.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: drinkFav.strCategory,
+      alcoholicOrNot: drinkFav.strAlcoholic,
+      name: drinkFav.strDrink,
+      image: drinkFav.strDrinkThumb,
+    };
+    if (localStorage.favoriteRecipes) {
+      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+      newFavoriteRecipesArray.push(newFavoriteDrink);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteDrink]));
+    }
+  };
+
   return (
     <div>
       { // photo, title and category
@@ -156,6 +176,7 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
         <button
           className="favorite-recipe-btn"
           data-testid="favorite-btn"
+          onClick={ () => handleDrinkFavorites(drink[0]) }
         >
           Favorite
         </button>

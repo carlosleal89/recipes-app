@@ -17,6 +17,27 @@ function MealDetail({ meal, getIngredients, recommendation }) {
     setClipBoardMsg(true);
   };
 
+  const handleMealFavorites = (mealFav) => {
+    console.log(mealFav);
+    const newFavoriteMeal = {
+      id: mealFav.idMeal,
+      type: 'meal',
+      nationality: mealFav.strArea,
+      category: mealFav.strCategory,
+      alcoholicOrNot: '',
+      name: mealFav.strMeal,
+      image: mealFav.strMealThumb,
+    };
+    if (localStorage.favoriteRecipes) {
+      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+      newFavoriteRecipesArray.push(newFavoriteMeal);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteMeal]));
+    }
+  };
+
   return (
     <div>
       { // photo, title and category
@@ -160,6 +181,7 @@ function MealDetail({ meal, getIngredients, recommendation }) {
         <button
           className="favorite-recipe-btn"
           data-testid="favorite-btn"
+          onClick={ () => handleMealFavorites(meal[0]) }
         >
           Favorite
         </button>
