@@ -13,7 +13,7 @@ function RecipeDetails() {
   const [drink, setDrink] = useState(null);
   const [recommendationDrinks, setRecommendationDrinks] = useState(null);
   const [recommendationMeals, setRecommendationMeals] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { id } = useParams();
   const location = useLocation();
@@ -25,7 +25,6 @@ function RecipeDetails() {
         setMeal(mealById);
         const recommendation = await fetchRecommendationDrinks();
         setRecommendationDrinks(recommendation);
-        setIsLoading(true);
       }
 
       if (location.pathname === `/drinks/${id}`) {
@@ -33,8 +32,9 @@ function RecipeDetails() {
         setDrink(drinkById);
         const recommendation = await fetchRecommendationMeals();
         setRecommendationMeals(recommendation);
-        setIsLoading(true);
       }
+
+      setIsLoading(false);
     };
     getMealOrDrink();
   }, [id, location.pathname]);
@@ -59,28 +59,26 @@ function RecipeDetails() {
 
   return (
     <div className="container__recipe-details">
-      {meal && (
-        isLoading ? (
-          <MealDetail
-            meal={ meal.meals }
-            getIngredients={ getMeasuresAndIngredients }
-            recommendation={ recommendationDrinks.drinks }
-          />
-        ) : (
-          <p>Loading...</p>
-        )
-      )}
+      {!isLoading ? (
+        <>
+          {meal && (
+            <MealDetail
+              meal={ meal.meals }
+              getIngredients={ getMeasuresAndIngredients }
+              recommendation={ recommendationDrinks.drinks }
+            />
+          )}
 
-      {drink && (
-        isLoading ? (
-          <DrinkDetail
-            drink={ drink.drinks }
-            getIngredients={ getMeasuresAndIngredients }
-            recommendation={ recommendationMeals.meals }
-          />
-        ) : (
-          <p>Loading...</p>
-        )
+          {drink && (
+            <DrinkDetail
+              drink={ drink.drinks }
+              getIngredients={ getMeasuresAndIngredients }
+              recommendation={ recommendationMeals.meals }
+            />
+          )}
+        </>
+      ) : (
+        <p>Loading...</p>
       )}
     </div>
   );

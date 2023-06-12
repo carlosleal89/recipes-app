@@ -6,12 +6,12 @@ import YoutubePlayer from './YoutubePlayer';
 function MealDetail({ meal, getIngredients, recommendation }) {
   // console.log(recommendation);
   const DRINKS_LIST_MAX_LENGTH = 6;
-  const { measures, ingredients } = getIngredients(meal)[0];
+  const { measures, ingredients } = getIngredients(meal)?.[0] ?? {};
 
   return (
     <div>
       { // photo, title and category
-        meal.map(({
+        meal?.map(({
           idMeal,
           strMealThumb,
           strMeal,
@@ -76,7 +76,7 @@ function MealDetail({ meal, getIngredients, recommendation }) {
       </div>
 
       { // Instructions
-        meal.map(({
+        meal?.map(({
           idMeal,
           strInstructions,
           strYoutube,
@@ -101,29 +101,31 @@ function MealDetail({ meal, getIngredients, recommendation }) {
         <Carousel>
 
           { // card - recommendation
-            recommendation
-              .slice(0, DRINKS_LIST_MAX_LENGTH).map(({
-                strDrink,
-                strDrinkThumb,
-              }, index) => (
-                <Carousel.Item
-                  className="recommendation-card"
-                  data-testid={ `${index}-recommendation-card` }
-                  key={ index }
-                >
-                  <img
-                    className="d-block mx-auto"
-                    alt={ strDrink }
-                    src={ strDrinkThumb }
-                  />
-                  <p
-                    className="text-center"
-                    data-testid={ `${index}-recommendation-title` }
+            recommendation && (
+              recommendation
+                .slice(0, DRINKS_LIST_MAX_LENGTH).map(({
+                  strDrink,
+                  strDrinkThumb,
+                }, index) => (
+                  <Carousel.Item
+                    className="recommendation-card"
+                    data-testid={ `${index}-recommendation-card` }
+                    key={ index }
                   >
-                    {strDrink}
-                  </p>
-                </Carousel.Item>
-              ))
+                    <img
+                      className="d-block mx-auto"
+                      alt={ strDrink }
+                      src={ strDrinkThumb }
+                    />
+                    <p
+                      className="text-center"
+                      data-testid={ `${index}-recommendation-title` }
+                    >
+                      {strDrink}
+                    </p>
+                  </Carousel.Item>
+                ))
+            )
           }
         </Carousel>
       </div>
