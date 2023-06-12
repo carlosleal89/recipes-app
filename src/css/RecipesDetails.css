@@ -99,3 +99,17 @@
   position: fixed;
 }
 
+.share-recipe-btn {
+  position: absolute;
+  right: 150px;
+}
+
+.favorite-recipe-btn {
+  position: absolute;
+  right: 250px;
+}
+
+.clipboard-msg {
+  position: absolute;
+  right: 350px;
+}

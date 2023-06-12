@@ -1,12 +1,20 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import { Carousel } from 'react-bootstrap';
+import copy from 'clipboard-copy';
+import shareIcon from '../../images/shareIcon.svg';
 
 function DrinkDetail({ drink, getIngredients, recommendation }) {
   // console.log(recommendation);
   const MEALS_LIST_MAX_LENGTH = 6;
-
   const { measures, ingredients } = getIngredients(drink)[0];
+  const [clipBoardMsg, setClipBoardMsg] = useState(false);
+
+  const clipboardShare = (link) => {
+    const clipboardLink = copy(link);
+    console.log(clipboardLink);
+    setClipBoardMsg(true);
+  };
 
   return (
     <div>
@@ -135,6 +143,25 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
         >
           Start Recipe
         </button>
+        <button
+          className="share-recipe-btn"
+          data-testid="share-btn"
+          onClick={ () => clipboardShare(window.location.href) }
+        >
+          <img
+            src={ shareIcon }
+            alt="share icon"
+          />
+        </button>
+        <button
+          className="favorite-recipe-btn"
+          data-testid="favorite-btn"
+        >
+          Favorite
+        </button>
+        {
+          clipBoardMsg && <p className="clipboard-msg">Link copied!</p>
+        }
       </div>
 
     </div>
