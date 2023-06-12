@@ -135,6 +135,18 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
         >
           Start Recipe
         </button>
+        <button
+          className="share-recipe-btn"
+          data-testid="share-btn"
+        >
+          Share
+        </button>
+        <button
+          className="favorite-recipe-btn"
+          data-testid="favorite-btn"
+        >
+          Favorite
+        </button>
       </div>
 
     </div>
