@@ -80,12 +80,14 @@ function SearchBar() {
     case 'ingredient':
       if (search.length < 2) {
         global.alert('Please, enter a valid ingredient');
+        break;
       }
       handleIngridientSearch(id, MAX_LENGTH);
       break;
     case 'name':
       if (search.length < 1) {
         global.alert('Your search is empty');
+        break;
       }
       handleNameSearch(id, MAX_LENGTH);
       break;
@@ -94,6 +96,7 @@ function SearchBar() {
         global.alert(
           'Your search must have only 1 (one) character',
         );
+        break;
       }
       handleFirstLetter(id, MAX_LENGTH);
       break;
@@ -102,6 +105,7 @@ function SearchBar() {
         'Sorry, we haven\'t found any recipes for these filters.',
       );
     }
+    setSearch('');
   };
 
   return (

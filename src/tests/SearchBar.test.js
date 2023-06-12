@@ -3,38 +3,36 @@ import React from 'react';
 import { act } from 'react-dom/test-utils';
 import mealCategories from '../../cypress/mocks/mealCategories';
 import mealIngredients from '../mocks/mealIngredients';
-import meals from '../../cypress/mocks/meals';
+import mealName from '../mocks/mealName';
 import drinkCategories from '../../cypress/mocks/drinkCategories';
-import drinks from '../../cypress/mocks/drinks';
-import ordinaryDrinks from '../../cypress/mocks/ordinaryDrinks';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
-import SearchBar from '../components/SearchBar';
+import mealFirstLetter from '../mocks/mealFirsLetter';
+import drinkIngredients from '../mocks/drinkIngredients';
+import drinkName from '../mocks/drinkName';
+import drinkFirstLetter from '../mocks/drinkFirstLetter';
 
-describe.only('Teste do SearchBar na rota /meals', () => {
-  beforeEach(() => {
+describe('Teste do SearchBar na rota /meals', () => {
+  const RECIPE_CARD = '0-recipe-card';
+  const SEARCH_BTN = 'exec-search-btn';
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('Verifica se renderiza as refeições por ingrediente', async () => {
     jest.spyOn(global, 'fetch');
     global.fetch
       .mockResolvedValueOnce({
         json: jest.fn().mockResolvedValue(mealCategories),
       })
-      // .mockResolvedValueOnce({
-      //   json: jest.fn().mockResolvedValue(meals),
-      // })
       .mockResolvedValueOnce({
         json: jest.fn().mockResolvedValue(mealIngredients),
       });
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  it('Verifica se renderiza as refeições de acordo com o filtro', async () => {
-    const { debug } = renderWithRouter(<App />, { initialEntries: ['/meals'] });
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+    renderWithRouter(<App />, { initialEntries: ['/meals'] });
 
     await waitFor(() => {
-      const mealCard = screen.getByTestId('0-recipe-card');
+      const mealCard = screen.getByTestId(RECIPE_CARD);
       expect(mealCard).toBeInTheDocument();
     });
 
@@ -46,7 +44,7 @@ describe.only('Teste do SearchBar na rota /meals', () => {
 
     const inputSearch = screen.getByPlaceholderText(/search/i);
     const selectedRadio = screen.getByRole('radio', { name: /ingredient/i });
-    const buttonSeach = screen.getByTestId('exec-search-btn');
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
 
     act(() => {
       fireEvent.change(inputSearch, { target: { value: 'chicken' } });
@@ -54,37 +52,396 @@ describe.only('Teste do SearchBar na rota /meals', () => {
       fireEvent.click(buttonSeach);
     });
 
-    // console.log(debug());
-
     screen.getByText(/brown stew chicken/i);
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se renderiza as refeições por nome', async () => {
+    jest.spyOn(global, 'fetch');
+    global.fetch
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(mealCategories),
+      })
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(mealName),
+      });
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/meals'] });
+
+    await waitFor(() => {
+      const mealCard = screen.getByTestId(RECIPE_CARD);
+      expect(mealCard).toBeInTheDocument();
+    });
+
+    const buttonSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch);
+    });
+
+    const inputSearch = screen.getByPlaceholderText(/search/i);
+    const selectedRadio = screen.getByRole('radio', { name: /name/i });
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.change(inputSearch, { target: { value: 'soup' } });
+      fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    screen.getByText(/leblebi soup/i);
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se aparece o alerte se colocar um nome inválido', async () => {
+    jest.spyOn(global, 'fetch');
+    global.fetch
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(mealCategories),
+      })
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(mealName),
+      });
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/meals'] });
+
+    await waitFor(() => {
+      const mealCard = screen.getByTestId(RECIPE_CARD);
+      expect(mealCard).toBeInTheDocument();
+    });
+
+    const buttonSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch);
+    });
+
+    const inputSearch = screen.getByPlaceholderText(/search/i);
+    const selectedRadio = screen.getByRole('radio', { name: /name/i });
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.change(inputSearch, { target: { value: 'soup' } });
+      fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    screen.getByText(/leblebi soup/i);
+
+    fireEvent.change(inputSearch, { target: { value: 'test' } });
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se filtar por first letter', async () => {
+    jest.spyOn(global, 'fetch');
+    global.fetch
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(mealCategories),
+      })
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(mealFirstLetter),
+      });
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/meals'] });
+
+    await waitFor(() => {
+      const mealCard = screen.getByTestId(RECIPE_CARD);
+      expect(mealCard).toBeInTheDocument();
+    });
+
+    const buttonSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch);
+    });
+
+    const inputSearch = screen.getByPlaceholderText(/search/i);
+    const selectedRadio = screen.getByRole('radio', { name: /first letter/i });
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.change(inputSearch, { target: { value: 'c' } });
+      fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    screen.getByText(/chocolate gateau/i);
+
+    fireEvent.change(inputSearch, { target: { value: 'test' } });
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se aparece o alert', async () => {
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/meals'] });
+
+    await waitFor(() => {
+      const mealCard = screen.getByTestId(RECIPE_CARD);
+      expect(mealCard).toBeInTheDocument();
+    });
+
+    const buttonSearch1 = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch1);
+    });
+
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
   });
 });
 
-describe('Teste da página de receitas na rota /drinks', () => {
-  beforeEach(() => {
+describe('Teste do SearchBar na rota /drinks', () => {
+  const RECIPE_CARD = '0-recipe-card';
+  const SEARCH_BTN = 'exec-search-btn';
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('Verifica se renderiza as refeições por ingrediente', async () => {
     jest.spyOn(global, 'fetch');
     global.fetch
       .mockResolvedValueOnce({
         json: jest.fn().mockResolvedValue(drinkCategories),
       })
       .mockResolvedValueOnce({
-        json: jest.fn().mockResolvedValue(drinks),
-      })
-      .mockResolvedValueOnce({
-        json: jest.fn().mockResolvedValue(ordinaryDrinks),
+        json: jest.fn().mockResolvedValue(drinkIngredients),
       });
-  });
-
-  afterEach(() => {
-    jest.restoreAllMocks();
-  });
-
-  it('Verifica se renderiza as bebidas de acordo com o filtro', async () => {
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
     renderWithRouter(<App />, { initialEntries: ['/drinks'] });
 
     await waitFor(() => {
-      const drinkCard = screen.getByTestId('0-recipe-card');
+      const drinkCard = screen.getByTestId(RECIPE_CARD);
       expect(drinkCard).toBeInTheDocument();
+    });
+
+    const buttonSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch);
+    });
+
+    const inputSearch = screen.getByPlaceholderText(/search/i);
+    const selectedRadio = screen.getByRole('radio', { name: /ingredient/i });
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.change(inputSearch, { target: { value: 'lemon' } });
+      fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    screen.getByText(/a true amaretto sour/i);
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se renderiza as refeições por nome', async () => {
+    jest.spyOn(global, 'fetch');
+    global.fetch
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(drinkCategories),
+      })
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(drinkName),
+      });
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/drinks'] });
+
+    await waitFor(() => {
+      const drinkCard = screen.getByTestId(RECIPE_CARD);
+      expect(drinkCard).toBeInTheDocument();
+    });
+
+    const buttonSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch);
+    });
+
+    const inputSearch = screen.getByPlaceholderText(/search/i);
+    const selectedRadio = screen.getByRole('radio', { name: /name/i });
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.change(inputSearch, { target: { value: 'gin' } });
+      fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    screen.getByText(/gin fizz/i);
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se aparece o alerte se colocar um nome inválido', async () => {
+    jest.spyOn(global, 'fetch');
+    global.fetch
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(drinkCategories),
+      })
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(drinkName),
+      });
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/drinks'] });
+
+    await waitFor(() => {
+      const drinkCard = screen.getByTestId(RECIPE_CARD);
+      expect(drinkCard).toBeInTheDocument();
+    });
+
+    const buttonSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch);
+    });
+
+    const selectedRadio = screen.getByRole('radio', { name: /name/i });
+    const inputSearch = screen.getByPlaceholderText(/search/i);
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.change(inputSearch, { target: { value: 'test' } });
+      fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se filtar por first letter', async () => {
+    jest.spyOn(global, 'fetch');
+    global.fetch
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(drinkCategories),
+      })
+      .mockResolvedValueOnce({
+        json: jest.fn().mockResolvedValue(drinkFirstLetter),
+      });
+
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/drinks'] });
+
+    await waitFor(() => {
+      const drinkCard = screen.getByTestId(RECIPE_CARD);
+      expect(drinkCard).toBeInTheDocument();
+    });
+
+    const buttonSearch = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch);
+    });
+
+    const inputSearch = screen.getByPlaceholderText(/search/i);
+    const selectedRadio = screen.getByRole('radio', { name: /first letter/i });
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.change(inputSearch, { target: { value: 'c' } });
+      fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    screen.getByText(/casino/i);
+
+    fireEvent.change(inputSearch, { target: { value: 'test' } });
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
+    });
+  });
+
+  it('Verifica se aparece o alert', async () => {
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+    renderWithRouter(<App />, { initialEntries: ['/drinks'] });
+
+    await waitFor(() => {
+      const drinkCard = screen.getByTestId(RECIPE_CARD);
+      expect(drinkCard).toBeInTheDocument();
+    });
+
+    const buttonSearch1 = screen.getByRole('img', { name: /searchicon/i });
+
+    act(() => {
+      fireEvent.click(buttonSearch1);
+    });
+
+    const buttonSeach = screen.getByTestId(SEARCH_BTN);
+
+    act(() => {
+      fireEvent.click(buttonSeach);
+    });
+
+    await waitFor(() => {
+      expect(global.alert).toHaveBeenCalled();
     });
   });
 });
