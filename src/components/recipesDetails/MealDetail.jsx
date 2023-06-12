@@ -1,20 +1,69 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-bootstrap';
 import copy from 'clipboard-copy';
 import YoutubePlayer from './YoutubePlayer';
 import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 function MealDetail({ meal, getIngredients, recommendation }) {
   // console.log(recommendation);
   const DRINKS_LIST_MAX_LENGTH = 6;
   const { measures, ingredients } = getIngredients(meal)?.[0] ?? {};
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const clipboardShare = (link) => {
     const clipboardLink = copy(link);
     console.log(clipboardLink);
     setClipBoardMsg(true);
+  };
+
+  const checkFavorites = () => {
+    if (localStorage.favoriteRecipes) {
+      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+      const isFavoriteMeal = newFavoriteRecipesArray
+        .some((recipe) => recipe.id === meal[0].idMeal);
+      setIsFavorite(isFavoriteMeal);
+    }
+  };
+
+  useEffect(() => {
+    checkFavorites();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isFavorite]);
+
+  const handleMealFavorites = (mealFav) => {
+    if (!isFavorite) {
+      setIsFavorite(true);
+      const newFavoriteMeal = {
+        id: mealFav.idMeal,
+        type: 'meal',
+        nationality: mealFav.strArea,
+        category: mealFav.strCategory,
+        alcoholicOrNot: '',
+        name: mealFav.strMeal,
+        image: mealFav.strMealThumb,
+      };
+      if (localStorage.favoriteRecipes) {
+        const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+        const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+        newFavoriteRecipesArray.push(newFavoriteMeal);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteMeal]));
+      }
+    } else {
+      setIsFavorite(false);
+      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+      const favoriteArrayRemoved = newFavoriteRecipesArray
+        .filter((recipe) => recipe.id !== meal[0].idMeal);
+      localStorage.setItem('favoriteRecipes', JSON
+        .stringify(favoriteArrayRemoved));
+    }
   };
 
   return (
@@ -159,9 +208,13 @@ function MealDetail({ meal, getIngredients, recommendation }) {
         </button>
         <button
           className="favorite-recipe-btn"
-          data-testid="favorite-btn"
+          onClick={ () => handleMealFavorites(meal[0]) }
         >
-          Favorite
+          <img
+            data-testid="favorite-btn"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="favorite icon"
+          />
         </button>
         {
           clipBoardMsg && <p className="clipboard-msg">Link copied!</p>
