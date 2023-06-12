@@ -7,6 +7,7 @@ import renderWithRouter from '../services/renderWithRouter';
 describe('Testa a tela de login.', () => {
   const emailTestId = 'email-input';
   const passwordTestId = 'password-input';
+
   beforeEach(() => {
     renderWithRouter(<App />);
   });

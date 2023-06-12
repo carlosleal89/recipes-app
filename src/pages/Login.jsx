@@ -7,7 +7,6 @@ export default function Login() {
     email: '',
     password: '',
   });
-  const [isButtonActive, setIsButtonActive] = useState(false);
   const emailValidation = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const history = useHistory();
   const MIN_PASSWORD_LENGTH = 6;
@@ -52,17 +51,13 @@ export default function Login() {
           </label>
           <div>
             <button
-              className={
-                isButtonActive ? 'login-submit-btn-active' : 'login-submit-btn'
-              }
+              className="login-submit-btn"
               disabled={
                 !(emailValidation.test(userData.email)
                 && userData.password.length > MIN_PASSWORD_LENGTH)
               }
               data-testid="login-submit-btn"
               onClick={ setLocalStorage }
-              onMouseEnter={ () => setIsButtonActive(true) }
-              onMouseLeave={ () => setIsButtonActive(false) }
             >
               Enter
             </button>

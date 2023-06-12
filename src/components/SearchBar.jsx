@@ -11,12 +11,16 @@ import MealsContext from '../context/MealsContext';
 import DrinkContext from '../context/DrinksContext';
 
 function SearchBar() {
-  const [activeRadio, setActieRadio] = useState('');
+  const [activeRadio, setActiveRadio] = useState({ filter: '' });
   const [search, setSearch] = useState('');
   const { setMealListArray } = useContext(MealsContext);
   const { setDrinkListArray } = useContext(DrinkContext);
   const history = useHistory();
   const page = history.location.pathname;
+
+  const handleOnChangeFilter = ({ target: { value, name } }) => {
+    setActiveRadio({ [name]: value });
+  };
 
   const handleError = () => {
     global.alert(
@@ -60,7 +64,9 @@ function SearchBar() {
 
   const handleFirstLetter = async (id, MAX_LENGTH) => {
     const url = page === '/meals'
-      ? await fetchMealsFirstLetter(id) : await fetchDrinksFirstLetter(id);
+      ? await fetchMealsFirstLetter(id)
+      : await fetchDrinksFirstLetter(id);
+
     const urlTeste = page === '/meals'
       ? setMealListArray(url.meals.slice(0, MAX_LENGTH))
       : setDrinkListArray(url.drinks.slice(0, MAX_LENGTH));
@@ -69,18 +75,28 @@ function SearchBar() {
 
   const handleSearchBtn = async (id) => {
     const MAX_LENGTH = 12;
-    switch (activeRadio) {
-    case 'Ingredient':
+
+    switch (activeRadio.filter) {
+    case 'ingredient':
+      if (search.length < 2) {
+        global.alert('Please, enter a valid ingredient');
+        break;
+      }
       handleIngridientSearch(id, MAX_LENGTH);
       break;
-    case 'Name':
+    case 'name':
+      if (search.length < 1) {
+        global.alert('Your search is empty');
+        break;
+      }
       handleNameSearch(id, MAX_LENGTH);
       break;
-    case 'FirstLetter':
+    case 'first-letter':
       if (search.length !== 1) {
         global.alert(
           'Your search must have only 1 (one) character',
         );
+        break;
       }
       handleFirstLetter(id, MAX_LENGTH);
       break;
@@ -89,6 +105,7 @@ function SearchBar() {
         'Sorry, we haven\'t found any recipes for these filters.',
       );
     }
+    setSearch('');
   };
 
   return (
@@ -100,36 +117,37 @@ function SearchBar() {
         placeholder="Search"
         onChange={ (event) => setSearch(event.target.value) }
       />
-      <label htmlFor="radio">
-        <input
-          type="radio"
-          name="ingredient"
-          value="ingredient"
-          data-testid="ingredient-search-radio"
-          onClick={ () => setActieRadio('Ingredient') }
-        />
-        Ingredient
-      </label>
-      <label htmlFor="name">
-        <input
-          type="radio"
-          name="name"
-          value="name"
-          data-testid="name-search-radio"
-          onClick={ () => setActieRadio('Name') }
-        />
-        Name
-      </label>
-      <label htmlFor="first-letter">
-        <input
-          type="radio"
-          name="first"
-          value="first-letter"
-          data-testid="first-letter-search-radio"
-          onClick={ () => setActieRadio('FirstLetter') }
-        />
-        First letter
-      </label>
+
+      <input
+        id="ingredient"
+        type="radio"
+        name="filter"
+        value="ingredient"
+        data-testid="ingredient-search-radio"
+        onClick={ handleOnChangeFilter }
+      />
+      <label htmlFor="ingredient">Ingredient</label>
+
+      <input
+        id="name"
+        type="radio"
+        name="filter"
+        value="name"
+        data-testid="name-search-radio"
+        onClick={ handleOnChangeFilter }
+      />
+      <label htmlFor="name">Name</label>
+
+      <input
+        id="first-letter"
+        type="radio"
+        name="filter"
+        value="first-letter"
+        data-testid="first-letter-search-radio"
+        onClick={ handleOnChangeFilter }
+      />
+      <label htmlFor="first-letter">First letter</label>
+
       <button
         style={ {
           backgroundColor: '#d3d3d3',
@@ -139,7 +157,7 @@ function SearchBar() {
         data-testid="exec-search-btn"
         onClick={ () => handleSearchBtn(search) }
       >
-        Buscar
+        Search
       </button>
     </div>
   );
