@@ -109,7 +109,7 @@ describe('Teste do SearchBar na rota /meals', () => {
     });
   });
 
-  it('Verifica se aparece o alerte se colocar um nome inválido', async () => {
+  it('Verifica se aparece o alert se colocar um nome inválido', async () => {
     jest.spyOn(global, 'fetch');
     global.fetch
       .mockResolvedValueOnce({
@@ -330,7 +330,7 @@ describe('Teste do SearchBar na rota /drinks', () => {
     });
   });
 
-  it('Verifica se aparece o alerte se colocar um nome inválido', async () => {
+  it('Verifica se aparece o alert se colocar um nome inválido', async () => {
     jest.spyOn(global, 'fetch');
     global.fetch
       .mockResolvedValueOnce({
@@ -355,13 +355,21 @@ describe('Teste do SearchBar na rota /drinks', () => {
       fireEvent.click(buttonSearch);
     });
 
-    const selectedRadio = screen.getByRole('radio', { name: /name/i });
     const inputSearch = screen.getByPlaceholderText(/search/i);
+    const selectedRadio = screen.getByRole('radio', { name: /name/i });
     const buttonSeach = screen.getByTestId(SEARCH_BTN);
 
     act(() => {
-      fireEvent.change(inputSearch, { target: { value: 'test' } });
+      fireEvent.change(inputSearch, { target: { value: 'gin' } });
       fireEvent.click(selectedRadio);
+      fireEvent.click(buttonSeach);
+    });
+
+    screen.getByText(/gin fizz/i);
+
+    fireEvent.change(inputSearch, { target: { value: 'test' } });
+
+    act(() => {
       fireEvent.click(buttonSeach);
     });
 

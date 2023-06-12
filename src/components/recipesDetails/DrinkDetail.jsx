@@ -36,6 +36,7 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
 
   useEffect(() => {
     checkFavorites();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFavorite]);
 
   const handleDrinkFavorites = (drinkFav) => {

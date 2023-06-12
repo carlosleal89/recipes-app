@@ -5,27 +5,13 @@ import App from '../App';
 import renderWithRouter from '../services/renderWithRouter';
 
 describe('Testa a tela de login.', () => {
-  const emailTestId = 'email-input';
-  const passwordTestId = 'password-input';
   const profileBtnTestId = 'profile-top-btn';
-  const correctEmail = 'main-group7@email.com';
-  const correctPassword = '1234567';
+
   beforeEach(() => {
-    renderWithRouter(<App />);
+    renderWithRouter(<App />, { initialEntries: ['/profile'] });
   });
 
   it('Testa se os componentes da tela de profile são renderizados.', () => {
-    const emailInput = screen.getByTestId(emailTestId);
-    const passwordInput = screen.getByTestId(passwordTestId);
-    const btnEl = screen.getByRole('button');
-
-    userEvent.type(emailInput, correctEmail);
-    userEvent.type(passwordInput, correctPassword);
-    userEvent.click(btnEl);
-
-    const profileBtnEl = screen.getByTestId(profileBtnTestId);
-    userEvent.click(profileBtnEl);
-
     const titleEl = screen.getByRole('heading', { name: /profile/i });
     const userEmailEl = screen.getByTestId('profile-email');
     const doneRecipesBtnEl = screen.getByTestId('profile-done-btn');
@@ -39,14 +25,6 @@ describe('Testa a tela de login.', () => {
   });
 
   it('Testa se os botão Done Recipes redireciona para a rota correta.', () => {
-    const emailInput = screen.getByTestId(emailTestId);
-    const passwordInput = screen.getByTestId(passwordTestId);
-    const btnEl = screen.getByRole('button');
-
-    userEvent.type(emailInput, correctEmail);
-    userEvent.type(passwordInput, correctPassword);
-    userEvent.click(btnEl);
-
     const profileBtnEl = screen.getByTestId(profileBtnTestId);
     userEvent.click(profileBtnEl);
 
@@ -59,14 +37,6 @@ describe('Testa a tela de login.', () => {
   });
 
   it('Testa se o botão de Favorites recipes redireciona para a rota correta.', () => {
-    const emailInput = screen.getByTestId(emailTestId);
-    const passwordInput = screen.getByTestId(passwordTestId);
-    const btnEl = screen.getByRole('button');
-
-    userEvent.type(emailInput, correctEmail);
-    userEvent.type(passwordInput, correctPassword);
-    userEvent.click(btnEl);
-
     const profileBtnEl = screen.getByTestId(profileBtnTestId);
     userEvent.click(profileBtnEl);
 
@@ -79,14 +49,6 @@ describe('Testa a tela de login.', () => {
   });
 
   it('Testa se o botão de logout recipes redireciona para a rota correta.', () => {
-    const emailInput = screen.getByTestId(emailTestId);
-    const passwordInput = screen.getByTestId(passwordTestId);
-    const btnEl = screen.getByRole('button');
-
-    userEvent.type(emailInput, correctEmail);
-    userEvent.type(passwordInput, correctPassword);
-    userEvent.click(btnEl);
-
     const profileBtnEl = screen.getByTestId(profileBtnTestId);
     userEvent.click(profileBtnEl);
 
@@ -96,5 +58,15 @@ describe('Testa a tela de login.', () => {
 
     const subTitleEl = screen.getByRole('heading', { name: /login/i });
     expect(subTitleEl).toBeInTheDocument();
+  });
+
+  it('Verifica se há user no Local Storage', () => {
+    const setUserInfo = JSON.stringify({ email: 'test@trybe.com' });
+    localStorage.setItem('user', setUserInfo);
+
+    const getUserInfo1 = localStorage.getItem('user');
+    const userInfoObj = JSON.parse(getUserInfo1);
+
+    expect(userInfoObj.email).toBe('test@trybe.com');
   });
 });
