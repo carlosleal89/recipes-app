@@ -32,26 +32,37 @@ function MealDetail({ meal, getIngredients, recommendation }) {
 
   useEffect(() => {
     checkFavorites();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFavorite]);
 
   const handleMealFavorites = (mealFav) => {
-    setIsFavorite(true);
-    const newFavoriteMeal = {
-      id: mealFav.idMeal,
-      type: 'meal',
-      nationality: mealFav.strArea,
-      category: mealFav.strCategory,
-      alcoholicOrNot: '',
-      name: mealFav.strMeal,
-      image: mealFav.strMealThumb,
-    };
-    if (localStorage.favoriteRecipes) {
+    if (!isFavorite) {
+      setIsFavorite(true);
+      const newFavoriteMeal = {
+        id: mealFav.idMeal,
+        type: 'meal',
+        nationality: mealFav.strArea,
+        category: mealFav.strCategory,
+        alcoholicOrNot: '',
+        name: mealFav.strMeal,
+        image: mealFav.strMealThumb,
+      };
+      if (localStorage.favoriteRecipes) {
+        const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+        const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+        newFavoriteRecipesArray.push(newFavoriteMeal);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteMeal]));
+      }
+    } else {
+      setIsFavorite(false);
       const favoriteRecipes = localStorage.getItem('favoriteRecipes');
       const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-      newFavoriteRecipesArray.push(newFavoriteMeal);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteMeal]));
+      const favoriteArrayRemoved = newFavoriteRecipesArray
+        .filter((recipe) => recipe.id !== meal[0].idMeal);
+      localStorage.setItem('favoriteRecipes', JSON
+        .stringify(favoriteArrayRemoved));
     }
   };
 

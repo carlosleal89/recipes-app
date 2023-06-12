@@ -29,28 +29,44 @@ function DrinkDetail({ drink, getIngredients, recommendation }) {
     }
   };
 
+  // localStorage.getItem(favoriteRecipes) {
+
+  //   if (localStorage.favoriteRecipes.id !== id)
+  // }
+
   useEffect(() => {
     checkFavorites();
   }, [isFavorite]);
 
   const handleDrinkFavorites = (drinkFav) => {
-    setIsFavorite(true);
-    const newFavoriteDrink = {
-      id: drinkFav.idDrink,
-      type: 'drink',
-      nationality: '',
-      category: drinkFav.strCategory,
-      alcoholicOrNot: drinkFav.strAlcoholic,
-      name: drinkFav.strDrink,
-      image: drinkFav.strDrinkThumb,
-    };
-    if (localStorage.favoriteRecipes) {
+    if (!isFavorite) {
+      setIsFavorite(true);
+      const newFavoriteDrink = {
+        id: drinkFav.idDrink,
+        type: 'drink',
+        nationality: '',
+        category: drinkFav.strCategory,
+        alcoholicOrNot: drinkFav.strAlcoholic,
+        name: drinkFav.strDrink,
+        image: drinkFav.strDrinkThumb,
+      };
+      if (localStorage.favoriteRecipes) {
+        const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+        const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+        newFavoriteRecipesArray.push(newFavoriteDrink);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteDrink]));
+      }
+    } else {
+      setIsFavorite(false);
       const favoriteRecipes = localStorage.getItem('favoriteRecipes');
       const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-      newFavoriteRecipesArray.push(newFavoriteDrink);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteDrink]));
+      const favoriteArrayRemoved = newFavoriteRecipesArray
+        .filter((recipe) => recipe.id !== drink[0].idDrink);
+      console.log(favoriteArrayRemoved);
+      localStorage.setItem('favoriteRecipes', JSON
+        .stringify(favoriteArrayRemoved));
     }
   };
 
