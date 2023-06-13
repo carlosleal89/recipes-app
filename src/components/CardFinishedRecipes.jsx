@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
 import oneMeal from '../mocks/oneMeal';
+import oneDrink from '../mocks/oneDrink';
 
 function CardFinishedRecipes() {
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
 
   const tagName = 'Pasta';
   const index = 0;
-  console.log(index);
 
   const clipboardShare = (link) => {
     copy(link);
@@ -25,7 +25,9 @@ function CardFinishedRecipes() {
       <p
         data-testid={ `${index}-horizontal-top-text` }
       >
-        { oneMeal.meals[0].strCategory }
+        { `${oneMeal.meals[0].strCategory} - ${oneMeal.meals[0].strArea}`
+        || `${oneDrink.drinks[0].strAlcoholic}` }
+
       </p>
       <p
         data-testid={ `${index}-horizontal-name` }

@@ -10,26 +10,30 @@ function DoneRecipes() {
     setTitle('Done Recipes');
   }, [setTitle]);
 
+  // filtro de meals
+  // filtro de drinks
+  // remove filtros de meals e drinks e renderiza o localStorage completo
+
   return (
     <div>
       <Header />
       <button
         data-testid="filter-by-all-btn"
-        // onClick={  }
+        // onClick={ remove todos os filtros e renderiza tudo que está no localStorage  }
       >
         All
       </button>
       <button
         data-testid="filter-by-meal-btn"
-        // onClick={  }
+        // onClick={ .filter no local storage para que seja trazido todos os meals armazenados no local storage }
       >
-        Food
+        Meals
       </button>
       <button
         data-testid="filter-by-drink-btn"
-        // onClick={  }
+        // onClick={ .filter no local storage para que seja trazido todos os drinks armazenados no local storage }
       >
-        Drink
+        Drinks
       </button>
       <CardFinishedRecipes />
     </div>
