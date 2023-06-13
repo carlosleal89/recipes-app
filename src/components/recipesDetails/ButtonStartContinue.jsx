@@ -1,37 +1,73 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, useLocation } from 'react-router-dom';
 
 function ButtonStartContinue({ recipe }) {
   const [isStarted, setIsStarted] = useState(false);
   const history = useHistory();
   const { id } = useParams();
+  const location = useLocation();
 
-  // const ckeckRecipeInProgress = () => {
-  //   if (localStorage.inProgressRecipes) {
-  //     const progressRecipes = localStorage.getItem('inProgressRecipes');
-  //     const newProgressRecipes = JSON.parse(progressRecipes);
-  //     if (newProgressRecipes.drinks && newProgressRecipes.drinks[id]) {
-  //       setIsStarted(true);
-  //     }
-  //   } else {
-  //     localStorage.inProgressRecipes = {};
-  //   }
-  // };
+  const getIngredients = (drinkOrMeal) => {
+    const ingredientsList = drinkOrMeal.map((obj) => {
+      const measures = Object.keys(obj)
+        .filter((key) => key.startsWith('strMeasure') && obj[key])
+        .map((key) => obj[key]);
 
-  const handleClickStartRecipe = ({ idDrink }) => {
-    const recipeInProgress = {
-      drinks: {
-        [idDrink]: [getIngredients(recipe)[0]],
-      },
-    };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
-    history.push(`/drinks/${id}/in-progress`);
-    setIsStarted('teste'); // apagar
+      const ingredients = Object.keys(obj)
+        .filter((key) => key.startsWith('strIngredient') && obj[key])
+        .map((key) => obj[key]);
+
+      return {
+        measures,
+        ingredients,
+      };
+    });
+    return ingredientsList;
+  };
+
+  const checkRecipeInProgress = () => {
+    if (
+      (location.pathname === `/drinks/${id}` || location.pathname === `/meals/${id}`)
+      && localStorage.inProgressRecipes
+    ) {
+      const progressRecipes = localStorage.getItem('inProgressRecipes');
+      const newProgressRecipes = JSON.parse(progressRecipes);
+
+      const inProgressKey = location.pathname.includes('drinks') ? 'drinks' : 'meals';
+
+      if (newProgressRecipes[inProgressKey] && newProgressRecipes[inProgressKey][id]) {
+        setIsStarted(true);
+      }
+    } else {
+      localStorage.inProgressRecipes = {};
+    }
+  };
+
+  const handleClickStartRecipe = (obj) => {
+    if (location.pathname === `/drinks/${id}`) {
+      const recipeInProgress = {
+        drinks: {
+          [obj.idDrink]: [getIngredients(recipe)[0]],
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+      history.push(`/drinks/${id}/in-progress`);
+    }
+
+    if (location.pathname === `/meals/${id}`) {
+      const recipeInProgress = {
+        meals: {
+          [obj.idMeal]: [getIngredients(recipe)[0]],
+        },
+      };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+      history.push(`/meals/${id}/in-progress`);
+    }
   };
 
   useEffect(() => {
-    // ckeckRecipeInProgress();
+    checkRecipeInProgress();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

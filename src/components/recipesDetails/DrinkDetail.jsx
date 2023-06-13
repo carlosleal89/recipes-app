@@ -15,8 +15,7 @@ function DrinkDetail({ drink, recommendation }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const clipboardShare = (link) => {
-    const clipboardLink = copy(link);
-    console.log(clipboardLink);
+    copy(link);
     setClipBoardMsg(true);
   };
 
@@ -61,7 +60,6 @@ function DrinkDetail({ drink, recommendation }) {
       const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
       const favoriteArrayRemoved = newFavoriteRecipesArray
         .filter((recipe) => recipe.id !== drink[0].idDrink);
-      console.log(favoriteArrayRemoved);
       localStorage.setItem('favoriteRecipes', JSON
         .stringify(favoriteArrayRemoved));
     }
