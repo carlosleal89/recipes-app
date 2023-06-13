@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 function PhotoAndTitle({ recipe }) {
-  console.log(recipe);
   return (
     <div>
       { // photo, title and category
