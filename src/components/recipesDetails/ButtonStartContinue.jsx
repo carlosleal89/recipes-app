@@ -39,9 +39,10 @@ function ButtonStartContinue({ recipe }) {
       if (newProgressRecipes[inProgressKey] && newProgressRecipes[inProgressKey][id]) {
         setIsStarted(true);
       }
-    } else {
-      localStorage.inProgressRecipes = {};
     }
+    // else {
+    //   localStorage.inProgressRecipes = {};
+    // }
   };
 
   const handleClickStartRecipe = (obj) => {
@@ -51,7 +52,11 @@ function ButtonStartContinue({ recipe }) {
           [obj.idDrink]: [getIngredients(recipe)[0]],
         },
       };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+      const progressRecipes = localStorage.getItem('inProgressRecipes');
+      const newProgressRecipes = JSON.parse(progressRecipes);
+      const actualProgressRecipes = { ...newProgressRecipes, recipeInProgress };
+
+      localStorage.setItem('inProgressRecipes', JSON.stringify(actualProgressRecipes));
       history.push(`/drinks/${id}/in-progress`);
     }
 
@@ -61,7 +66,11 @@ function ButtonStartContinue({ recipe }) {
           [obj.idMeal]: [getIngredients(recipe)[0]],
         },
       };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+      const progressRecipes = localStorage.getItem('inProgressRecipes');
+      const newProgressRecipes = JSON.parse(progressRecipes);
+      const actualProgressRecipes = { ...newProgressRecipes, recipeInProgress };
+
+      localStorage.setItem('inProgressRecipes', JSON.stringify(actualProgressRecipes));
       history.push(`/meals/${id}/in-progress`);
     }
   };
