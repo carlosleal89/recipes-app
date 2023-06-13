@@ -7,6 +7,7 @@ import { fetchMealsById,
   fetchRecommendationDrinks,
   fetchRecommendationMeals } from '../helpers/API_URL';
 import '../css/RecipesDetails.css';
+import Loading from '../components/recipesDetails/Loading';
 
 function RecipeDetails() {
   const [meal, setMeal] = useState(null);
@@ -39,24 +40,6 @@ function RecipeDetails() {
     getMealOrDrink();
   }, [id, location.pathname]);
 
-  const getMeasuresAndIngredients = (drinkOrMeal) => {
-    const ingredientsList = drinkOrMeal.map((obj) => {
-      const measures = Object.keys(obj)
-        .filter((key) => key.startsWith('strMeasure') && obj[key])
-        .map((key) => obj[key]);
-
-      const ingredients = Object.keys(obj)
-        .filter((key) => key.startsWith('strIngredient') && obj[key])
-        .map((key) => obj[key]);
-
-      return {
-        measures,
-        ingredients,
-      };
-    });
-    return ingredientsList;
-  };
-
   return (
     <div className="container__recipe-details">
       {!isLoading ? (
@@ -64,7 +47,6 @@ function RecipeDetails() {
           {meal && (
             <MealDetail
               meal={ meal.meals }
-              getIngredients={ getMeasuresAndIngredients }
               recommendation={ recommendationDrinks.drinks }
             />
           )}
@@ -72,13 +54,12 @@ function RecipeDetails() {
           {drink && (
             <DrinkDetail
               drink={ drink.drinks }
-              getIngredients={ getMeasuresAndIngredients }
               recommendation={ recommendationMeals.meals }
             />
           )}
         </>
       ) : (
-        <p>Loading...</p>
+        <Loading />
       )}
     </div>
   );
