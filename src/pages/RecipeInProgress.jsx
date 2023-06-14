@@ -6,7 +6,7 @@ import Loading from '../components/recipesDetails/Loading';
 import shareIcon from '../images/shareIcon.svg';
 import Instructions from '../components/recipesDetails/Instructions';
 import '../css/RecipeInProgress.css';
-import Ingredients from '../components/recipesDetails/Ingredients';
+import IngredientsWithCheckboxes from '../components/recipesDetails/ingredientsWithCheckboxes';
 
 export default function RecipesInProgress() {
   const [ingredientState, setIngredientState] = useState({});
@@ -15,8 +15,8 @@ export default function RecipesInProgress() {
   const location = useLocation();
 
   const { id } = useParams();
-  const atualRecipe = localStorage.getItem('inProgressRecipes');
-  const newRecipe = JSON.parse(atualRecipe) || [];
+  // const atualRecipe = localStorage.getItem('inProgressRecipes');
+  // const newRecipe = JSON.parse(atualRecipe) || [];
 
   const getMeasuresAndIngredients = async (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
@@ -82,24 +82,7 @@ export default function RecipesInProgress() {
           >
             Favorite
           </button>
-          <Ingredients recipe={ recipes } />
-          {/* { ingredients &&
-            ingredients.map((ingredient, index) => (
-              <div key={ index }>
-                <label
-                  htmlFor={ `ingredient${index}` }
-                  data-testid={ `${index}-ingredient-step` }
-                >
-                  <input
-                    className="checked"
-                    type="checkbox"
-                    id={ `ingredient${index}` }
-                  />
-                  <span className="text">{`${measures[index]} ${ingredient}` }</span>
-                </label>
-              </div>
-            ))
-          } */}
+          <IngredientsWithCheckboxes recipe={ recipes } />
           <Instructions recipe={ recipes } />
           <button
             data-testid="finish-recipe-btn"
