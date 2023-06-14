@@ -40,9 +40,6 @@ function ButtonStartContinue({ recipe }) {
         setIsStarted(true);
       }
     }
-    // else {
-    //   localStorage.inProgressRecipes = {};
-    // }
   };
 
   const handleClickStartRecipe = (obj) => {

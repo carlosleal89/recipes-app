@@ -10,44 +10,34 @@ import IngredientsWithCheckboxes
   from '../components/recipesDetails/ingredientsWithCheckboxes';
 
 export default function RecipesInProgress() {
-  const [ingredientState, setIngredientState] = useState({});
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [clipBoardMsg, setClipBoardMsg] = useState(false);
   const location = useLocation();
 
   const { id } = useParams();
 
-  const getMeasuresAndIngredients = async (drinkOrMeal) => {
-    const ingredientsList = drinkOrMeal.map((obj) => {
-      const measures = Object.keys(obj)
-        .filter((key) => key.startsWith('strMeasure') && obj[key])
-        .map((key) => obj[key]);
-
-      const ingredients = Object.keys(obj)
-        .filter((key) => key.startsWith('strIngredient') && obj[key])
-        .map((key) => obj[key]);
-
-      return {
-        measures,
-        ingredients,
-      };
-    });
-    return ingredientsList;
+  const clipboardShare = () => {
+    if (location.pathname === `/meals/${id}/in-progress`) {
+      navigator.clipboard.writeText(`http://localhost:3000/meals/${id}`);
+    }
+    if (location.pathname === `/drinks/${id}/in-progress`) {
+      navigator.clipboard.writeText(`http://localhost:3000/drinks/${id}`);
+    }
+    const SECONDS = 1500;
+    setClipBoardMsg(true);
+    setTimeout(() => {
+      setClipBoardMsg(false);
+    }, SECONDS);
   };
 
   useEffect(() => {
     const getMealOrDrink = async () => {
       if (location.pathname === `/meals/${id}/in-progress`) {
-        // const ingredients = newRecipe.meals[id];
-        // setIngredientState(ingredients[0]);
         const mealById = await fetchMealsById(id);
         setRecipes(mealById.meals);
-        const tst = await getMeasuresAndIngredients(mealById.meals);
-        setIngredientState(tst);
       }
       if (location.pathname === `/drinks/${id}/in-progress`) {
-        // const ingredients = newRecipe.drinks[id];
-        // setIngredientState(ingredients[0]);
         const drinkById = await fetchDrinksById(id);
         setRecipes(drinkById.drinks);
       }
@@ -55,8 +45,7 @@ export default function RecipesInProgress() {
     };
     getMealOrDrink();
   }, [id, location.pathname]);
-  const tst2 = ingredientState[0];
-  console.log(tst2);
+
   return (
     <div>
       { !isLoading ? (
@@ -65,19 +54,25 @@ export default function RecipesInProgress() {
           <button
             className=""
             data-testid="share-btn"
-            onClick={ () => clipboardShare(window.location.href) }
+            onClick={ clipboardShare }
           >
             <img
               src={ shareIcon }
               alt="share icon"
             />
           </button>
+
           <button
             data-testid="favorite-btn"
           // onClick={ }
           >
             Favorite
           </button>
+
+          {
+            clipBoardMsg && <span>Link copied!</span>
+          }
+
           <IngredientsWithCheckboxes recipe={ recipes } />
           <Instructions recipe={ recipes } />
           <button

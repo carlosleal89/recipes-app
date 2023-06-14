@@ -16,9 +16,12 @@ function MealDetail({ meal, recommendation }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const clipboardShare = (link) => {
-    const clipboardLink = copy(link);
-    console.log(clipboardLink);
+    const SECONDS = 1500;
+    copy(link);
     setClipBoardMsg(true);
+    setTimeout(() => {
+      setClipBoardMsg(false);
+    }, SECONDS);
   };
 
   const checkFavorites = () => {
