@@ -24,11 +24,26 @@ function FavoriteRecipes() {
 
   const btn = ['All', 'Meal', 'Drink'];
 
-  const handleClick = (id) => {
+  const handleClickFavorite = (id) => {
     const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const removedId = localStorageData.filter((e) => e.id !== id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(removedId));
     setProducts(removedId);
+  };
+
+  const handleClickFilter = (filter) => {
+    if (filter === 'All') {
+      const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      return setProducts(localStorageData);
+    }
+    if (filter === 'Meal') {
+      const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const mealFilter = localStorageData.filter((e) => e.type === 'meal');
+      return setProducts(mealFilter);
+    }
+    const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const drinkFilter = localStorageData.filter((e) => e.type === 'drink');
+    setProducts(drinkFilter);
   };
 
   return (
@@ -37,6 +52,7 @@ function FavoriteRecipes() {
       {
         btn.map((element, index) => (
           <button
+            onClick={ () => handleClickFilter(element) }
             style={ {
               fontSize: 15,
               fontStyle: 'italic',
@@ -91,7 +107,7 @@ function FavoriteRecipes() {
                 clipBoardmsg && <p className="clipboard-msg">Link copied!</p>
               }
               <button
-                onClick={ () => handleClick(element.id) }
+                onClick={ () => handleClickFavorite(element.id) }
               >
                 <img
                   data-testid={ `${index}-horizontal-favorite-btn` }
