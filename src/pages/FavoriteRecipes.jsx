@@ -2,30 +2,22 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import TitleContext from '../context/TitleContext';
 import shareIcon from '../images/shareIcon.svg';
-// import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
   const { setTitle } = useContext(TitleContext);
-  // const [isFavorite, setIsFavorite] = useState(false);
-  const [getLocalStorage, setLocalStorage] = useState([]);
-
-  const checkFavorites = async () => {
-    if (localStorage.favoriteRecipes) {
-      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-      setLocalStorage(newFavoriteRecipesArray);
-    }
-  };
+  const [products] = useState(() => {
+    const localStorageData = localStorage.getItem('favoriteRecipes');
+    return localStorageData ? JSON.parse(localStorageData) : [];
+  });
 
   useEffect(() => {
     setTitle('Favorite Recipes');
-    checkFavorites();
   }, [setTitle]);
-  console.log(getLocalStorage[0]);
 
   const btn = ['All', 'Meal', 'Drink'];
 
+  console.log(products);
   return (
     <div>
       <Header />
@@ -48,38 +40,41 @@ function FavoriteRecipes() {
         ))
       }
       {
-        getLocalStorage.map((element, index) => (
+        products.map((element, index) => (
           <div
             key={ index }
           >
             <img
               data-testid={ `${index}-horizontal-image` }
-              src={ element[0] }
+              src={ element.image }
               alt="teste"
               key={ index }
             />
             <h1
               data-testid={ `${index}-horizontal-top-text` }
             >
-              A
+              {element.type === 'meal'
+                ? `${element.nationality} - ${element.category}`
+                : `${element.alcoholicOrNot} - ${element.category}`}
             </h1>
             <h2
               data-testid={ `${index}-horizontal-name` }
             >
-              B
+              {element.name}
             </h2>
-            <button
-              data-testid={ `${index}-horizontal-share-btn` }
-            >
+            <button>
               <img
+                data-testid={ `${index}-horizontal-share-btn` }
                 src={ shareIcon }
                 alt="share icon"
               />
             </button>
-            <button
-              data-testid={ `${index}-horizontal-favorite-btn` }
-            >
-              Favorite
+            <button>
+              <img
+                data-testid={ `${index}-horizontal-favorite-btn` }
+                src={ blackHeartIcon }
+                alt="black heart"
+              />
             </button>
           </div>
         ))
