@@ -15,8 +15,12 @@ function DrinkDetail({ drink, recommendation }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const clipboardShare = (link) => {
+    const SECONDS = 1500;
     copy(link);
     setClipBoardMsg(true);
+    setTimeout(() => {
+      setClipBoardMsg(false);
+    }, SECONDS);
   };
 
   const checkFavorites = () => {
