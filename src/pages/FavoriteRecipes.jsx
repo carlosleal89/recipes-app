@@ -1,4 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import TitleContext from '../context/TitleContext';
@@ -7,19 +10,26 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
   const { setTitle } = useContext(TitleContext);
-  const [clipBoardmsg, setClipBoardMsg] = useState(false);
+  const [clipBoardmsg, setClipBoardMsg] = useState();
   const [products, setProducts] = useState(() => {
     const localStorageData = localStorage.getItem('favoriteRecipes');
     return localStorageData ? JSON.parse(localStorageData) : [];
   });
+  const history = useHistory();
 
   useEffect(() => {
     setTitle('Favorite Recipes');
   }, [setTitle]);
 
-  const clipboardShare = (link) => {
+  const clipboardShare = (type, id) => {
+    let link;
+    if (type === 'meal') {
+      link = `http://localhost:3000/meals/${id}`;
+    } else {
+      link = `http://localhost:3000/drinks/${id}`;
+    }
     copy(link);
-    setClipBoardMsg(true);
+    setClipBoardMsg(id);
   };
 
   const btn = ['All', 'Meal', 'Drink'];
@@ -46,6 +56,12 @@ function FavoriteRecipes() {
     setProducts(drinkFilter);
   };
 
+  const handleNavigate = (type, id) => {
+    if (type === 'meal') {
+      return history.push(`/meals/${id}`);
+    }
+    history.push(`/drinks/${id}`);
+  };
   return (
     <div>
       <Header />
@@ -75,10 +91,16 @@ function FavoriteRecipes() {
               key={ index }
             >
               <img
+                onClick={ () => handleNavigate(element.type, element.id) }
                 data-testid={ `${index}-horizontal-image` }
                 src={ element.image }
                 alt={ element.name }
                 key={ index }
+                style={ {
+                  width: '150px',
+                  height: '150px',
+                  marginBottom: '20px',
+                } }
               />
               <h1
                 data-testid={ `${index}-horizontal-top-text` }
@@ -89,13 +111,12 @@ function FavoriteRecipes() {
               </h1>
               <h2
                 data-testid={ `${index}-horizontal-name` }
+                onClick={ () => handleNavigate(element.type, element.id) }
               >
                 {element.name}
               </h2>
               <button
-                onClick={ () => clipboardShare(element.type === 'meal'
-                  ? `http://localhost:3000/meals/${element.id}`
-                  : `http://localhost:3000/drinks/${element.id}`) }
+                onClick={ () => clipboardShare(element.type, element.id) }
               >
                 <img
                   data-testid={ `${index}-horizontal-share-btn` }
@@ -104,7 +125,14 @@ function FavoriteRecipes() {
                 />
               </button>
               {
-                clipBoardmsg && <p className="clipboard-msg">Link copied!</p>
+                clipBoardmsg === element.id
+                && (
+                  <p
+                    data-testid="copy-clipboard"
+                    className="clipboard-msg"
+                  >
+                    Link copied!
+                  </p>)
               }
               <button
                 onClick={ () => handleClickFavorite(element.id) }
