@@ -8,7 +8,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 function FavoriteRecipes() {
   const { setTitle } = useContext(TitleContext);
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
-  const [products] = useState(() => {
+  const [products, setProducts] = useState(() => {
     const localStorageData = localStorage.getItem('favoriteRecipes');
     return localStorageData ? JSON.parse(localStorageData) : [];
   });
@@ -23,7 +23,13 @@ function FavoriteRecipes() {
   };
 
   const btn = ['All', 'Meal', 'Drink'];
-  console.log(products);
+
+  const handleClick = (id) => {
+    const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    const removedId = localStorageData.filter((e) => e.id !== id);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(removedId));
+    setProducts(removedId);
+  };
 
   return (
     <div>
@@ -84,7 +90,9 @@ function FavoriteRecipes() {
               {
                 clipBoardmsg && <p className="clipboard-msg">Link copied!</p>
               }
-              <button>
+              <button
+                onClick={ () => handleClick(element.id) }
+              >
                 <img
                   data-testid={ `${index}-horizontal-favorite-btn` }
                   src={ blackHeartIcon }
