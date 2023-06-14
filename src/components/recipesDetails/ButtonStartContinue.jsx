@@ -52,11 +52,11 @@ function ButtonStartContinue({ recipe }) {
           [obj.idDrink]: [getIngredients(recipe)[0]],
         },
       };
-      const progressRecipes = localStorage.getItem('inProgressRecipes');
-      const newProgressRecipes = JSON.parse(progressRecipes);
-      const actualProgressRecipes = { ...newProgressRecipes, recipeInProgress };
+      // const progressRecipes = localStorage.getItem('inProgressRecipes');
+      // const newProgressRecipes = JSON.parse(progressRecipes);
+      // const actualProgressRecipes = { ...newProgressRecipes, recipeInProgress };
 
-      localStorage.setItem('inProgressRecipes', JSON.stringify(actualProgressRecipes));
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
       history.push(`/drinks/${id}/in-progress`);
     }
 
@@ -66,11 +66,11 @@ function ButtonStartContinue({ recipe }) {
           [obj.idMeal]: [getIngredients(recipe)[0]],
         },
       };
-      const progressRecipes = localStorage.getItem('inProgressRecipes');
-      const newProgressRecipes = JSON.parse(progressRecipes);
-      const actualProgressRecipes = { ...newProgressRecipes, recipeInProgress };
+      // const progressRecipes = localStorage.getItem('inProgressRecipes');
+      // const newProgressRecipes = JSON.parse(progressRecipes);
+      // const actualProgressRecipes = { ...newProgressRecipes, recipeInProgress };
 
-      localStorage.setItem('inProgressRecipes', JSON.stringify(actualProgressRecipes));
+      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
       history.push(`/meals/${id}/in-progress`);
     }
   };
