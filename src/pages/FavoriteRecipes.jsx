@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import TitleContext from '../context/TitleContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -6,6 +7,7 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 function FavoriteRecipes() {
   const { setTitle } = useContext(TitleContext);
+  const [clipBoardmsg, setClipBoardMsg] = useState(false);
   const [products] = useState(() => {
     const localStorageData = localStorage.getItem('favoriteRecipes');
     return localStorageData ? JSON.parse(localStorageData) : [];
@@ -15,7 +17,13 @@ function FavoriteRecipes() {
     setTitle('Favorite Recipes');
   }, [setTitle]);
 
+  const clipboardShare = (link) => {
+    copy(link);
+    setClipBoardMsg(true);
+  };
+
   const btn = ['All', 'Meal', 'Drink'];
+  console.log(products);
 
   return (
     <div>
@@ -62,13 +70,20 @@ function FavoriteRecipes() {
               >
                 {element.name}
               </h2>
-              <button>
+              <button
+                onClick={ () => clipboardShare(element.type === 'meal'
+                  ? `http://localhost:3000/meals/${element.id}`
+                  : `http://localhost:3000/drinks/${element.id}`) }
+              >
                 <img
                   data-testid={ `${index}-horizontal-share-btn` }
                   src={ shareIcon }
                   alt="share icon"
                 />
               </button>
+              {
+                clipBoardmsg && <p className="clipboard-msg">Link copied!</p>
+              }
               <button>
                 <img
                   data-testid={ `${index}-horizontal-favorite-btn` }
