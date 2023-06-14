@@ -1,0 +1,3 @@
+.checked[ type = 'checkbox' ]:checked ~ .text {
+  text-decoration: line-through solid black;
+}
