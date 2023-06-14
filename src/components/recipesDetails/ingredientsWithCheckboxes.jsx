@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../../css/RecipeInProgress.css';
 
 function IngredientsWithCheckboxes({ recipe }) {
   const getMeasuresAndIngredients = (drinkOrMeal) => {
@@ -20,25 +21,34 @@ function IngredientsWithCheckboxes({ recipe }) {
     return ingredientsList;
   };
 
+  const handleChange = (target) => {
+    if (target.checked) {
+      target.parentNode.className = 'text';
+    } else {
+      target.parentNode.className = '';
+    }
+  };
+
   const { measures, ingredients } = getMeasuresAndIngredients(recipe)[0];
 
   return (
     <div>
       {
         ingredients.map((ingredient, index) => (
-        <div key={ index }>
-        <label
-            htmlFor={ `ingredient${index}` }
-            data-testid={ `${index}-ingredient-step` }
-        >
-            <input
-            className="checked"
-            type="checkbox"
-            id={ `ingredient${index}` }
-            />
-            <span className="text">{`${measures[index]} ${ingredient}` }</span>
-        </label>
-        </div>
+          <div key={ index }>
+            <label
+              htmlFor={ `ingredient${index}` }
+              data-testid={ `${index}-ingredient-step` }
+            >
+              <input
+                className="checked"
+                type="checkbox"
+                id={ `ingredient${index}` }
+                onChange={ ({ target }) => handleChange(target) }
+              />
+              <span>{`${measures[index]} ${ingredient}` }</span>
+            </label>
+          </div>
         ))
       }
     </div>

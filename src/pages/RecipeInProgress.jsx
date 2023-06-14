@@ -6,7 +6,8 @@ import Loading from '../components/recipesDetails/Loading';
 import shareIcon from '../images/shareIcon.svg';
 import Instructions from '../components/recipesDetails/Instructions';
 import '../css/RecipeInProgress.css';
-import IngredientsWithCheckboxes from '../components/recipesDetails/ingredientsWithCheckboxes';
+import IngredientsWithCheckboxes
+  from '../components/recipesDetails/ingredientsWithCheckboxes';
 
 export default function RecipesInProgress() {
   const [ingredientState, setIngredientState] = useState({});
@@ -15,8 +16,6 @@ export default function RecipesInProgress() {
   const location = useLocation();
 
   const { id } = useParams();
-  // const atualRecipe = localStorage.getItem('inProgressRecipes');
-  // const newRecipe = JSON.parse(atualRecipe) || [];
 
   const getMeasuresAndIngredients = async (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
@@ -37,9 +36,6 @@ export default function RecipesInProgress() {
   };
 
   useEffect(() => {
-    // if (tst) {
-    //   setIngredientState(tst);
-    // }
     const getMealOrDrink = async () => {
       if (location.pathname === `/meals/${id}/in-progress`) {
         // const ingredients = newRecipe.meals[id];
