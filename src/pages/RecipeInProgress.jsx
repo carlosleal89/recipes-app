@@ -8,14 +8,63 @@ import Instructions from '../components/recipesDetails/Instructions';
 import '../css/RecipeInProgress.css';
 import IngredientsWithCheckboxes
   from '../components/recipesDetails/ingredientsWithCheckboxes';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function RecipesInProgress() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
   const location = useLocation();
 
   const { id } = useParams();
+
+  // const checkFavorites = () => {
+  //   if (localStorage.favoriteRecipes) {
+  //     const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+  //     const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+  //     const isFavoriteRecipe = newFavoriteRecipesArray
+  //       .some((recipe) => recipe.id === recipes.idMeal);
+  //     setIsFavorite(isFavoriteRecipe);
+  //   }
+  //   // console.log(isFavoriteRecipe);
+  //   // setIsFavorite(true);
+  // };
+
+  // useEffect(() => {
+  //   checkFavorites();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isFavorite]);
+
+  const handleMealFavorites = (recipeFav) => {
+    if (!isFavorite) {
+      setIsFavorite(true);
+      const newFavoriteMeal = {
+        id: recipeFav.idMeal || recipeFav.idDrink,
+        type: location.pathname.includes('/meals') ? 'meal' : 'drink',
+        nationality: recipeFav.strArea || '',
+        category: recipeFav.strCategory,
+        alcoholicOrNot: recipeFav.strAlcoholic || '',
+        name: recipeFav.strMeal || recipeFav.strDrink,
+        image: recipeFav.strMealThumb || recipeFav.strDrinkThumb,
+      };
+      if (localStorage.favoriteRecipes) {
+        const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+        const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
+        newFavoriteRecipesArray.push(newFavoriteMeal);
+        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
+      } else {
+        localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteMeal]));
+      }
+    } else {
+      const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const removedId = localStorageData.filter((e) => e.id !== id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(removedId));
+      setIsFavorite(false);
+    }
+  };
 
   const clipboardShare = () => {
     if (location.pathname === `/meals/${id}/in-progress`) {
@@ -44,6 +93,18 @@ export default function RecipesInProgress() {
       setIsLoading(false);
     };
     getMealOrDrink();
+
+    const checkFavorites = () => {
+      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
+      if (favoriteRecipes) {
+        const parsedFavoriteRecipes = JSON.parse(favoriteRecipes);
+        const isFavoriteDrink = parsedFavoriteRecipes.some(
+          (recipe) => recipe.id === id,
+        );
+        setIsFavorite(isFavoriteDrink);
+      }
+    };
+    checkFavorites();
   }, [id, location.pathname]);
 
   return (
@@ -63,10 +124,14 @@ export default function RecipesInProgress() {
           </button>
 
           <button
-            data-testid="favorite-btn"
-          // onClick={ }
+            className="favorite-recipe-btn"
+            onClick={ () => handleMealFavorites(recipes[0]) }
           >
-            Favorite
+            <img
+              data-testid="favorite-btn"
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="favorite icon"
+            />
           </button>
 
           {
