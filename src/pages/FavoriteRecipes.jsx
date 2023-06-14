@@ -17,7 +17,6 @@ function FavoriteRecipes() {
 
   const btn = ['All', 'Meal', 'Drink'];
 
-  console.log(products);
   return (
     <div>
       <Header />
@@ -39,46 +38,48 @@ function FavoriteRecipes() {
           </button>
         ))
       }
-      {
-        products.map((element, index) => (
-          <div
-            key={ index }
-          >
-            <img
-              data-testid={ `${index}-horizontal-image` }
-              src={ element.image }
-              alt="teste"
+      <div data-testid="products-holder">
+        {
+          products.map((element, index) => (
+            <div
               key={ index }
-            />
-            <h1
-              data-testid={ `${index}-horizontal-top-text` }
             >
-              {element.type === 'meal'
-                ? `${element.nationality} - ${element.category}`
-                : `${element.alcoholicOrNot} - ${element.category}`}
-            </h1>
-            <h2
-              data-testid={ `${index}-horizontal-name` }
-            >
-              {element.name}
-            </h2>
-            <button>
               <img
-                data-testid={ `${index}-horizontal-share-btn` }
-                src={ shareIcon }
-                alt="share icon"
+                data-testid={ `${index}-horizontal-image` }
+                src={ element.image }
+                alt={ element.name }
+                key={ index }
               />
-            </button>
-            <button>
-              <img
-                data-testid={ `${index}-horizontal-favorite-btn` }
-                src={ blackHeartIcon }
-                alt="black heart"
-              />
-            </button>
-          </div>
-        ))
-      }
+              <h1
+                data-testid={ `${index}-horizontal-top-text` }
+              >
+                {element.type === 'meal'
+                  ? `${element.nationality} - ${element.category}`
+                  : `${element.alcoholicOrNot} - ${element.category}`}
+              </h1>
+              <h2
+                data-testid={ `${index}-horizontal-name` }
+              >
+                {element.name}
+              </h2>
+              <button>
+                <img
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  src={ shareIcon }
+                  alt="share icon"
+                />
+              </button>
+              <button>
+                <img
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                  src={ blackHeartIcon }
+                  alt="black heart"
+                />
+              </button>
+            </div>
+          ))
+        }
+      </div>
     </div>
   );
 }
