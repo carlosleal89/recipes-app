@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
@@ -91,6 +89,7 @@ function FavoriteRecipes() {
               key={ index }
             >
               <img
+                role="presentation"
                 onClick={ () => handleNavigate(element.type, element.id) }
                 data-testid={ `${index}-horizontal-image` }
                 src={ element.image }
@@ -110,6 +109,7 @@ function FavoriteRecipes() {
                   : `${element.alcoholicOrNot} - ${element.category}`}
               </h1>
               <h2
+                role="presentation"
                 data-testid={ `${index}-horizontal-name` }
                 onClick={ () => handleNavigate(element.type, element.id) }
               >
