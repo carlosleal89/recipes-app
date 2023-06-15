@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../css/RecipeInProgress.css';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function IngredientsWithCheckboxes({ recipe }) {
   const { id } = useParams();
+  const location = useLocation();
+  const [routeName, setRouteName] = useState('');
   const getMeasuresAndIngredients = (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
       const measures = Object.keys(obj)
@@ -23,14 +25,30 @@ function IngredientsWithCheckboxes({ recipe }) {
     return ingredientsList;
   };
 
-  const handleLocalStorage = (value) => {
+  const removeLocalStorage = (value) => {
+    console.log(routeName);
     const inProgressRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const { ingredients, measures } = inProgressRecipe.meals[id][0];
+    const { ingredients, measures } = inProgressRecipe[routeName][id][0];
     const indexOfArrayIngredients = ingredients.indexOf(value);
     ingredients.splice(indexOfArrayIngredients, 1);
     measures.splice(indexOfArrayIngredients, 1);
     const newInprogressRecipe = {
-      meals: {
+      [routeName]: {
+        [id]: [{
+          ingredients,
+          measures,
+        }],
+      },
+    };
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogressRecipe));
+  };
+  const addLocalStorage = (value) => {
+    console.log(routeName);
+    const inProgressRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const { ingredients, measures } = inProgressRecipe[routeName][id][0];
+    ingredients.push(value);
+    const newInprogressRecipe = {
+      [routeName]: {
         [id]: [{
           ingredients,
           measures,
@@ -41,15 +59,22 @@ function IngredientsWithCheckboxes({ recipe }) {
   };
 
   const handleChange = (target) => {
-    handleLocalStorage(target.value);
     if (target.checked) {
+      removeLocalStorage(target.value);
       target.parentNode.className = 'text';
     } else {
+      addLocalStorage(target.value);
       target.parentNode.className = '';
     }
   };
 
   const { measures, ingredients } = getMeasuresAndIngredients(recipe)[0];
+
+  useEffect(() => {
+    if (location.pathname.startsWith('/meals/')) {
+      setRouteName('meals');
+    } else setRouteName('drinks');
+  }, []);
 
   return (
     <div>
