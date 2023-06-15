@@ -16,6 +16,7 @@ export default function RecipesInProgress() {
   const [isLoading, setIsLoading] = useState(true);
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [enableFinishBtn, setEnableFinishBtn] = useState(false);
   const history = useHistory();
 
   const location = useLocation();
@@ -145,11 +146,15 @@ export default function RecipesInProgress() {
             clipBoardMsg && <span>Link copied!</span>
           }
 
-          <IngredientsWithCheckboxes recipe={ recipes } />
+          <IngredientsWithCheckboxes
+            recipe={ recipes }
+            enableFinishBtn={ setEnableFinishBtn }
+          />
           <Instructions recipe={ recipes } />
           <button
             data-testid="finish-recipe-btn"
             onClick={ () => handleFinish(recipes[0]) }
+            disabled={ !enableFinishBtn }
           >
             Finish recipe
           </button>

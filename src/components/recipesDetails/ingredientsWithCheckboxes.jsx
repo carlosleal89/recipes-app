@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import '../../css/RecipeInProgress.css';
 
-function IngredientsWithCheckboxes({ recipe }) {
+function IngredientsWithCheckboxes({ recipe, enableFinishBtn }) {
   const getMeasuresAndIngredients = (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
       const measures = Object.keys(obj)
@@ -50,7 +50,15 @@ function IngredientsWithCheckboxes({ recipe }) {
     });
   };
 
+  const handleFinishRecipeButton = () => {
+    const checkboxInput = document.querySelectorAll('.checked');
+    const checkboxInputArray = Array.from(checkboxInput);
+    const isChecked = checkboxInputArray.every((checkBox) => checkBox.checked);
+    enableFinishBtn(isChecked);
+  };
+
   const handleChange = (target) => {
+    handleFinishRecipeButton();
     if (target.checked) {
       addLocalStorage(target.value);
       target.parentNode.className = 'text';
@@ -96,6 +104,7 @@ function IngredientsWithCheckboxes({ recipe }) {
 
 IngredientsWithCheckboxes.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
-};
+  enableFinishBtn: PropTypes.func,
+}.isRequired;
 
 export default IngredientsWithCheckboxes;
