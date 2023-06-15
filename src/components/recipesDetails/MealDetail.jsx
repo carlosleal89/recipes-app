@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import copy from 'clipboard-copy';
 import Recommendation from './Recommendation';
 import YoutubePlayer from './YoutubePlayer';
 import shareIcon from '../../images/shareIcon.svg';
@@ -17,7 +16,7 @@ function MealDetail({ meal, recommendation }) {
 
   const clipboardShare = (link) => {
     const SECONDS = 1500;
-    copy(link);
+    navigator.clipboard.writeText(link);
     setClipBoardMsg(true);
     setTimeout(() => {
       setClipBoardMsg(false);

@@ -1,11 +1,18 @@
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, fireEvent } from '@testing-library/react';
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import meals from '../../cypress/mocks/meals';
 import drinks from '../../cypress/mocks/drinks';
 import mealById from '../mocks/mealsById';
 import drinkById from '../mocks/drinkById';
 import renderWithRouter from '../services/renderWithRouter';
 import App from '../App';
+
+const MEALS = '/meals/52977';
+const DRINKS = '/drinks/15997';
+const WHITE_HEART_ICON = 'whiteHeartIcon.svg';
+const BLACK_HEART_ICON = 'blackHeartIcon.svg';
+const LINK_COPIED = 'Link copied!';
 
 describe('Teste da página de detalhes da receita começando na rota /meals', () => {
   beforeEach(() => {
@@ -17,6 +24,10 @@ describe('Teste da página de detalhes da receita começando na rota /meals', ()
       .mockResolvedValueOnce({
         json: jest.fn().mockResolvedValue(drinks),
       });
+
+    navigator.clipboard = {
+      writeText: jest.fn(),
+    };
   });
 
   afterEach(() => {
@@ -24,7 +35,7 @@ describe('Teste da página de detalhes da receita começando na rota /meals', ()
   });
 
   it('Verifica se renderiza os detalhes da receita corretamente', async () => {
-    renderWithRouter(<App />, { initialEntries: ['/meals/52977'] });
+    renderWithRouter(<App />, { initialEntries: [MEALS] });
 
     await waitFor(() => {
       const loading = screen.queryByText(/loading.../i);
@@ -49,6 +60,78 @@ describe('Teste da página de detalhes da receita começando na rota /meals', ()
     const imgRecommended = screen.getByRole('img', { name: /gg/i });
     expect(imgRecommended).toBeInTheDocument();
   });
+
+  it('Testa o botão de favoritar', async () => {
+    renderWithRouter(<App />, { initialEntries: [MEALS] });
+
+    await waitFor(() => {
+      const loading = screen.queryByText(/loading.../i);
+      expect(loading).not.toBeInTheDocument();
+    });
+
+    const buttonFavorite = screen.getByRole('img', { name: /favorite icon/i });
+    expect(buttonFavorite).toBeInTheDocument();
+    expect(buttonFavorite).toHaveAttribute('src', WHITE_HEART_ICON);
+
+    act(() => {
+      fireEvent.click(buttonFavorite);
+    });
+
+    expect(buttonFavorite).toHaveAttribute('src', BLACK_HEART_ICON);
+
+    act(() => {
+      fireEvent.click(buttonFavorite);
+    });
+
+    expect(buttonFavorite).toHaveAttribute('src', WHITE_HEART_ICON);
+
+    act(() => {
+      fireEvent.click(buttonFavorite);
+    });
+
+    expect(buttonFavorite).toHaveAttribute('src', BLACK_HEART_ICON);
+  });
+
+  it('Testa se ao clicar no botão compartilhar o link é copiado e aparece a mensagem', async () => {
+    renderWithRouter(<App />, { initialEntries: [MEALS] });
+
+    await waitFor(() => {
+      const loading = screen.queryByText(/loading.../i);
+      expect(loading).not.toBeInTheDocument();
+    });
+
+    const buttonShare = screen.getByRole('img', { name: /share icon/i });
+    expect(buttonShare).toBeInTheDocument();
+
+    act(() => {
+      fireEvent.click(buttonShare);
+    });
+
+    const clipBoardMs = screen.getByText(LINK_COPIED);
+    expect(clipBoardMs).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByText(LINK_COPIED)).not.toBeInTheDocument();
+    }, { timeout: 1500 });
+  });
+
+  it('Testa o botão Start Recipe', async () => {
+    const { history } = renderWithRouter(<App />, { initialEntries: [MEALS] });
+
+    await waitFor(() => {
+      const loading = screen.queryByText(/loading.../i);
+      expect(loading).not.toBeInTheDocument();
+    });
+
+    const buttonStart = screen.getByRole('button', { name: /start recipe/i });
+    expect(buttonStart).toBeInTheDocument();
+
+    act(() => {
+      fireEvent.click(buttonStart);
+    });
+
+    expect(history.location.pathname).toBe('/meals/52977/in-progress');
+  });
 });
 
 describe('Teste da página de detalhes da receita começando na rota /drinks', () => {
@@ -61,6 +144,10 @@ describe('Teste da página de detalhes da receita começando na rota /drinks', (
       .mockResolvedValueOnce({
         json: jest.fn().mockResolvedValue(meals),
       });
+
+    navigator.clipboard = {
+      writeText: jest.fn(),
+    };
   });
 
   afterEach(() => {
@@ -68,7 +155,7 @@ describe('Teste da página de detalhes da receita começando na rota /drinks', (
   });
 
   it('Verifica se renderiza os detalhes da receita corretamente', async () => {
-    renderWithRouter(<App />, { initialEntries: ['/drinks/15997'] });
+    renderWithRouter(<App />, { initialEntries: [DRINKS] });
 
     await waitFor(() => {
       const loading = screen.queryByText(/loading.../i);
@@ -92,5 +179,77 @@ describe('Teste da página de detalhes da receita começando na rota /drinks', (
 
     const imgRecommended = screen.getByRole('img', { name: /corba/i });
     expect(imgRecommended).toBeInTheDocument();
+  });
+
+  it('Testa o botão de favoritar', async () => {
+    renderWithRouter(<App />, { initialEntries: [DRINKS] });
+
+    await waitFor(() => {
+      const loading = screen.queryByText(/loading.../i);
+      expect(loading).not.toBeInTheDocument();
+    });
+
+    const buttonFavorite = screen.getByRole('img', { name: /favorite icon/i });
+    expect(buttonFavorite).toBeInTheDocument();
+    expect(buttonFavorite).toHaveAttribute('src', WHITE_HEART_ICON);
+
+    act(() => {
+      fireEvent.click(buttonFavorite);
+    });
+
+    expect(buttonFavorite).toHaveAttribute('src', BLACK_HEART_ICON);
+
+    act(() => {
+      fireEvent.click(buttonFavorite);
+    });
+
+    expect(buttonFavorite).toHaveAttribute('src', WHITE_HEART_ICON);
+
+    act(() => {
+      fireEvent.click(buttonFavorite);
+    });
+
+    expect(buttonFavorite).toHaveAttribute('src', BLACK_HEART_ICON);
+  });
+
+  it('Testa se ao clicar no botão compartilhar o link é copiado e aparece a mensagem', async () => {
+    renderWithRouter(<App />, { initialEntries: [DRINKS] });
+
+    await waitFor(() => {
+      const loading = screen.queryByText(/loading.../i);
+      expect(loading).not.toBeInTheDocument();
+    });
+
+    const buttonShare = screen.getByRole('img', { name: /share icon/i });
+    expect(buttonShare).toBeInTheDocument();
+
+    act(() => {
+      fireEvent.click(buttonShare);
+    });
+
+    const clipBoardMs = screen.getByText(LINK_COPIED);
+    expect(clipBoardMs).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.queryByText(LINK_COPIED)).not.toBeInTheDocument();
+    }, { timeout: 1500 });
+  });
+
+  it('Testa o botão Start Recipe', async () => {
+    const { history } = renderWithRouter(<App />, { initialEntries: [DRINKS] });
+
+    await waitFor(() => {
+      const loading = screen.queryByText(/loading.../i);
+      expect(loading).not.toBeInTheDocument();
+    });
+
+    const buttonStart = screen.getByRole('button', { name: /start recipe/i });
+    expect(buttonStart).toBeInTheDocument();
+
+    act(() => {
+      fireEvent.click(buttonStart);
+    });
+
+    expect(history.location.pathname).toBe('/drinks/15997/in-progress');
   });
 });

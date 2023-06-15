@@ -40,7 +40,8 @@ function CardFinishedRecipes({ recipe, index }) {
         { recipe.doneDate }
       </p>
 
-      {recipe.tags.splice(0, 2).map((tag) => (
+      { recipe.tags
+      && recipe.tags.splice(0, 2).map((tag) => (
         <p
           data-testid={ `${index}-${tag}-horizontal-tag` }
           key={ index }

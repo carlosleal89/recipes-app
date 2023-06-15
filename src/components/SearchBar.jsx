@@ -6,7 +6,7 @@ import { fetchMeals,
   fetchDrinks,
   fetchDrinksName,
   fetchDrinksFirstLetter,
-} from '../services/mealApi';
+} from '../helpers/API_URL';
 import MealsContext from '../context/MealsContext';
 import DrinkContext from '../context/DrinksContext';
 
