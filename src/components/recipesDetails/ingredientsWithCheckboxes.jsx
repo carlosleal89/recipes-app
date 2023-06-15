@@ -7,6 +7,7 @@ function IngredientsWithCheckboxes({ recipe }) {
   const { id } = useParams();
   const location = useLocation();
   const [routeName, setRouteName] = useState('');
+
   const getMeasuresAndIngredients = (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
       const measures = Object.keys(obj)
@@ -42,6 +43,7 @@ function IngredientsWithCheckboxes({ recipe }) {
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogressRecipe));
   };
+
   const addLocalStorage = (value) => {
     console.log(routeName);
     const inProgressRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
@@ -56,6 +58,15 @@ function IngredientsWithCheckboxes({ recipe }) {
       },
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogressRecipe));
+  };
+
+  const checkDoneIngredientes = () => {
+    const doneIngredients = document.querySelectorAll('.done-ingredient');
+    doneIngredients[0].className = 'text';
+    doneIngredients[0].firstChild.checked = true;
+    const { value } = doneIngredients[0].firstChild;
+    removeLocalStorage(value);
+    console.log(value);
   };
 
   const handleChange = (target) => {
@@ -74,6 +85,7 @@ function IngredientsWithCheckboxes({ recipe }) {
     if (location.pathname.startsWith('/meals/')) {
       setRouteName('meals');
     } else setRouteName('drinks');
+    checkDoneIngredientes();
   }, []);
 
   return (
@@ -82,6 +94,7 @@ function IngredientsWithCheckboxes({ recipe }) {
         ingredients.map((ingredient, index) => (
           <div key={ index }>
             <label
+              className="done-ingredient"
               htmlFor={ `ingredient${index}` }
               data-testid={ `${index}-ingredient-step` }
             >
