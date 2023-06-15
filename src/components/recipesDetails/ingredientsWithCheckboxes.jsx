@@ -42,6 +42,7 @@ function IngredientsWithCheckboxes({ recipe }) {
             >
               <input
                 className="checked"
+                data-testid={ `${index}-ingredient-checkbox` }
                 type="checkbox"
                 id={ `ingredient${index}` }
                 onChange={ ({ target }) => handleChange(target) }
