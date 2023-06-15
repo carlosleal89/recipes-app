@@ -44,23 +44,27 @@ function ButtonStartContinue({ recipe }) {
 
   const handleClickStartRecipe = (obj) => {
     if (location.pathname === `/drinks/${id}`) {
-      const recipeInProgress = {
-        drinks: {
-          [obj.idDrink]: [getIngredients(recipe)[0]],
-        },
-      };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
-      history.push(`/drinks/${id}/in-progress`);
+      if (!isStarted) {
+        const recipeInProgress = {
+          drinks: {
+            [obj.idDrink]: [getIngredients(recipe)[0]],
+          },
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+        history.push(`/drinks/${id}/in-progress`);
+      } else history.push(`/drinks/${id}/in-progress`);
     }
 
     if (location.pathname === `/meals/${id}`) {
-      const recipeInProgress = {
-        meals: {
-          [obj.idMeal]: [getIngredients(recipe)[0]],
-        },
-      };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
-      history.push(`/meals/${id}/in-progress`);
+      if (!isStarted) {
+        const recipeInProgress = {
+          meals: {
+            [obj.idMeal]: [getIngredients(recipe)[0]],
+          },
+        };
+        localStorage.setItem('inProgressRecipes', JSON.stringify(recipeInProgress));
+        history.push(`/meals/${id}/in-progress`);
+      } else history.push(`/meals/${id}/in-progress`);
     }
   };
 
