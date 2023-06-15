@@ -37,8 +37,7 @@ function IngredientsWithCheckboxes({ recipe }) {
         }],
       },
     };
-    console.log(newInprogressRecipe);
-    // console.log(ingredients);
+    localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogressRecipe));
   };
 
   const handleChange = (target) => {
