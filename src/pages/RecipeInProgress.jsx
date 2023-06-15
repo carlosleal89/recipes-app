@@ -22,23 +22,6 @@ export default function RecipesInProgress() {
 
   const { id } = useParams();
 
-  // const checkFavorites = () => {
-  //   if (localStorage.favoriteRecipes) {
-  //     const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-  //     const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-  //     const isFavoriteRecipe = newFavoriteRecipesArray
-  //       .some((recipe) => recipe.id === recipes.idMeal);
-  //     setIsFavorite(isFavoriteRecipe);
-  //   }
-  //   // console.log(isFavoriteRecipe);
-  //   // setIsFavorite(true);
-  // };
-
-  // useEffect(() => {
-  //   checkFavorites();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isFavorite]);
-
   const handleMealFavorites = (recipeDone) => {
     if (!isFavorite) {
       setIsFavorite(true);

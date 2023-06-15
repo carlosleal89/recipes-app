@@ -1,55 +1,62 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
-import oneMeal from '../mocks/oneMeal';
-import oneDrink from '../mocks/oneDrink';
 
-function CardFinishedRecipes() {
+function CardFinishedRecipes({ recipe, index }) {
+  console.log(recipe);
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
 
-  const tagName = 'Pasta';
-  const index = 0;
-
   const clipboardShare = (link) => {
+    const SECONDS = 1500;
     copy(link);
     setClipBoardMsg(true);
+    setTimeout(() => {
+      setClipBoardMsg(false);
+    }, SECONDS);
   };
 
   return (
     <div>
       <img
         alt="recipe"
-        src={ oneMeal.meals[0].strMealThumb }
+        src={ recipe.image }
         data-testid={ `${index}-horizontal-image` }
       />
       <p
         data-testid={ `${index}-horizontal-top-text` }
       >
-        { `${oneMeal.meals[0].strCategory} - ${oneMeal.meals[0].strArea}`
-        || `${oneDrink.drinks[0].strAlcoholic}` }
-
+        {recipe.category && recipe.nationality
+          ? `${recipe.nationality} - ${recipe.category}` : recipe.alcoholicOrNot}
       </p>
       <p
         data-testid={ `${index}-horizontal-name` }
       >
-        { oneMeal.meals[0].strMeal }
+        { recipe.name }
       </p>
       <p
         data-testid={ `${index}-horizontal-done-date` }
       >
-        { (new Date()).toLocaleDateString() }
+        { recipe.doneDate }
       </p>
-      <p
-        data-testid={ `${index}-${tagName}-horizontal-tag` }
-      >
-        { oneMeal.meals[0].strTags }
-      </p>
+
+      {recipe.tags.splice(0, 2).map((tag) => (
+        <p
+          data-testid={ `${index}-${tag}-horizontal-tag` }
+          key={ index }
+        >
+          {tag}
+        </p>
+      ))}
+
       <button
         className="share-recipe-btn"
         data-testid={ `${index}-horizontal-share-btn` }
         onClick={ () => clipboardShare(window.location.href) }
+        src={ shareIcon }
       >
         <img
+          data-testid={ `${index}-horizontal-share-btn` }
           src={ shareIcon }
           alt="share icon"
         />
@@ -60,5 +67,10 @@ function CardFinishedRecipes() {
     </div>
   );
 }
+
+CardFinishedRecipes.propTypes = {
+  recipe: PropTypes.instanceOf(Object).isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default CardFinishedRecipes;

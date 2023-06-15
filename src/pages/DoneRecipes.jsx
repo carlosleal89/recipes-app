@@ -10,6 +10,8 @@ function DoneRecipes() {
     setTitle('Done Recipes');
   }, [setTitle]);
 
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+  console.log(doneRecipes);
   // filtro de meals
   // filtro de drinks
   // remove filtros de meals e drinks e renderiza o localStorage completo
@@ -35,7 +37,12 @@ function DoneRecipes() {
       >
         Drinks
       </button>
-      <CardFinishedRecipes />
+      { doneRecipes && (
+        doneRecipes.map((recipe, index) => (
+          <div key={ index }>
+            <CardFinishedRecipes recipe={ recipe } index={ index } />
+          </div>
+        )))}
     </div>
   );
 }
