@@ -1,13 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../../css/RecipeInProgress.css';
-import { useParams, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function IngredientsWithCheckboxes({ recipe }) {
-  const { id } = useParams();
-  const location = useLocation();
-  const [routeName, setRouteName] = useState('');
-
   const getMeasuresAndIngredients = (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
       const measures = Object.keys(obj)
@@ -27,54 +22,40 @@ function IngredientsWithCheckboxes({ recipe }) {
   };
 
   const removeLocalStorage = (value) => {
-    console.log(routeName);
-    const inProgressRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const { ingredients, measures } = inProgressRecipe[routeName][id][0];
-    const indexOfArrayIngredients = ingredients.indexOf(value);
-    ingredients.splice(indexOfArrayIngredients, 1);
-    measures.splice(indexOfArrayIngredients, 1);
-    const newInprogressRecipe = {
-      [routeName]: {
-        [id]: [{
-          ingredients,
-          measures,
-        }],
-      },
-    };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogressRecipe));
+    const doneIngredients = JSON.parse(localStorage.getItem('doneIngredients'));
+    const indexOfArrayIngredients = doneIngredients.indexOf(value);
+    doneIngredients.splice(indexOfArrayIngredients, 1);
+    localStorage.setItem('doneIngredients', JSON.stringify(doneIngredients));
   };
 
   const addLocalStorage = (value) => {
-    console.log(routeName);
-    const inProgressRecipe = JSON.parse(localStorage.getItem('inProgressRecipes'));
-    const { ingredients, measures } = inProgressRecipe[routeName][id][0];
-    ingredients.push(value);
-    const newInprogressRecipe = {
-      [routeName]: {
-        [id]: [{
-          ingredients,
-          measures,
-        }],
-      },
-    };
-    localStorage.setItem('inProgressRecipes', JSON.stringify(newInprogressRecipe));
+    if (localStorage.doneIngredients) {
+      const doneIngredients = JSON.parse(localStorage.getItem('doneIngredients'));
+      doneIngredients.push(value);
+      localStorage.setItem('doneIngredients', JSON.stringify(doneIngredients));
+    } else {
+      const doneIngredients = [value];
+      localStorage.setItem('doneIngredients', JSON.stringify(doneIngredients));
+    }
   };
 
   const checkDoneIngredientes = () => {
-    const doneIngredients = document.querySelectorAll('.done-ingredient');
-    doneIngredients[0].className = 'text';
-    doneIngredients[0].firstChild.checked = true;
-    const { value } = doneIngredients[0].firstChild;
-    removeLocalStorage(value);
-    console.log(value);
+    const allIngredients = document.querySelectorAll('.done-ingredient');
+    const doneIngredients = JSON.parse(localStorage.getItem('doneIngredients'));
+    allIngredients.forEach((ingredient) => {
+      if (doneIngredients.includes(ingredient.firstChild.value)) {
+        ingredient.className = 'text';
+        ingredient.firstChild.checked = true;
+      }
+    });
   };
 
   const handleChange = (target) => {
     if (target.checked) {
-      removeLocalStorage(target.value);
+      addLocalStorage(target.value);
       target.parentNode.className = 'text';
     } else {
-      addLocalStorage(target.value);
+      removeLocalStorage(target.value);
       target.parentNode.className = '';
     }
   };
@@ -82,10 +63,9 @@ function IngredientsWithCheckboxes({ recipe }) {
   const { measures, ingredients } = getMeasuresAndIngredients(recipe)[0];
 
   useEffect(() => {
-    if (location.pathname.startsWith('/meals/')) {
-      setRouteName('meals');
-    } else setRouteName('drinks');
-    checkDoneIngredientes();
+    if (localStorage.doneIngredients) {
+      checkDoneIngredientes();
+    }
   }, []);
 
   return (
