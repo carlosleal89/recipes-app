@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { fetchMealsById, fetchDrinksById } from '../helpers/API_URL';
 import PhotoAndTitle from '../components/recipesDetails/PhotoAndTitle';
 import Loading from '../components/recipesDetails/Loading';
@@ -16,6 +16,7 @@ export default function RecipesInProgress() {
   const [isLoading, setIsLoading] = useState(true);
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const history = useHistory();
 
   const location = useLocation();
 
@@ -38,17 +39,17 @@ export default function RecipesInProgress() {
   // // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [isFavorite]);
 
-  const handleMealFavorites = (recipeFav) => {
+  const handleMealFavorites = (recipeDone) => {
     if (!isFavorite) {
       setIsFavorite(true);
       const newFavoriteMeal = {
-        id: recipeFav.idMeal || recipeFav.idDrink,
+        id: recipeDone.idMeal || recipeDone.idDrink,
         type: location.pathname.includes('/meals') ? 'meal' : 'drink',
-        nationality: recipeFav.strArea || '',
-        category: recipeFav.strCategory,
-        alcoholicOrNot: recipeFav.strAlcoholic || '',
-        name: recipeFav.strMeal || recipeFav.strDrink,
-        image: recipeFav.strMealThumb || recipeFav.strDrinkThumb,
+        nationality: recipeDone.strArea || '',
+        category: recipeDone.strCategory,
+        alcoholicOrNot: recipeDone.strAlcoholic || '',
+        name: recipeDone.strMeal || recipeDone.strDrink,
+        image: recipeDone.strMealThumb || recipeDone.strDrinkThumb,
       };
       if (localStorage.favoriteRecipes) {
         const favoriteRecipes = localStorage.getItem('favoriteRecipes');
@@ -78,6 +79,29 @@ export default function RecipesInProgress() {
     setTimeout(() => {
       setClipBoardMsg(false);
     }, SECONDS);
+  };
+
+  const handleFinish = (recipeDone) => {
+    const finishedRecipe = {
+      id: recipeDone.idMeal || recipeDone.idDrink,
+      type: location.pathname.includes('/meals') ? 'meal' : 'drink',
+      nationality: recipeDone.strArea || '',
+      category: recipeDone.strCategory,
+      alcoholicOrNot: recipeDone.strAlcoholic || '',
+      name: recipeDone.strMeal || recipeDone.strDrink,
+      image: recipeDone.strMealThumb || recipeDone.strDrinkThumb,
+      doneDate: (new Date()).toISOString(),
+      tags: recipeDone.strTags ? recipeDone.strTags.split(',') : [],
+    };
+    if (localStorage.doneRecipes) {
+      const doneRecipes = localStorage.getItem('doneRecipes');
+      const newDoneRecipesArray = JSON.parse(doneRecipes);
+      const teste = ([...newDoneRecipesArray, finishedRecipe]);
+      localStorage.setItem('doneRecipes', JSON.stringify(teste));
+    } else {
+      localStorage.setItem('doneRecipes', JSON.stringify([finishedRecipe]));
+    }
+    history.push('/done-recipes');
   };
 
   useEffect(() => {
@@ -142,7 +166,7 @@ export default function RecipesInProgress() {
           <Instructions recipe={ recipes } />
           <button
             data-testid="finish-recipe-btn"
-          // onClick={ }
+            onClick={ () => handleFinish(recipes[0]) }
           >
             Finish recipe
           </button>
