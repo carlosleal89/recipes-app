@@ -52,11 +52,10 @@ function CardFinishedRecipes({ recipe, index }) {
       <button
         className="share-recipe-btn"
         data-testid={ `${index}-horizontal-share-btn` }
-        onClick={ () => clipboardShare(window.location.href) }
+        onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
         src={ shareIcon }
       >
         <img
-          data-testid={ `${index}-horizontal-share-btn` }
           src={ shareIcon }
           alt="share icon"
         />
