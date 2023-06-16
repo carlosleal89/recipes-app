@@ -121,7 +121,7 @@ export default function RecipesInProgress() {
         <div>
           <PhotoAndTitle recipe={ recipes } />
           <button
-            className=""
+            className="share-recipe-btn"
             data-testid="share-btn"
             onClick={ clipboardShare }
           >
@@ -143,7 +143,7 @@ export default function RecipesInProgress() {
           </button>
 
           {
-            clipBoardMsg && <span>Link copied!</span>
+            clipBoardMsg && <span className="clipboard-msg">Link copied!</span>
           }
 
           <IngredientsWithCheckboxes
