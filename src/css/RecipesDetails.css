@@ -95,21 +95,49 @@
 }
 
 .start-recipe-btn {
+  align-items: center;
+  background-color: rgba(200, 200, 200, 0.7);
+  border: none;
+  border-radius: 10px;
   bottom: 0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 40px;
+  margin: 10px;
   position: fixed;
+  z-index: 100;
 }
 
 .share-recipe-btn {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 40px;
   position: absolute;
-  right: 150px;
+  right: 60px;
+  top: 57%;
 }
 
 .favorite-recipe-btn {
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-color: transparent;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  display: flex;
+  height: 40px;
   position: absolute;
-  right: 250px;
+  right: 10px;
+  top: 57%;
 }
 
 .clipboard-msg {
   position: absolute;
-  right: 350px;
+  right: 110px;
+  top: 58%;
 }
