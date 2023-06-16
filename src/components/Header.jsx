@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory, Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import TitleContext from '../context/TitleContext';
@@ -29,7 +29,11 @@ function Header() {
 
       <div className="container__header-logo-buttons">
         <div className="container__header-logo">
-          <img src={ logo } alt="logo" width="210px" />
+          <Link
+            to="/meals"
+          >
+            <img src={ logo } alt="logo" width="210px" />
+          </Link>
         </div>
 
         <div className="container__header-buttons">
@@ -70,7 +74,12 @@ function Header() {
       </div>
 
       <div className="container__header-search">
-        {isShowInput && (<SearchBar />)}
+        {isShowInput && (
+          <div className={ `search-bar ${isShowInput ? 'active' : ''}` }>
+
+            <SearchBar />
+          </div>
+        )}
       </div>
 
     </header>
