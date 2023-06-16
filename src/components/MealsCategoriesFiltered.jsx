@@ -6,10 +6,6 @@ import MealsCategories from './MealsCategories';
 export default function MealsCategoriesFiltered() {
   const { mealsCategoriesFilter } = useContext(MealsContext);
   const MEALS_LIST_MAX_LENGTH = 12;
-  //   useEffect(() => {
-  //     fetchData('https://www.themealdb.com/api/json/v1/1/list.php?c=list', setMealsCategoriesFilter);
-  //   }, []);
-  // console.log(mealsCategoriesFilter);
   return (
     <div>
       <MealsCategories />

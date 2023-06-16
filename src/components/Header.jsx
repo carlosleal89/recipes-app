@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import TitleContext from '../context/TitleContext';
+import logo from '../images/Logo_header.png';
 import SearchBar from './SearchBar';
 import '../css/Header.css';
 
@@ -26,35 +27,43 @@ function Header() {
   return (
     <header className="container__header">
 
-      <div className="container__header-buttons">
-        {isShowButton && (
+      <div className="container__header-logo-buttons">
+        <div className="container__header-logo">
+          <img src={ logo } alt="logo" width="210px" />
+        </div>
+
+        <div className="container__header-buttons">
+          {isShowButton && (
+            <button
+              type="button"
+              className="header-buttons"
+              onClick={ handleSearchClick }
+            >
+              <img
+                data-testid="search-top-btn"
+                src={ searchIcon }
+                alt="searchIcon"
+              />
+            </button>
+          )}
           <button
             type="button"
-            onClick={ handleSearchClick }
+            className="header-buttons"
+            onClick={ handleProfileClick }
           >
             <img
-              data-testid="search-top-btn"
-              src={ searchIcon }
-              alt="searchIcon"
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="profileIcon"
             />
           </button>
-        )}
-
-        <button
-          type="button"
-          onClick={ handleProfileClick }
-        >
-          <img
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="profileIcon"
-          />
-        </button>
+        </div>
       </div>
 
       <div className="container__header-title">
         <h2
           data-testid="page-title"
+          className="page-title"
         >
           { title }
         </h2>
