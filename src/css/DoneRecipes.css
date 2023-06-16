@@ -1,0 +1,16 @@
+@media screen and ( width : 360px ) and ( height : 640px ) {
+
+  .button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+
+  .button-categories {
+    background-color: #fcdb36c5;
+    border-color: rgba(0, 0, 0, 0.092);
+    border-radius: 10px;
+    bottom: 10px;
+    width: 100px;
+  }
+}
