@@ -47,13 +47,13 @@
 
   .recipe-title {
     color: white;
-    font-size: 100px;
+    font-size: 50px;
     font-weight: 700;
     left: 50%;
     position: absolute;
     text-align: center;
     text-transform: uppercase;
-    top: 70%;
+    top: 50%;
     transform: translate(-50%, -50%);
   }
 
