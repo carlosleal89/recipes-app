@@ -77,7 +77,7 @@ function IngredientsWithCheckboxes({ recipe, enableFinishBtn }) {
   }, []);
 
   return (
-    <div>
+    <div className="checkboxContainer">
       {
         ingredients.map((ingredient, index) => (
           <div key={ index }>

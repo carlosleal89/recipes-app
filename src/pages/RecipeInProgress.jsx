@@ -74,7 +74,11 @@ export default function RecipesInProgress() {
       alcoholicOrNot: recipeDone.strAlcoholic || '',
       name: recipeDone.strMeal || recipeDone.strDrink,
       image: recipeDone.strMealThumb || recipeDone.strDrinkThumb,
-      doneDate: (new Date()).toISOString(),
+      doneDate: (new Date()).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }),
       tags: recipeDone.strTags ? recipeDone.strTags.split(',') : [],
     };
     if (localStorage.doneRecipes) {
@@ -127,7 +131,7 @@ export default function RecipesInProgress() {
           >
             <img
               src={ shareIcon }
-              alt="share icon"
+              alt=""
             />
           </button>
 
@@ -145,7 +149,7 @@ export default function RecipesInProgress() {
           {
             clipBoardMsg && <span className="clipboard-msg">Link copied!</span>
           }
-
+          <h1 className="ingredient">Ingredients</h1>
           <IngredientsWithCheckboxes
             recipe={ recipes }
             enableFinishBtn={ setEnableFinishBtn }
@@ -155,6 +159,7 @@ export default function RecipesInProgress() {
             data-testid="finish-recipe-btn"
             onClick={ () => handleFinish(recipes[0]) }
             disabled={ !enableFinishBtn }
+            className="finish-btn"
           >
             Finish recipe
           </button>
