@@ -24,36 +24,23 @@ function Drinks() {
     <div>
 
       <DrinksCategories />
-      <div
-        style={
-          {
-            marginLeft: '10px',
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '20px' }
-        }
-      >
+      <div className="recipes-container">
         {drinkListArray.slice(0, DRINKS_LIST_MAX_LENGTH).map((drink, index) => (
-          <Link to={ `/drinks/${drink.idDrink}` } key={ index }>
-            <div data-testid={ `${index}-recipe-card` } key={ index }>
-              <p
-                data-testid={ `${index}-card-name` }
-                style={ {
-                  fontSize: 20,
-                  fontStyle: 'italic',
-                  padding: 0,
-                  margin: 0,
-                  marginLeft: '2rem',
-                } }
-              >
+          <Link
+            className="link-container"
+            to={ `/drinks/${drink.idDrink}` }
+            key={ index }
+          >
+            <div
+              data-testid={ `${index}-recipe-card` }
+              key={ index }
+              className="recipe-card-container"
+            >
+              <p className="recipe-name-text">
                 { drink.strDrink }
               </p>
               <img
-                style={ {
-                  width: '150px',
-                  height: '150px',
-                  marginBottom: '20px',
-                } }
+                className="recipe-img"
                 data-testid={ `${index}-card-img` }
                 alt={ drink.srtDrink }
                 src={ drink.strDrinkThumb }

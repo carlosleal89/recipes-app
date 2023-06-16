@@ -104,9 +104,12 @@
     bottom: 0;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
+    font-size: 0.7rem;
     height: 40px;
+    justify-content: center;
     margin: 10px;
     position: fixed;
+    width: 120px;
     z-index: 100;
   }
 

@@ -8,7 +8,7 @@ import MealsContext from '../context/MealsContext';
 import DrinkContext from '../context/DrinksContext';
 import MealsCategoriesFiltered from '../components/MealsCategoriesFiltered';
 import DrinksCategoriesFiltered from '../components/DrinksCategoriesFiltered';
-// import '../css/Recipes.css';
+import '../css/Recipes.css';
 
 function Recipes() {
   const location = useLocation();
@@ -20,7 +20,7 @@ function Recipes() {
   } = useContext(DrinkContext);
 
   return (
-    <div>
+    <div className="recipe-page-container">
       <Header />
       <div>
         {

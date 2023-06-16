@@ -5,7 +5,7 @@
     justify-content: center;
   }
 
-  .all-btn-filter {
+  .all-drink-btn-filter {
     align-items: flex-end;
     background-color: transparent;
     background-image: url('../images/allDrink.svg');
@@ -134,7 +134,7 @@
     justify-content: space-evenly;
   }
 
-  .all-btn-filter {
+  .all-drink-btn-filter {
     align-items: flex-end;
     background-color: transparent;
     background-image: url('../images/allDrink.svg');
@@ -148,11 +148,11 @@
     color: rgb(75, 75, 75);
     display: flex;
     font-size: 0.5rem;
-    height: 50px;
+    height: 100px;
     justify-content: center;
     margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
-    width: 50px;
+    width: 100px;
   }
 
   [ class = 'Ordinary Drink-btn-filter' ] {
@@ -168,11 +168,11 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
     font-size: 0.5rem;
-    height: 50px;
+    height: 100px;
     justify-content: center;
     margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
-    width: 50px;
+    width: 100px;
   }
 
   .Cocktail-btn-filter {
@@ -188,11 +188,11 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
     font-size: 0.5rem;
-    height: 50px;
+    height: 100px;
     justify-content: center;
     margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
-    width: 50px;
+    width: 100px;
   }
 
   .Shake-btn-filter {
@@ -208,11 +208,11 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
     font-size: 0.5rem;
-    height: 50px;
+    height: 100px;
     justify-content: center;
     margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
-    width: 50px;
+    width: 100px;
   }
 
   [ class = 'Other / Unknown-btn-filter' ] {
@@ -228,11 +228,11 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
     font-size: 0.5rem;
-    height: 50px;
+    height: 100px;
     justify-content: center;
     margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
-    width: 50px;
+    width: 100px;
   }
 
   .Cocoa-btn-filter {
@@ -248,10 +248,10 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     display: flex;
     font-size: 0.5rem;
-    height: 50px;
+    height: 100px;
     justify-content: center;
     margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
-    width: 50px;
+    width: 100px;
   }
 }

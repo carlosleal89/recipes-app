@@ -31,7 +31,7 @@ export default function MealsCategories() {
         onClick={ () => {
           setShowMealCategoriesFilter(true);
         } }
-        className="all-btn-filter"
+        className="all-meals-btn-filter"
         data-testid="All-category-filter"
       >
         All

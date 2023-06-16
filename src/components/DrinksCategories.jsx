@@ -32,7 +32,7 @@ export default function DrinksCategories() {
       <button
         onClick={ () => setShowDrinkCategoriesFilter(true) }
         data-testid="All-category-filter"
-        className="all-btn-filter"
+        className="all-drink-btn-filter"
       >
         All
       </button>
