@@ -109,8 +109,9 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <div className="container__header-search-2">
       <input
+        className="input-search"
         type="text"
         data-testid="search-input"
         value={ search }
@@ -118,47 +119,50 @@ function SearchBar() {
         onChange={ (event) => setSearch(event.target.value) }
       />
 
-      <input
-        id="ingredient"
-        type="radio"
-        name="filter"
-        value="ingredient"
-        data-testid="ingredient-search-radio"
-        onClick={ handleOnChangeFilter }
-      />
-      <label htmlFor="ingredient">Ingredient</label>
+      <div className="container__background">
+        <div className="container__input-radio">
+          <input
+            id="ingredient"
+            type="radio"
+            name="filter"
+            value="ingredient"
+            data-testid="ingredient-search-radio"
+            onClick={ handleOnChangeFilter }
+          />
+          <label htmlFor="ingredient">Ingredient</label>
 
-      <input
-        id="name"
-        type="radio"
-        name="filter"
-        value="name"
-        data-testid="name-search-radio"
-        onClick={ handleOnChangeFilter }
-      />
-      <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="radio"
+            name="filter"
+            value="name"
+            data-testid="name-search-radio"
+            onClick={ handleOnChangeFilter }
+          />
+          <label htmlFor="name">Name</label>
 
-      <input
-        id="first-letter"
-        type="radio"
-        name="filter"
-        value="first-letter"
-        data-testid="first-letter-search-radio"
-        onClick={ handleOnChangeFilter }
-      />
-      <label htmlFor="first-letter">First letter</label>
+          <input
+            id="first-letter"
+            type="radio"
+            name="filter"
+            value="first-letter"
+            data-testid="first-letter-search-radio"
+            onClick={ handleOnChangeFilter }
+          />
+          <label htmlFor="first-letter">First letter</label>
+        </div>
 
-      <button
-        style={ {
-          backgroundColor: '#d3d3d3',
-          borderRadius: 50,
-        } }
-        name="search-btn"
-        data-testid="exec-search-btn"
-        onClick={ () => handleSearchBtn(search) }
-      >
-        Search
-      </button>
+        <div className="container__search-button">
+          <button
+            className="search-btn"
+            name="search-btn"
+            data-testid="exec-search-btn"
+            onClick={ () => handleSearchBtn(search) }
+          >
+            Search
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

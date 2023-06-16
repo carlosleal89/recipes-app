@@ -3,6 +3,10 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import TitleContext from '../context/TitleContext';
+import iconDone from '../images/icon _done_.png';
+import iconFavorite from '../images/icon_favorite.png';
+import iconLogout from '../images/icon_logout.png';
+import '../css/Profile.css';
 
 function Profile() {
   const { setTitle } = useContext(TitleContext);
@@ -32,26 +36,37 @@ function Profile() {
   return (
     <div>
       <Header />
-      <div>
-        <h3 data-testid="profile-email">{userEmail}</h3>
-        <div>
+      <div className="container__profile">
+        <h4
+          className="profile-email"
+          data-testid="profile-email"
+        >
+          {userEmail}
+        </h4>
+        <div className="container__profile-buttons">
           <button
             onClick={ () => handleButton('/done-recipes') }
             data-testid="profile-done-btn"
+            className="profile-btn"
           >
-            Done Recipes
+            <img src={ iconDone } alt="icon done" />
+            <span className="button-text">Done Recipes</span>
           </button>
           <button
             onClick={ () => handleButton('/favorite-recipes') }
             data-testid="profile-favorite-btn"
+            className="profile-btn"
           >
-            Favorite Recipes
+            <img src={ iconFavorite } alt="icon done" />
+            <span className="button-text">Favorite Recipes</span>
           </button>
           <button
             onClick={ () => handleButton('/') }
             data-testid="profile-logout-btn"
+            className="profile-btn"
           >
-            Logout
+            <img src={ iconLogout } alt="icon done" />
+            <span className="button-text">Logout</span>
           </button>
         </div>
 
