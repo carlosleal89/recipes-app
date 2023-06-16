@@ -2,13 +2,16 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import Recommendation from './Recommendation';
 import YoutubePlayer from './YoutubePlayer';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
+// import shareIcon from '../../images/shareIcon.svg';
+// import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import PhotoAndTitle from './PhotoAndTitle';
 import ButtonStartContinue from './ButtonStartContinue';
+import yellowShare from '../../images/yellowShare.svg';
+import yellowHeart from '../../images/yellowHeart.svg';
+import loginRedHeart from '../../images/loginRedHeart.svg';
 
 function MealDetail({ meal, recommendation }) {
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
@@ -91,8 +94,8 @@ function MealDetail({ meal, recommendation }) {
           onClick={ () => clipboardShare(window.location.href) }
         >
           <img
-            src={ shareIcon }
-            alt="share icon"
+            src={ yellowShare }
+            alt=""
           />
         </button>
         <button
@@ -101,7 +104,7 @@ function MealDetail({ meal, recommendation }) {
         >
           <img
             data-testid="favorite-btn"
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            src={ isFavorite ? loginRedHeart : yellowHeart }
             alt="favorite icon"
           />
         </button>
