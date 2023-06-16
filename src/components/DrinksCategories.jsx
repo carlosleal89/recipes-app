@@ -46,11 +46,7 @@ export default function DrinksCategories() {
               () => clickHandler(category.strCategory)
             }
           >
-            <span
-              className="drink-catergory-text"
-            >
-              {category.strCategory.match(regex)?.[1]}
-            </span>
+            {category.strCategory.match(regex)?.[1]}
           </button>
         ))
       }
