@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: absolute;
+    top: 50%;
   }
 
 
@@ -23,6 +25,19 @@
     display: flex;
     height: 100dvh;
     justify-content: center;
+  }
+
+  .img-logo {
+    background-image: url('../images/logoHungry.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    height: 140px;
+    overflow: hidden;
+    position: absolute;
+    top: 25%;
+    width: 300px;
   }
 
   .inputs-div {
@@ -67,13 +82,15 @@
   }
 }
 
-@media screen and ( min-width : 640px ) {
+@media screen and ( min-width : 361px ), screen and ( min-height : 641px ) {
 
   .login-page-div {
     align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: absolute;
+    top: 50%;
   }
 
 
@@ -92,6 +109,19 @@
     display: flex;
     height: 100dvh;
     justify-content: center;
+  }
+
+  .img-logo {
+    background-image: url('../images/logoHungry.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    height: 240px;
+    overflow: hidden;
+    position: absolute;
+    top: 15%;
+    width: 350px;
   }
 
   .inputs-div {
