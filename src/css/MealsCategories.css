@@ -129,7 +129,7 @@
 
 @media screen and ( min-width : 640px ) {
 
-  .meals-category-btn-container {
+  .category-btn-container {
     display: flex;
     justify-content: space-evenly;
   }

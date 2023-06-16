@@ -25,6 +25,8 @@ export default function DrinksCategories() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const regex = /^(\S+)/;
+
   return (
     <div className="category-btn-container">
       <button
@@ -44,7 +46,11 @@ export default function DrinksCategories() {
               () => clickHandler(category.strCategory)
             }
           >
-            {category.strCategory}
+            <span
+              className="drink-catergory-text"
+            >
+              {category.strCategory.match(regex)?.[1]}
+            </span>
           </button>
         ))
       }
