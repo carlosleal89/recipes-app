@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import DrinkContext from '../context/DrinksContext';
 import useFetch from '../hooks/useFetch';
+import '../css/DrinksCategories.css';
 
 export default function DrinksCategories() {
   const { fetchData } = useFetch();
@@ -25,33 +26,19 @@ export default function DrinksCategories() {
   }, []);
 
   return (
-    <div>
+    <div className="category-btn-container">
       <button
-        style={ {
-          fontSize: 15,
-          fontStyle: 'italic',
-          padding: 0,
-          margin: 0,
-          marginLeft: '1rem',
-          marginRight: '0.5rem',
-        } }
         onClick={ () => setShowDrinkCategoriesFilter(true) }
         data-testid="All-category-filter"
+        className="all-btn-filter"
       >
         All
       </button>
       {
         drinksCategories.map((category, index) => (
           <button
-            style={ {
-              fontSize: 15,
-              fontStyle: 'italic',
-              padding: 0,
-              margin: 0,
-              marginLeft: '0.5rem',
-              marginRight: '0.5rem',
-            } }
             key={ index }
+            className={ `${category.strCategory}-btn-filter` }
             data-testid={ `${category.strCategory}-category-filter` }
             onClick={
               () => clickHandler(category.strCategory)

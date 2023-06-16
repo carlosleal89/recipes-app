@@ -26,7 +26,7 @@ export default function MealsCategories() {
   }, []);
 
   return (
-    <div className="category-btn-container">
+    <div className="meals-category-btn-container">
       <button
         onClick={ () => {
           setShowMealCategoriesFilter(true);

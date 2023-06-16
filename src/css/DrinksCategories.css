@@ -8,10 +8,10 @@
   .all-btn-filter {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/allFoodIcon.svg');
+    background-image: url('../images/allDrink.svg');
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 95% 80%;
+    background-size: 95% 75%;
     border: none;
     border-color: transparent;
     border-radius: 10px;
@@ -26,10 +26,10 @@
     width: 50px;
   }
 
-  .Beef-btn-filter {
+  [ class = 'Ordinary Drink-btn-filter' ] {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/beef.svg');
+    background-image: url('../images/ordinaryDrink.svg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 95% 75%;
@@ -46,10 +46,10 @@
     width: 50px;
   }
 
-  .Breakfast-btn-filter {
+  .Cocktail-btn-filter {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/breakfast.svg');
+    background-image: url('../images/cocktail.svg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 95% 70%;
@@ -66,10 +66,10 @@
     width: 50px;
   }
 
-  .Chicken-btn-filter {
+  .Shake-btn-filter {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/chickenIcon.svg');
+    background-image: url('../images/shake.svg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 95% 75%;
@@ -86,10 +86,10 @@
     width: 50px;
   }
 
-  .Dessert-btn-filter {
+  [ class = 'Other / Unknown-btn-filter' ] {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/dessert.svg');
+    background-image: url('../images/otherDrink.svg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 95% 70%;
@@ -106,10 +106,10 @@
     width: 50px;
   }
 
-  .Goat-btn-filter {
+  .Cocoa-btn-filter {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/goatIcon.svg');
+    background-image: url('../images/cocoaDrink.svg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 95% 75%;
@@ -129,7 +129,7 @@
 
 @media screen and ( min-width : 640px ) {
 
-  .meals-category-btn-container {
+  .category-btn-container {
     display: flex;
     justify-content: space-evenly;
   }
@@ -137,10 +137,10 @@
   .all-btn-filter {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/allFoodIcon.svg');
+    background-image: url('../images/allDrink.svg');
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 95% 85%;
+    background-size: 95% 75%;
     border: none;
     border-color: transparent;
     border-radius: 10px;
@@ -150,35 +150,15 @@
     font-size: 0.5rem;
     height: 50px;
     justify-content: center;
-    margin: 0 10px;
+    margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
     width: 50px;
   }
 
-  .Beef-btn-filter {
+  [ class = 'Ordinary Drink-btn-filter' ] {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/beef.svg');
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: 95% 80%;
-    border: none;
-    border-color: transparent;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    display: flex;
-    font-size: 0.5rem;
-    height: 50px;
-    justify-content: center;
-    margin: 0 5px;
-    text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
-    width: 50px;
-  }
-
-  .Breakfast-btn-filter {
-    align-items: flex-end;
-    background-color: transparent;
-    background-image: url('../images/breakfast.svg');
+    background-image: url('../images/ordinaryDrink.svg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 95% 75%;
@@ -190,18 +170,18 @@
     font-size: 0.5rem;
     height: 50px;
     justify-content: center;
-    margin: 0 5px;
+    margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
     width: 50px;
   }
 
-  .Chicken-btn-filter {
+  .Cocktail-btn-filter {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/chickenIcon.svg');
+    background-image: url('../images/cocktail.svg');
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 95% 78%;
+    background-size: 95% 70%;
     border: none;
     border-color: transparent;
     border-radius: 10px;
@@ -210,15 +190,15 @@
     font-size: 0.5rem;
     height: 50px;
     justify-content: center;
-    margin: 0 5px;
+    margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
     width: 50px;
   }
 
-  .Dessert-btn-filter {
+  .Shake-btn-filter {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/dessert.svg');
+    background-image: url('../images/shake.svg');
     background-position: center top;
     background-repeat: no-repeat;
     background-size: 95% 75%;
@@ -230,18 +210,18 @@
     font-size: 0.5rem;
     height: 50px;
     justify-content: center;
-    margin: 0 5px;
+    margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
     width: 50px;
   }
 
-  .Goat-btn-filter {
+  [ class = 'Other / Unknown-btn-filter' ] {
     align-items: flex-end;
     background-color: transparent;
-    background-image: url('../images/goatIcon.svg');
+    background-image: url('../images/otherDrink.svg');
     background-position: center top;
     background-repeat: no-repeat;
-    background-size: 95% 80%;
+    background-size: 95% 70%;
     border: none;
     border-color: transparent;
     border-radius: 10px;
@@ -250,7 +230,27 @@
     font-size: 0.5rem;
     height: 50px;
     justify-content: center;
-    margin: 0 5px;
+    margin: 0 2px;
+    text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
+    width: 50px;
+  }
+
+  .Cocoa-btn-filter {
+    align-items: flex-end;
+    background-color: transparent;
+    background-image: url('../images/cocoaDrink.svg');
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: 95% 75%;
+    border: none;
+    border-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    font-size: 0.5rem;
+    height: 50px;
+    justify-content: center;
+    margin: 0 2px;
     text-shadow: 1.5px 1.5px 1px rgba(0, 0, 0, 0.3);
     width: 50px;
   }
