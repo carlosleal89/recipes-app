@@ -25,6 +25,19 @@
     justify-content: center;
   }
 
+  .img-logo {
+    background-image: url('../images/LogoHungry.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+    height: 200px;
+    overflow: hidden;
+    position: absolute;
+    top: 130px;
+    width: 310px;
+  }
+
   .inputs-div {
     align-items: center;
     display: flex;
