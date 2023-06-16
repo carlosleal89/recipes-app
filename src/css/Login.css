@@ -10,7 +10,16 @@
 
 .login-background {
   align-items: center;
-  background-image: url('../images/comidas-login.jpg');
+
+  /* background-image: url('../images/comidas-login.jpg'); */
+  background-image: url('../images/loginBackground.jpg');
+
+  /* imagem retirada de
+  <a href="https://www.freepik.com/free-photo/notebook-recipe-tomato-farfalle-garlic
+  -onion-mortar-pepper-top-view-copy-space_7824788.htm#query=recipe%20background&position=
+  14&from_view=keyword&track=ais">
+  Image by stockking</a> on Freepik */
+  background-size: 100% 100%;
   display: flex;
   height: 100dvh;
   justify-content: center;
@@ -25,7 +34,13 @@
 
 .login-input {
   background-color: rgba(255, 255, 255, 0.542);
+  border: none;
+  border-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   color: black;
+  margin: 1px;
+  width: 300px;
 }
 
 .login-input::placeholder {
