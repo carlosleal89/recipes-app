@@ -1,11 +1,12 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
+import '../css/CardFinishedRecipes.css';
 
 function CardFinishedRecipes({ recipe, index }) {
-  console.log(recipe.id);
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
 
   const clipboardShare = (link) => {
@@ -19,37 +20,38 @@ function CardFinishedRecipes({ recipe, index }) {
 
   return (
     <div>
-      <Link to={ `/${recipe.type}s/${recipe.id}` }>
-        <img
-          alt="recipe"
-          src={ recipe.image }
-          data-testid={ `${index}-horizontal-image` }
-          style={ {
-            width: 150,
-            height: 150,
-          } }
-        />
-      </Link>
-      <p
-        data-testid={ `${index}-horizontal-top-text` }
-      >
-        {recipe.category && recipe.nationality
-          ? `${recipe.nationality} - ${recipe.category}` : recipe.alcoholicOrNot}
-      </p>
-      <Link to={ `/${recipe.type}s/${recipe.id}` }>
-        <p
-          data-testid={ `${index}-horizontal-name` }
-        >
-          { recipe.name }
-        </p>
-      </Link>
-      <p
-        data-testid={ `${index}-horizontal-done-date` }
-      >
-        { recipe.doneDate }
-      </p>
+      <div className="card-recipe">
+        <div className="image-recipe">
+          <Link to={ `/${recipe.type}s/${recipe.id}` }>
+            <img
+              alt="recipe"
+              src={ recipe.image }
+              data-testid={ `${index}-horizontal-image` }
+              className="recipe-image"
+            />
+          </Link>
+        </div>
+        <div className="recipe-info">
+          <h2
+            data-testid={ `${index}-horizontal-name` }
+          >
+            { recipe.name }
+            <div>
 
-      { recipe.tags
+              <button
+                className="share-recipe-button"
+                data-testid={ `${index}-horizontal-share-btn` }
+                onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
+                src={ shareIcon }
+              >
+                <img
+                  src={ shareIcon }
+                  alt="share icon"
+                />
+              </button>
+            </div>
+          </h2>
+          { recipe.tags
       && recipe.tags.splice(0, 2).map((tag) => (
         <p
           data-testid={ `${index}-${tag}-horizontal-tag` }
@@ -58,18 +60,19 @@ function CardFinishedRecipes({ recipe, index }) {
           {tag}
         </p>
       ))}
-
-      <button
-        className="share-recipe-btn"
-        data-testid={ `${index}-horizontal-share-btn` }
-        onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
-        src={ shareIcon }
-      >
-        <img
-          src={ shareIcon }
-          alt="share icon"
-        />
-      </button>
+          <p
+            data-testid={ `${index}-horizontal-top-text` }
+          >
+            {recipe.category && recipe.nationality
+              ? `${recipe.nationality} - ${recipe.category}` : recipe.alcoholicOrNot}
+          </p>
+          <p
+            data-testid={ `${index}-horizontal-done-date` }
+          >
+            { recipe.doneDate }
+          </p>
+        </div>
+      </div>
       {
         clipBoardmsg && <p className="clipboard-msg">Link copied!</p>
       }

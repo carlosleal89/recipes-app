@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import TitleContext from '../context/TitleContext';
 import CardFinishedRecipes from '../components/CardFinishedRecipes';
+import '../css/DoneRecipes.css';
 
 function DoneRecipes() {
   const { setTitle } = useContext(TitleContext);
@@ -31,15 +32,29 @@ function DoneRecipes() {
   return (
     <div>
       <Header />
-      <button data-testid="filter-by-all-btn" onClick={ () => handleFilterByAll() }>
-        All
-      </button>
-      <button data-testid="filter-by-meal-btn" onClick={ () => handleFilterByMeal() }>
-        Meals
-      </button>
-      <button data-testid="filter-by-drink-btn" onClick={ () => handleFilterByDrink() }>
-        Drinks
-      </button>
+      <div className="button-container">
+        <button
+          className="button-categories"
+          data-testid="filter-by-all-btn"
+          onClick={ () => handleFilterByAll() }
+        >
+          All
+        </button>
+        <button
+          className="button-categories"
+          data-testid="filter-by-meal-btn"
+          onClick={ () => handleFilterByMeal() }
+        >
+          Meals
+        </button>
+        <button
+          className="button-categories"
+          data-testid="filter-by-drink-btn"
+          onClick={ () => handleFilterByDrink() }
+        >
+          Drinks
+        </button>
+      </div>
       {filteredRecipes
       && filteredRecipes.map((recipe, index) => (
         <div key={ index }>
