@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import MealsContext from '../context/MealsContext';
 import useFetch from '../hooks/useFetch';
+import '../css/MealsCategories.css';
 
 export default function MealsCategories() {
   const { fetchData } = useFetch();
@@ -25,19 +26,12 @@ export default function MealsCategories() {
   }, []);
 
   return (
-    <div>
+    <div className="category-btn-container">
       <button
-        style={ {
-          fontSize: 15,
-          fontStyle: 'italic',
-          padding: 0,
-          margin: 0,
-          marginLeft: '1rem',
-          marginRight: '0.5rem',
-        } }
         onClick={ () => {
           setShowMealCategoriesFilter(true);
         } }
+        className="all-btn-filter"
         data-testid="All-category-filter"
       >
         All
@@ -45,15 +39,8 @@ export default function MealsCategories() {
       {
         mealsCategories.map((category, index) => (
           <button
-            style={ {
-              fontSize: 15,
-              fontStyle: 'italic',
-              padding: 0,
-              margin: 0,
-              marginLeft: '0.5rem',
-              marginRight: '0.5rem',
-            } }
             key={ index }
+            className={ `${category.strCategory}-btn-filter` }
             data-testid={ `${category.strCategory}-category-filter` }
             onClick={
               () => clickHandler(category.strCategory)
