@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import DrinksContext from '../context/DrinksContext';
 import DrinksCategories from './DrinksCategories';
+import '../css/DrinksCategoriesFiltered.css';
 
 export default function DrinksCategoriesFiltered() {
   const { drinksCategoriesFilter } = useContext(DrinksContext);
@@ -17,9 +18,13 @@ export default function DrinksCategoriesFiltered() {
             to={ `/drinks/${drink.idDrink}` }
             key={ index }
           >
-            <div data-testid={ `${index}-recipe-card` } key={ index }>
+            <div
+              className="filtered-recipe-container"
+              data-testid={ `${index}-recipe-card` }
+              key={ index }
+            >
               <p
-                className="recipe-name-text"
+                className="recipe-filtered-name-text"
                 data-testid={ `${index}-card-name` }
               >
                 { drink.strDrink }

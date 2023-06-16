@@ -12,9 +12,13 @@ export default function MealsCategoriesFiltered() {
       <div className="recipes-container">
         {mealsCategoriesFilter.slice(0, MEALS_LIST_MAX_LENGTH).map((recipe, index) => (
           <Link className="link-container" to={ `/meals/${recipe.idMeal}` } key={ index }>
-            <div data-testid={ `${index}-recipe-card` } key={ index }>
+            <div
+              className="filtered-recipe-container"
+              data-testid={ `${index}-recipe-card` }
+              key={ index }
+            >
               <p
-                className="recipe-name-text"
+                className="recipe-filtered-name-text"
                 data-testid={ `${index}-card-name` }
               >
                 { recipe.strMeal }

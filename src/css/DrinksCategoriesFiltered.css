@@ -1,0 +1,26 @@
+@media screen and ( width : 360px ) and ( height : 640px ) {
+
+  .recipe-filtered-name-text {
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .filtered-recipe-container {
+    width: 150px;
+  }
+}
+
+@media screen and ( min-width : 361px ), screen and ( min-height : 641px ) {
+
+  .recipe-filtered-name-text {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .filtered-recipe-container {
+    width: 80%;
+  }
+}
