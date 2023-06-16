@@ -4,12 +4,11 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Meals from '../components/Meals';
 import Drinks from '../components/Drinks';
-// import MealsCategories from '../components/MealsCategories';
-// import DrinksCategories from '../components/DrinksCategories';
 import MealsContext from '../context/MealsContext';
 import DrinkContext from '../context/DrinksContext';
 import MealsCategoriesFiltered from '../components/MealsCategoriesFiltered';
 import DrinksCategoriesFiltered from '../components/DrinksCategoriesFiltered';
+// import '../css/Recipes.css';
 
 function Recipes() {
   const location = useLocation();
@@ -24,24 +23,22 @@ function Recipes() {
     <div>
       <Header />
       <div>
-        <h1>
-          {
-            location.pathname === '/meals'
-            && (
-              showMealCategoriesFilter ? (
-                <Meals />
-              ) : (<MealsCategoriesFiltered />)
-            )
-          }
-          {
-            location.pathname === '/drinks'
+        {
+          location.pathname === '/meals'
           && (
-            showDrinkCategoriesFilter ? (
-              <Drinks />
-            ) : (<DrinksCategoriesFiltered />)
+            showMealCategoriesFilter ? (
+              <Meals />
+            ) : (<MealsCategoriesFiltered />)
           )
-          }
-        </h1>
+        }
+        {
+          location.pathname === '/drinks'
+        && (
+          showDrinkCategoriesFilter ? (
+            <Drinks />
+          ) : (<DrinksCategoriesFiltered />)
+        )
+        }
       </div>
       <Footer />
     </div>
