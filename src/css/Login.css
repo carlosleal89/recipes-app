@@ -3,6 +3,8 @@
   .login-page-div {
     align-items: center;
     display: flex;
+    position: absolute;
+    top: 50%;
     flex-direction: column;
     justify-content: center;
   }
@@ -26,16 +28,16 @@
   }
 
   .img-logo {
-    background-image: url('../images/LogoHungry.png');
+    background-image: url('../images/logoHungry.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
     border-radius: 50%;
-    height: 200px;
+    height: 140px;
     overflow: hidden;
     position: absolute;
-    top: 130px;
-    width: 310px;
+    top: 25%;
+    width: 300px;
   }
 
   .inputs-div {

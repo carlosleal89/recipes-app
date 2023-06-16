@@ -21,7 +21,6 @@ export default function Login() {
     <div className="login-background">
       <div className="img-logo"> </div>
       <div className="login-page-div">
-        <h1 className="login-text">Recipes</h1>
         <h2 className="login-text">Login</h2>
         <div className="inputs-div">
           <label htmlFor="email-input">
