@@ -3,13 +3,13 @@ import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { fetchMealsById, fetchDrinksById } from '../helpers/API_URL';
 import PhotoAndTitle from '../components/recipesDetails/PhotoAndTitle';
 import Loading from '../components/recipesDetails/Loading';
-import shareIcon from '../images/shareIcon.svg';
 import Instructions from '../components/recipesDetails/Instructions';
 import '../css/RecipeInProgress.css';
 import IngredientsWithCheckboxes
   from '../components/recipesDetails/ingredientsWithCheckboxes';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import yellowShare from '../images/yellowShare.svg';
+import yellowHeart from '../images/yellowHeart.svg';
+import loginRedHeart from '../images/loginRedHeart.svg';
 
 export default function RecipesInProgress() {
   const [recipes, setRecipes] = useState([]);
@@ -130,7 +130,7 @@ export default function RecipesInProgress() {
             onClick={ clipboardShare }
           >
             <img
-              src={ shareIcon }
+              src={ yellowShare }
               alt=""
             />
           </button>
@@ -141,7 +141,7 @@ export default function RecipesInProgress() {
           >
             <img
               data-testid="favorite-btn"
-              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              src={ isFavorite ? loginRedHeart : yellowHeart }
               alt="favorite icon"
             />
           </button>
