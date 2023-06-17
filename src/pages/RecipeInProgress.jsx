@@ -3,13 +3,13 @@ import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { fetchMealsById, fetchDrinksById } from '../helpers/API_URL';
 import PhotoAndTitle from '../components/recipesDetails/PhotoAndTitle';
 import Loading from '../components/recipesDetails/Loading';
-import shareIcon from '../images/shareIcon.svg';
 import Instructions from '../components/recipesDetails/Instructions';
 import '../css/RecipeInProgress.css';
 import IngredientsWithCheckboxes
   from '../components/recipesDetails/ingredientsWithCheckboxes';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import yellowShare from '../images/yellowShare.svg';
+import yellowHeart from '../images/yellowHeart.svg';
+import loginRedHeart from '../images/loginRedHeart.svg';
 
 export default function RecipesInProgress() {
   const [recipes, setRecipes] = useState([]);
@@ -74,7 +74,11 @@ export default function RecipesInProgress() {
       alcoholicOrNot: recipeDone.strAlcoholic || '',
       name: recipeDone.strMeal || recipeDone.strDrink,
       image: recipeDone.strMealThumb || recipeDone.strDrinkThumb,
-      doneDate: (new Date()).toISOString(),
+      doneDate: (new Date()).toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+      }),
       tags: recipeDone.strTags ? recipeDone.strTags.split(',') : [],
     };
     if (localStorage.doneRecipes) {
@@ -126,8 +130,8 @@ export default function RecipesInProgress() {
             onClick={ clipboardShare }
           >
             <img
-              src={ shareIcon }
-              alt="share icon"
+              src={ yellowShare }
+              alt=""
             />
           </button>
 
@@ -137,7 +141,7 @@ export default function RecipesInProgress() {
           >
             <img
               data-testid="favorite-btn"
-              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              src={ isFavorite ? loginRedHeart : yellowHeart }
               alt="favorite icon"
             />
           </button>
@@ -145,19 +149,22 @@ export default function RecipesInProgress() {
           {
             clipBoardMsg && <span className="clipboard-msg">Link copied!</span>
           }
-
+          <h1 className="ingredient">Ingredients</h1>
           <IngredientsWithCheckboxes
             recipe={ recipes }
             enableFinishBtn={ setEnableFinishBtn }
           />
           <Instructions recipe={ recipes } />
-          <button
-            data-testid="finish-recipe-btn"
-            onClick={ () => handleFinish(recipes[0]) }
-            disabled={ !enableFinishBtn }
-          >
-            Finish recipe
-          </button>
+          <div className="finish-btn-box">
+            <button
+              data-testid="finish-recipe-btn"
+              onClick={ () => handleFinish(recipes[0]) }
+              disabled={ !enableFinishBtn }
+              className="finish-btn"
+            >
+              Finish Recipe
+            </button>
+          </div>
         </div>
       ) : (
         <Loading />

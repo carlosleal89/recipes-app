@@ -1,0 +1,76 @@
+@media screen and ( width : 360px ) and ( height : 640px ) {
+
+  .card-recipe {
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    position: relative;
+  }
+
+  .card-recipe:before {
+    background-image: url('../images/comidas.jpg');
+    background-size: cover;
+    border-radius: inherit;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0.1;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .recipe-image {
+    align-items: center;
+    border-radius: 5px;
+    max-height: 130px;
+    max-width: 130px;
+  }
+
+  .image-recipe {
+    align-items: center;
+    border-radius: 5px;
+    max-height: 130px;
+    max-width: 130px;
+  }
+
+  .recipe-info {
+    margin-left: 10px;
+  }
+
+  .share-recipe-button {
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    border-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    height: 30px;
+
+  }
+
+  .link {
+    color: inherit;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .title-recipes {
+    font-size: 17px;
+    font-weight: 600;
+    overflow-wrap: break-word;
+  }
+
+  .card-done-recipe-info {
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 2px;
+    padding: 0;
+    word-spacing: 2px;
+  }
+}

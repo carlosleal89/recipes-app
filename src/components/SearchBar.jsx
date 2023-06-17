@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { fetchMeals,
   fetchMealsName,
   fetchMealsFirstLetter,
@@ -18,14 +19,25 @@ function SearchBar() {
   const history = useHistory();
   const page = history.location.pathname;
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    icon: 'error',
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
+
   const handleOnChangeFilter = ({ target: { value, name } }) => {
     setActiveRadio({ [name]: value });
   };
 
   const handleError = () => {
-    global.alert(
-      'Sorry, we haven\'t found any recipes for these filters.',
-    );
+    Toast.fire('Sorry, we haven\'t found any recipes for these filters.');
   };
 
   const handleIngridientSearch = async (id, MAX_LENGTH) => {
@@ -79,38 +91,35 @@ function SearchBar() {
     switch (activeRadio.filter) {
     case 'ingredient':
       if (search.length < 2) {
-        global.alert('Please, enter a valid ingredient');
+        Toast.fire('Please, enter a valid ingredient');
         break;
       }
       handleIngridientSearch(id, MAX_LENGTH);
       break;
     case 'name':
       if (search.length < 1) {
-        global.alert('Your search is empty');
+        Toast.fire('Your search is empty');
         break;
       }
       handleNameSearch(id, MAX_LENGTH);
       break;
     case 'first-letter':
       if (search.length !== 1) {
-        global.alert(
-          'Your search must have only 1 (one) character',
-        );
+        Toast.fire('Your search must have only 1 (one) character');
         break;
       }
       handleFirstLetter(id, MAX_LENGTH);
       break;
     default:
-      return global.alert(
-        'Sorry, we haven\'t found any recipes for these filters.',
-      );
+      return Toast.fire('Sorry, we haven\'t found any recipes for these filters.');
     }
     setSearch('');
   };
 
   return (
-    <div>
+    <div className="container__header-search-2">
       <input
+        className="input-search"
         type="text"
         data-testid="search-input"
         value={ search }
@@ -118,47 +127,50 @@ function SearchBar() {
         onChange={ (event) => setSearch(event.target.value) }
       />
 
-      <input
-        id="ingredient"
-        type="radio"
-        name="filter"
-        value="ingredient"
-        data-testid="ingredient-search-radio"
-        onClick={ handleOnChangeFilter }
-      />
-      <label htmlFor="ingredient">Ingredient</label>
+      <div className="container__background">
+        <div className="container__input-radio">
+          <input
+            id="ingredient"
+            type="radio"
+            name="filter"
+            value="ingredient"
+            data-testid="ingredient-search-radio"
+            onClick={ handleOnChangeFilter }
+          />
+          <label htmlFor="ingredient">Ingredient</label>
 
-      <input
-        id="name"
-        type="radio"
-        name="filter"
-        value="name"
-        data-testid="name-search-radio"
-        onClick={ handleOnChangeFilter }
-      />
-      <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            type="radio"
+            name="filter"
+            value="name"
+            data-testid="name-search-radio"
+            onClick={ handleOnChangeFilter }
+          />
+          <label htmlFor="name">Name</label>
 
-      <input
-        id="first-letter"
-        type="radio"
-        name="filter"
-        value="first-letter"
-        data-testid="first-letter-search-radio"
-        onClick={ handleOnChangeFilter }
-      />
-      <label htmlFor="first-letter">First letter</label>
+          <input
+            id="first-letter"
+            type="radio"
+            name="filter"
+            value="first-letter"
+            data-testid="first-letter-search-radio"
+            onClick={ handleOnChangeFilter }
+          />
+          <label htmlFor="first-letter">First letter</label>
+        </div>
 
-      <button
-        style={ {
-          backgroundColor: '#d3d3d3',
-          borderRadius: 50,
-        } }
-        name="search-btn"
-        data-testid="exec-search-btn"
-        onClick={ () => handleSearchBtn(search) }
-      >
-        Search
-      </button>
+        <div className="container__search-button">
+          <button
+            className="search-btn"
+            name="search-btn"
+            data-testid="exec-search-btn"
+            onClick={ () => handleSearchBtn(search) }
+          >
+            Search
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

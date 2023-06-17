@@ -1,0 +1,31 @@
+@media screen and ( max-width : 360px ) {
+
+  .button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+
+  .button-categories {
+    backdrop-filter: blur(1px);
+    border-color: rgba(0, 0, 0, 0.092);
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.353);
+    margin-bottom: 5px;
+    width: 100px;
+  }
+
+  .button-categories:before {
+    background-image: url('../images/comidas.jpg');
+    background-size: cover;
+    border-radius: 10px;
+    content: '';
+    height: 100%;
+    left: 0;
+    opacity: 0.15;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+  }
+}
