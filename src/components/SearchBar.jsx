@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { fetchMeals,
   fetchMealsName,
   fetchMealsFirstLetter,
@@ -18,14 +19,25 @@ function SearchBar() {
   const history = useHistory();
   const page = history.location.pathname;
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    icon: 'error',
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer);
+      toast.addEventListener('mouseleave', Swal.resumeTimer);
+    },
+  });
+
   const handleOnChangeFilter = ({ target: { value, name } }) => {
     setActiveRadio({ [name]: value });
   };
 
   const handleError = () => {
-    global.alert(
-      'Sorry, we haven\'t found any recipes for these filters.',
-    );
+    Toast.fire('Sorry, we haven\'t found any recipes for these filters.');
   };
 
   const handleIngridientSearch = async (id, MAX_LENGTH) => {
@@ -79,31 +91,27 @@ function SearchBar() {
     switch (activeRadio.filter) {
     case 'ingredient':
       if (search.length < 2) {
-        global.alert('Please, enter a valid ingredient');
+        Toast.fire('Please, enter a valid ingredient');
         break;
       }
       handleIngridientSearch(id, MAX_LENGTH);
       break;
     case 'name':
       if (search.length < 1) {
-        global.alert('Your search is empty');
+        Toast.fire('Your search is empty');
         break;
       }
       handleNameSearch(id, MAX_LENGTH);
       break;
     case 'first-letter':
       if (search.length !== 1) {
-        global.alert(
-          'Your search must have only 1 (one) character',
-        );
+        Toast.fire('Your search must have only 1 (one) character');
         break;
       }
       handleFirstLetter(id, MAX_LENGTH);
       break;
     default:
-      return global.alert(
-        'Sorry, we haven\'t found any recipes for these filters.',
-      );
+      return Toast.fire('Sorry, we haven\'t found any recipes for these filters.');
     }
     setSearch('');
   };
