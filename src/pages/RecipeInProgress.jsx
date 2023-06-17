@@ -155,14 +155,16 @@ export default function RecipesInProgress() {
             enableFinishBtn={ setEnableFinishBtn }
           />
           <Instructions recipe={ recipes } />
-          <button
-            data-testid="finish-recipe-btn"
-            onClick={ () => handleFinish(recipes[0]) }
-            disabled={ !enableFinishBtn }
-            className="finish-btn"
-          >
-            Finish recipe
-          </button>
+          <div className="finish-btn-box">
+            <button
+              data-testid="finish-recipe-btn"
+              onClick={ () => handleFinish(recipes[0]) }
+              disabled={ !enableFinishBtn }
+              className="finish-btn"
+            >
+              Finish Recipe
+            </button>
+          </div>
         </div>
       ) : (
         <Loading />

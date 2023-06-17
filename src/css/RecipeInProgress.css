@@ -1,64 +1,75 @@
-.text {
-  text-decoration: line-through solid black;
-}
+/* stylelint-disable selector-no-qualifying-type */
 
-.recipeInProgressContainer {
-  height: 100vh;
-}
+@media screen and ( width : 360px ) and ( height : 640px ) {
 
-.checkboxContainer {
-  background-color: whitesmoke;
-  border: 1px solid #b1b1b1;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  margin: 20px auto;
-  padding: 20px;
-  width: 90%;
-  flex-direction: column;
-  top: 360px;
-}
+  .text {
+    text-decoration: line-through solid black;
+  }
 
+  .recipeInProgressContainer {
+    height: 100vh;
+  }
 
-.ingredient {
-  text-align: center
-}
+  .checkboxContainer {
+    border: 1px solid #b1b1b1;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px auto;
+    padding: 20px;
+    padding-right: 20px;
+    top: 360px;
+    width: 90%;
+  }
 
-.share-recipe-btn {
-  position: absolute;
-  top: 25px;
-  background-color: rgba(0, 0, 0, 0.384);
-}
+  .ingredient {
+    margin-top: 10px;
+    text-align: center;
 
-.favorite-recipe-btn {
-  position: absolute;
-  top: 25px;
-  background-color: rgba(0, 0, 0, 0.384);
-}
+  }
 
-input[type="checkbox"] { 
-  accent-color:  #FCC436;
-  
-}
+  .share-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    position: absolute;
+    top: 25px;
+  }
 
-.finish-btn{
-  align-items: center;
-  background-color: #FCC436;
-  height: 40px;
-  width: 336px;
-  left: 12.5px;
-  border: none;
-  border-radius: 10px;
-  bottom: 0;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  display: flex;
-  font-size: 0.7rem;
-  height: 40px;
-  justify-content: center;
-  margin: 10px;
-  z-index: 100;
-}
+  .favorite-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    position: absolute;
+    top: 25px;
+  }
 
-.checked {
-  background-image:url() ;
+  input[ type = 'checkbox' ] {
+    accent-color: #fcc436;
+
+  }
+
+  .finish-btn-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  .finish-btn {
+    align-items: center;
+    background-color: #fcc436;
+    border: none;
+    border-radius: 10px;
+    bottom: 0;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    font-size: 700;
+    height: 40px;
+    justify-content: center;
+    left: 12.5px;
+    letter-spacing: 1px;
+    margin: 10px;
+    width: 150px;
+    word-spacing: 2px;
+    z-index: 100;
+  }
+
+  .checked {
+    margin-right: 10px;
+  }
 }
