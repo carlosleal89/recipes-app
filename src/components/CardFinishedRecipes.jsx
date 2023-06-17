@@ -32,7 +32,8 @@ function CardFinishedRecipes({ recipe, index }) {
           </Link>
         </div>
         <div className="recipe-info">
-          <h2
+          <h6
+            className="title-recipes"
             data-testid={ `${index}-horizontal-name` }
           >
             { recipe.name }
@@ -50,10 +51,11 @@ function CardFinishedRecipes({ recipe, index }) {
                 />
               </button>
             </div>
-          </h2>
+          </h6>
           { recipe.tags
       && recipe.tags.splice(0, 2).map((tag) => (
         <p
+          className="card-done-recipe-info"
           data-testid={ `${index}-${tag}-horizontal-tag` }
           key={ index }
         >
@@ -61,12 +63,14 @@ function CardFinishedRecipes({ recipe, index }) {
         </p>
       ))}
           <p
+            className="card-done-recipe-info"
             data-testid={ `${index}-horizontal-top-text` }
           >
             {recipe.category && recipe.nationality
               ? `${recipe.nationality} - ${recipe.category}` : recipe.alcoholicOrNot}
           </p>
           <p
+            className="card-done-recipe-info"
             data-testid={ `${index}-horizontal-done-date` }
           >
             { recipe.doneDate }
@@ -74,7 +78,7 @@ function CardFinishedRecipes({ recipe, index }) {
         </div>
       </div>
       {
-        clipBoardmsg && <p className="clipboard-msg">Link copied!</p>
+        clipBoardmsg && <p className="clipboard-message">Link copied!</p>
       }
     </div>
   );
