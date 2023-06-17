@@ -1,6 +1,6 @@
 /* stylelint-disable selector-no-qualifying-type */
 
-@media screen and ( width : 360px ) and ( height : 640px ) {
+@media screen and ( max-width : 360px ) {
 
   .text {
     text-decoration: line-through solid black;
