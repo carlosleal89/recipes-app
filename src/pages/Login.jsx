@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom/';
+import logoHungry from '../images/logoHungry.png';
 import '../css/Login.css';
 
 export default function Login() {
@@ -19,9 +20,9 @@ export default function Login() {
 
   return (
     <div className="login-background">
-      <div className="img-logo"> </div>
       <div className="login-page-div">
-        <h2 className="login-text">Login</h2>
+        <img className="img-logo" src={ logoHungry } alt="logo" />
+        {/* <h2 className="login-text">Login</h2> */}
         <div className="inputs-div">
           <label htmlFor="email-input">
             <input
@@ -59,7 +60,7 @@ export default function Login() {
               data-testid="login-submit-btn"
               onClick={ setLocalStorage }
             >
-              Enter
+              Login
             </button>
           </div>
         </div>

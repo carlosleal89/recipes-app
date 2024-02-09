@@ -1,11 +1,12 @@
 .login-page-div {
   align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 1px 5px 18px #2f2c2c;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 7vh;
-  position: absolute;
-  top: 50%;
+  padding: 2.5em;
 }
 
 .login-background {
@@ -20,23 +21,33 @@
 }
 
 .img-logo {
-  background-image: url('../images/logoHungry.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  border-radius: 50%;
-  height: 30vh;
-  overflow: hidden;
-  position: absolute;
-  top: 25vh;
-  width: 97.22vw;
+  animation: sway 4s ease-in-out infinite;
+  height: 15em;
+  width: auto;
 }
+
+@keyframes sway {
+
+  0% {
+    transform: rotateZ(-2deg);
+  }
+
+  50% {
+    transform: rotateZ(2deg);
+  }
+
+  100% {
+    transform: rotateZ(-2deg);
+  }
+}
+
 
 .inputs-div {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 2em;
 }
 
 .login-input {
@@ -46,43 +57,62 @@
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   color: rgb(21, 20, 20);
-  margin: 5px;
-  width: 60vw;
+  height: 2em;
+  margin: 0.5em;
+  transition: border-color 0.3s ease;
+  width: 20em;
 }
 
 .login-input::placeholder {
   color: dimgray;
   text-align: center;
-  text-shadow: 0.1px -0.1px 0 white , -1.5px 1.5px 0 white , 0.1px 0.1px 0 white;
 }
 
 .login-input:focus {
-  border-color: #fcdc36;
-  box-shadow: 0 0 5px #fcdc36;
-  outline: none;
+  animation: glow 0.5s infinite alternate;
 }
 
-.login-text {
-  color: #260f4b;
-  font-size: 4vh;
-  text-transform: uppercase;
+
+@keyframes glow {
+
+  from {
+    box-shadow: 0 0 5px #fcdc36;
+  }
+
+  to {
+    box-shadow: 0 0 10px #fcdc36;
+  }
 }
+
 
 .login-submit-btn:enabled {
-  background-color: #fcdc36;
+  background-color: #260f4b;
   border: none;
-  border-radius: 2.78vw;
-  width: 60vw;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+  height: 2.5em;
+  margin: 0.5em;
+  transition: box-shadow transform 0.2s;
+  width: 10em;
 }
+
 
 .login-submit-btn:disabled {
   background-color: #484646a4;
-  border-radius: 2.78vw;
+  border-radius: 8px;
   color: white;
-  width: 60vw;
+  height: 2.5em;
+  margin: 0.5em;
+  width: 10em;
 }
 
-@media screen and ( max-width : 360px ) {
+.login-submit-btn:enabled:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+/* @media screen and (max-width : 360px) {
 
   .login-page-div {
     align-items: center;
@@ -139,7 +169,7 @@
   .login-input::placeholder {
     color: dimgray;
     text-align: center;
-    text-shadow: 0.1px -0.1px 0 white , -1.5px 1.5px 0 white , 0.1px 0.1px 0 white;
+    text-shadow: 0.1px -0.1px 0 white, -1.5px 1.5px 0 white, 0.1px 0.1px 0 white;
   }
 
   .login-input:focus {
@@ -167,5 +197,4 @@
     color: white;
     width: 60vw;
   }
-}
-
+} */
