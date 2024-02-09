@@ -4,17 +4,12 @@ import DrinksContext from './DrinksContext';
 
 export default function DrinksProvider({ children }) {
   const [drinkList, setDrinkList] = useState([]);
-  const [drinkListArray, setDrinkListArray] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [drinksCategoriesFilter, setDrinksCategoriesFilter] = useState([]);
   const [showDrinkCategoriesFilter, setShowDrinkCategoriesFilter] = useState(true);
 
   useEffect(() => {
-    const DRINKS_LIST_MAX_LENGTH = 12;
     const DRINKS_CATEGORIES_MAX_LENGTH = 5;
-    if (drinkList.drinks) {
-      setDrinkListArray(drinkList.drinks.slice(0, DRINKS_LIST_MAX_LENGTH));
-    }
     if (drinksCategories.drinks) {
       setDrinksCategories(drinksCategories.drinks.slice(0, DRINKS_CATEGORIES_MAX_LENGTH));
     }
@@ -26,8 +21,7 @@ export default function DrinksProvider({ children }) {
   const drinksContext = useMemo(
     () => (
       {
-        drinkListArray,
-        setDrinkListArray,
+        drinkList,
         setDrinkList,
         drinksCategories,
         setDrinksCategories,
@@ -37,7 +31,7 @@ export default function DrinksProvider({ children }) {
         setShowDrinkCategoriesFilter,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [drinkListArray, showDrinkCategoriesFilter],
+    [drinkList, showDrinkCategoriesFilter],
   );
   return (
     <DrinksContext.Provider
