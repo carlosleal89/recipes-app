@@ -26,7 +26,7 @@ function Recipes() {
         {
           location.pathname === '/meals'
           && (
-            showMealCategoriesFilter ? (
+            showMealCategoriesFilter.show ? (
               <MealsCategoriesFiltered />
             ) : (<Meals />)
           )
@@ -34,7 +34,7 @@ function Recipes() {
         {
           location.pathname === '/drinks'
         && (
-          showDrinkCategoriesFilter ? (
+          showDrinkCategoriesFilter.show ? (
             <DrinksCategoriesFiltered />
           ) : (<Drinks />)
         )
