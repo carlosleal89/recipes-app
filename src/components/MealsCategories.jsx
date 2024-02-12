@@ -10,14 +10,13 @@ export default function MealsCategories() {
     setMealsCategories,
     setMealsCategoriesFilter,
     setShowMealCategoriesFilter,
-    showMealCategoriesFilter,
   } = useContext(MealsContext);
 
   const URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
   const clickHandler = (category) => {
     fetchData(`${URL}${category}`, setMealsCategoriesFilter);
-    setShowMealCategoriesFilter(!showMealCategoriesFilter);
+    setShowMealCategoriesFilter(true);
   };
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export default function MealsCategories() {
     <div className="category-btn-container">
       <button
         onClick={ () => {
-          setShowMealCategoriesFilter(true);
+          setShowMealCategoriesFilter(false);
         } }
         className="all-meals-btn-filter"
         data-testid="All-category-filter"

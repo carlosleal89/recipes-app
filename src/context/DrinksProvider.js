@@ -7,7 +7,7 @@ export default function DrinksProvider({ children }) {
   const [drinkListArray, setDrinkListArray] = useState([]);
   const [drinksCategories, setDrinksCategories] = useState([]);
   const [drinksCategoriesFilter, setDrinksCategoriesFilter] = useState([]);
-  const [showDrinkCategoriesFilter, setShowDrinkCategoriesFilter] = useState(true);
+  const [showDrinkCategoriesFilter, setShowDrinkCategoriesFilter] = useState(false);
 
   useEffect(() => {
     const DRINKS_LIST_MAX_LENGTH = 12;
