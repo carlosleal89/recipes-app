@@ -26,17 +26,17 @@ function Recipes() {
         {
           location.pathname === '/meals'
           && (
-            showMealCategoriesFilter ? (
-              <Meals />
-            ) : (<MealsCategoriesFiltered />)
+            showMealCategoriesFilter.show ? (
+              <MealsCategoriesFiltered />
+            ) : (<Meals />)
           )
         }
         {
           location.pathname === '/drinks'
         && (
-          showDrinkCategoriesFilter ? (
-            <Drinks />
-          ) : (<DrinksCategoriesFiltered />)
+          showDrinkCategoriesFilter.show ? (
+            <DrinksCategoriesFiltered />
+          ) : (<Drinks />)
         )
         }
       </div>

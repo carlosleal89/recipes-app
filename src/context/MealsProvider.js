@@ -7,7 +7,10 @@ export default function MealsProvider({ children }) {
   const [mealListArray, setMealListArray] = useState([]);
   const [mealsCategories, setMealsCategories] = useState([]);
   const [mealsCategoriesFilter, setMealsCategoriesFilter] = useState([]);
-  const [showMealCategoriesFilter, setShowMealCategoriesFilter] = useState(true);
+  const [showMealCategoriesFilter, setShowMealCategoriesFilter] = useState({
+    show: false,
+    category: '',
+  });
 
   useEffect(() => {
     const MEALS_LIST_MAX_LENGTH = 12;

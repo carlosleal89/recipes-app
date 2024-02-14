@@ -16,8 +16,15 @@ export default function DrinksCategories() {
   const URL = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 
   const clickHandler = (category) => {
+    if (showDrinkCategoriesFilter.category === '') {
+      fetchData(`${URL}${category}`, setDrinksCategoriesFilter);
+      return setShowDrinkCategoriesFilter({ show: true, category });
+    }
+    if (showDrinkCategoriesFilter.category === category) {
+      return setShowDrinkCategoriesFilter({ show: false, category: '' });
+    }
     fetchData(`${URL}${category}`, setDrinksCategoriesFilter);
-    setShowDrinkCategoriesFilter(!showDrinkCategoriesFilter);
+    return setShowDrinkCategoriesFilter({ show: true, category });
   };
 
   useEffect(() => {
@@ -30,7 +37,7 @@ export default function DrinksCategories() {
   return (
     <div className="category-btn-container">
       <button
-        onClick={ () => setShowDrinkCategoriesFilter(true) }
+        onClick={ () => setShowDrinkCategoriesFilter({ category: '', show: false }) }
         data-testid="All-category-filter"
         className="all-drink-btn-filter"
       >

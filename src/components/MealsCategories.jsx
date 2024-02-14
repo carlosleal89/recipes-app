@@ -16,8 +16,15 @@ export default function MealsCategories() {
   const URL = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 
   const clickHandler = (category) => {
+    if (showMealCategoriesFilter.category === '') {
+      fetchData(`${URL}${category}`, setMealsCategoriesFilter);
+      return setShowMealCategoriesFilter({ show: true, category });
+    }
+    if (showMealCategoriesFilter.category === category) {
+      return setShowMealCategoriesFilter({ show: false, category: '' });
+    }
     fetchData(`${URL}${category}`, setMealsCategoriesFilter);
-    setShowMealCategoriesFilter(!showMealCategoriesFilter);
+    return setShowMealCategoriesFilter({ show: true, category });
   };
 
   useEffect(() => {
@@ -29,7 +36,7 @@ export default function MealsCategories() {
     <div className="category-btn-container">
       <button
         onClick={ () => {
-          setShowMealCategoriesFilter(true);
+          setShowMealCategoriesFilter({ category: '', show: false });
         } }
         className="all-meals-btn-filter"
         data-testid="All-category-filter"
