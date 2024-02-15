@@ -1,0 +1,12 @@
+.theme-light {
+  background-color: white;
+  color: #222;
+}
+
+.theme-light .login-background {
+  background-color: #fcdc36;
+}
+
+.theme-light .login-container {
+  background-color: white;
+}

@@ -10,15 +10,15 @@ import ThemeProvider from './context/ThemeProvider';
 
 function App() {
   return (
-    <TitleProvider>
-      <MealsProvider>
-        <DrinksProvider>
-          <ThemeProvider>
+    <ThemeProvider>
+      <TitleProvider>
+        <MealsProvider>
+          <DrinksProvider>
             <Routes />
-          </ThemeProvider>
-        </DrinksProvider>
-      </MealsProvider>
-    </TitleProvider>
+          </DrinksProvider>
+        </MealsProvider>
+      </TitleProvider>
+    </ThemeProvider>
   );
 }
 

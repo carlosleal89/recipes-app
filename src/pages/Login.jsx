@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import logoHungry from '../images/logoHungry.png';
 import '../css/Login.css';
-import '../css/themes/darkTheme.css';
 import ThemeToggler from '../components/ThemeToggler';
 
 export default function Login() {
@@ -68,7 +67,7 @@ export default function Login() {
               className="login-submit-btn"
               disabled={
                 !(emailValidation.test(userData.email)
-                && userData.password.length > MIN_PASSWORD_LENGTH)
+                && userData.password.length >= MIN_PASSWORD_LENGTH)
               }
               data-testid="login-submit-btn"
               onClick={ setLocalStorage }

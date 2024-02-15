@@ -1,0 +1,12 @@
+.theme-dark {
+  background-color: #222;
+  color: white;
+}
+
+.theme-dark .login-background {
+  background-color: dimgray;
+}
+
+.theme-dark .login-container {
+  background-color: #252627;
+}
