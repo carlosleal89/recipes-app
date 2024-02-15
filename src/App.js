@@ -6,13 +6,16 @@ import Routes from './routes/Routes';
 import TitleProvider from './context/TitleProvider';
 import MealsProvider from './context/MealsProvider';
 import DrinksProvider from './context/DrinksProvider';
+import ThemeProvider from './context/ThemeProvider';
 
 function App() {
   return (
     <TitleProvider>
       <MealsProvider>
         <DrinksProvider>
-          <Routes />
+          <ThemeProvider>
+            <Routes />
+          </ThemeProvider>
         </DrinksProvider>
       </MealsProvider>
     </TitleProvider>

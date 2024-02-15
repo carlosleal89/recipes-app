@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom/';
+import { useHistory } from 'react-router-dom';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
 import logoHungry from '../images/logoHungry.png';
 import '../css/Login.css';
+import '../css/themes/darkTheme.css';
+import ThemeToggler from '../components/ThemeToggler';
 
 export default function Login() {
   const [userData, setUserData] = useState({
@@ -19,12 +22,21 @@ export default function Login() {
   };
 
   return (
-    <div className="login-background">
-      <div className="login-page-div">
-        <img className="img-logo" src={ logoHungry } alt="logo" />
-        {/* <h2 className="login-text">Login</h2> */}
-        <div className="inputs-div">
-          <label htmlFor="email-input">
+    <main className="login-background">
+      <div className="btn-theme-container">
+        <ThemeToggler />
+      </div>
+
+      <div className="login-container">
+        <div className="box-image">
+          <img className="img-logo" src={ logoHungry } alt="logo" />
+        </div>
+
+        <div className="login-form">
+          <h2 className="login-text">Login</h2>
+
+          <label htmlFor="email-input" className="input-with-icon">
+            <FaEnvelope className="icon" />
             <input
               className="login-input"
               type="text"
@@ -37,7 +49,8 @@ export default function Login() {
               }
             />
           </label>
-          <label htmlFor="password-input">
+          <label htmlFor="password-input" className="input-with-icon">
+            <FaLock className="icon" />
             <input
               className="login-input"
               type="password"
@@ -50,7 +63,7 @@ export default function Login() {
               }) }
             />
           </label>
-          <div>
+          <div className="button-enter">
             <button
               className="login-submit-btn"
               disabled={
@@ -60,11 +73,11 @@ export default function Login() {
               data-testid="login-submit-btn"
               onClick={ setLocalStorage }
             >
-              Login
+              Entrar
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
