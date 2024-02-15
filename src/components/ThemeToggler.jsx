@@ -9,7 +9,9 @@ export default function ThemeToggler() {
 
   return (
     <button onClick={ toggleTheme } className="btn-toggle-theme">
-      {theme === 'light' ? <FaMoon /> : <IoSunny />}
+      {theme === 'light'
+        ? <FaMoon className="moon" size={ 35 } />
+        : <IoSunny className="sun" size={ 35 } />}
     </button>
   );
 }

@@ -1,6 +1,6 @@
 /* general styles */
 .login-background {
-  background-image: url('../images/background1.png');
+  background-image: url('../images/background.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -11,9 +11,9 @@
 }
 
 .btn-theme-container {
-  left: 92%;
   position: absolute;
-  top: 5%;
+  right: 2%;
+  top: 2%;
 }
 
 .login-container {
@@ -127,6 +127,7 @@
   border: none;
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
   height: 2.5em;
   margin: 0.5em;
   transition: box-shadow transform 0.2s;
@@ -138,6 +139,7 @@
   background-color: #484646a4;
   border-radius: 8px;
   color: white;
+  cursor: pointer;
   height: 2.5em;
   margin: 0.5em;
   width: 10em;
@@ -150,7 +152,7 @@
 
 /* Responsive styles */
 
-@media (max-width: 1220px) {
+@media ( max-width : 1220px ) {
 
   .btn-theme-container {
     left: 88%;
@@ -197,11 +199,7 @@
   }
 }
 
-@media (min-width: 1000px) and (max-width: 1220px) {
-
-  .btn-theme-container {
-    left: 85%;
-  }
+@media ( min-width : 1000px ) and ( max-width : 1220px ) {
 
   .login-container {
     margin: 1.5rem auto;
@@ -249,11 +247,7 @@
   }
 }
 
-@media (min-width: 800px) and (max-width: 1000px) {
-
-  .btn-theme-container {
-    right: 70%;
-  }
+@media ( min-width : 800px ) and ( max-width : 1000px ) {
 
   .login-container {
     max-width: 25rem;
@@ -303,11 +297,7 @@
   }
 }
 
-@media (max-width: 800px) {
-
-  .btn-theme-container {
-    display: none;
-  }
+@media ( max-width : 800px ) {
 
   .login-container {
     flex-direction: column;
@@ -359,12 +349,17 @@
 }
 
 
-@media (max-width: 650px) {
+@media ( max-width : 650px ) {
 
-  .btn-theme-container {
-    display: none;
+  .login-background {
+    background-image: none;
   }
 
+  .btn-theme-container {
+    left: 0%;
+    position: fixo;
+    top: 0%;
+  }
 
   .login-container {
     margin: 1rem auto;
@@ -419,7 +414,17 @@
   }
 }
 
-@media (max-width: 360px) {
+@media ( max-width : 360px ) {
+
+  .login-background {
+    background-image: none;
+  }
+
+  .btn-theme-container {
+    left: 1%;
+    position: fixo;
+    top: 0%;
+  }
 
   .login-container {
     margin: auto;
@@ -469,4 +474,37 @@
     margin: 0.5em;
     width: 4em;
   }
+}
+
+
+@media ( max-width : 300px ) {
+
+  .login-container {
+    width: 80%;
+  }
+
+  .login-text {
+    font-size: 0.8em;
+  }
+
+  .box-image {
+    max-width: 100%;
+  }
+
+  .img-logo {
+    height: 6em;
+  }
+
+  .login-form {
+    padding: 0.5em;
+  }
+
+  .login-input {
+    width: 8em;
+  }
+
+  .login-input::placeholder {
+    font-size: 0.6em;
+  }
+
 }

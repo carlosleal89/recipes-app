@@ -4,6 +4,8 @@ import { FaEnvelope, FaLock } from 'react-icons/fa';
 import logoHungry from '../images/logoHungry.png';
 import '../css/Login.css';
 import ThemeToggler from '../components/ThemeToggler';
+import { useWithSound } from '../hooks/useWithSound';
+import click from '../audio/click.mp3';
 
 export default function Login() {
   const [userData, setUserData] = useState({
@@ -14,9 +16,12 @@ export default function Login() {
   const history = useHistory();
   const MIN_PASSWORD_LENGTH = 6;
 
+  const { playSound } = useWithSound(click);
+
   const setLocalStorage = () => {
     const userInfo = JSON.stringify({ email: userData.email });
     localStorage.setItem('user', userInfo);
+    playSound();
     history.push('/meals');
   };
 

@@ -10,3 +10,21 @@
 .theme-light .login-container {
   background-color: white;
 }
+
+.theme-light .btn-toggle-theme {
+  background-color: white;
+}
+
+@media ( max-width : 650px ) {
+
+  .theme-light .btn-toggle-theme {
+    background-color: transparent;
+  }
+}
+
+@media ( max-width : 360px ) {
+
+  .theme-light .btn-toggle-theme {
+    background-color: transparent;
+  }
+}

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import ThemeContext from './ThemeContext';
-
 import '../css/themes/light.css';
 import '../css/themes/dark.css';
 
