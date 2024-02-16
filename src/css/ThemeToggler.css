@@ -1,0 +1,20 @@
+.btn-toggle-theme {
+  border-radius: 50%;
+  height: 3em;
+  width: 3em;
+}
+
+.btn-toggle-theme:hover {
+  scale: 1.1;
+  transition: 0.5s;
+}
+
+.moon {
+  color: black;
+}
+
+
+.sun {
+  color: rgb(242, 242, 5);
+}
+

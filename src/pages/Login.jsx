@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom/';
+import { useHistory } from 'react-router-dom';
+import { FaEnvelope, FaLock } from 'react-icons/fa';
+import logoHungry from '../images/logoHungry.png';
 import '../css/Login.css';
+import ThemeToggler from '../components/ThemeToggler';
+import { useWithSound } from '../hooks/useWithSound';
+import click from '../audio/click.mp3';
 
 export default function Login() {
   const [userData, setUserData] = useState({
@@ -11,19 +16,31 @@ export default function Login() {
   const history = useHistory();
   const MIN_PASSWORD_LENGTH = 6;
 
+  const { playSound } = useWithSound(click);
+
   const setLocalStorage = () => {
     const userInfo = JSON.stringify({ email: userData.email });
     localStorage.setItem('user', userInfo);
+    playSound();
     history.push('/meals');
   };
 
   return (
-    <div className="login-background">
-      <div className="img-logo"> </div>
-      <div className="login-page-div">
-        <h2 className="login-text">Login</h2>
-        <div className="inputs-div">
-          <label htmlFor="email-input">
+    <main className="login-background">
+      <div className="btn-theme-container">
+        <ThemeToggler />
+      </div>
+
+      <div className="login-container">
+        <div className="box-image">
+          <img className="img-logo" src={ logoHungry } alt="logo" />
+        </div>
+
+        <div className="login-form">
+          <h2 className="login-text">Login</h2>
+
+          <label htmlFor="email-input" className="input-with-icon">
+            <FaEnvelope className="icon" />
             <input
               className="login-input"
               type="text"
@@ -36,7 +53,8 @@ export default function Login() {
               }
             />
           </label>
-          <label htmlFor="password-input">
+          <label htmlFor="password-input" className="input-with-icon">
+            <FaLock className="icon" />
             <input
               className="login-input"
               type="password"
@@ -49,21 +67,21 @@ export default function Login() {
               }) }
             />
           </label>
-          <div>
+          <div className="button-enter">
             <button
               className="login-submit-btn"
               disabled={
                 !(emailValidation.test(userData.email)
-                && userData.password.length > MIN_PASSWORD_LENGTH)
+                && userData.password.length >= MIN_PASSWORD_LENGTH)
               }
               data-testid="login-submit-btn"
               onClick={ setLocalStorage }
             >
-              Enter
+              Entrar
             </button>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

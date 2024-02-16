@@ -1,0 +1,31 @@
+.theme-dark {
+  background-color: #222;
+  color: white;
+}
+
+.theme-dark .login-background {
+  background-color: dimgray;
+}
+
+.theme-dark .login-container {
+  background-color: #252627;
+}
+
+.theme-dark .btn-toggle-theme {
+  background-color: #222;
+}
+
+@media ( max-width : 650px ) {
+
+  .theme-dark .btn-toggle-theme {
+    background-color: transparent;
+  }
+}
+
+
+@media ( max-width : 360px ) {
+
+  .theme-dark .btn-toggle-theme {
+    background-color: transparent;
+  }
+}
