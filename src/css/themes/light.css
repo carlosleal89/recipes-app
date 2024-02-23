@@ -18,7 +18,15 @@
 @media ( max-width : 650px ) {
 
   .theme-light .btn-toggle-theme {
-    background-color: transparent;
+    background-color: white;
+  }
+
+  .theme-light .container__measure-ingredient {
+    background-color: white;
+  }
+
+  .theme-light .instructions {
+    background-color: white;
   }
 }
 
