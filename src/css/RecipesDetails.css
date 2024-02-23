@@ -1,7 +1,7 @@
 /* general styles */
 .container__recipe-details {
   height: 100vh;
-}  
+}
 
 .container__recipe-ingredients {
   margin: 20px;
@@ -149,8 +149,9 @@
   }
 
   .container__recipe-ingredients {
-    margin: 20px;
-    padding: 20px;
+    margin: auto;
+    /* padding: 10px; */
+    width: 100%;
   }
 
   .container__recipe-ingredients h3 {
@@ -163,9 +164,9 @@
     border-radius: 20px;
     display: flex;
     justify-content: center;
-    margin: 20px auto;
-    padding: 20px;
-    width: 90%;
+    /* margin: 20px auto; */
+    padding: 10px;
+    width: 100%;
   }
 
   .container__measure-ingredient > .column {
