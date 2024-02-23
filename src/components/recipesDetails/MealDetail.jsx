@@ -89,9 +89,9 @@ function MealDetail({ meal, recommendation }) {
 
       <Recommendation recommendation={ recommendation } />
 
-      <div className="container__start-recipe-btn">
+      <ButtonStartContinue recipe={ meal } />
 
-        <ButtonStartContinue recipe={ meal } />
+      <div className="container__start-recipe-btn">
 
         <button
           className="share-recipe-btn"

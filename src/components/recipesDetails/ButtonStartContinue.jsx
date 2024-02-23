@@ -74,16 +74,14 @@ function ButtonStartContinue({ recipe }) {
   }, []);
 
   return (
-    <div className="container__start-recipe-btn">
-      <button
-        className="start-recipe-btn"
-        type="button"
-        data-testid="start-recipe-btn"
-        onClick={ () => handleClickStartRecipe(recipe[0]) }
-      >
-        {isStarted ? 'Continue Recipe' : 'Start Recipe' }
-      </button>
-    </div>
+    <button
+      className="start-recipe-btn"
+      type="button"
+      data-testid="start-recipe-btn"
+      onClick={ () => handleClickStartRecipe(recipe[0]) }
+    >
+      {isStarted ? 'Continue Recipe' : 'Start Recipe' }
+    </button>
   );
 }
 
