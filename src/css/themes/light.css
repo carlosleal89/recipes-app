@@ -25,7 +25,7 @@
 @media ( max-width : 360px ) {
 
   .theme-light .btn-toggle-theme {
-    background-color: transparent;
+    background-color: white;
   }
 
   .theme-light .container__measure-ingredient {

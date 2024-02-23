@@ -26,7 +26,7 @@
 @media ( max-width : 360px ) {
 
   .theme-dark .btn-toggle-theme {
-    background-color: transparent;
+    background-color: #222;
   }
 
   .theme-dark .container__measure-ingredient {
