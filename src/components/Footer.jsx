@@ -1,29 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
+import { BiSolidDrink } from 'react-icons/bi';
+import { GiMeal } from 'react-icons/gi';
+import { useWithSound } from '../hooks/useWithSound';
+import click from '../audio/click.mp3';
 import '../css/Footer.css';
 
 function Footer() {
+  const { playSound } = useWithSound(click);
+
   return (
-    <footer data-testid="footer">
+    <footer data-testid="footer" className="footer">
       <div className="footer-bar">
-        <div className="footer-icons">
+        <div className="container-icons">
           <Link to="/drinks">
-            <img
-              data-testid="drinks-bottom-btn"
-              src={ drinkIcon }
-              alt="Drinks"
-            />
+            <BiSolidDrink className="icon-footer" onClick={ () => playSound() } />
           </Link>
         </div>
-        <div className="footer-icons">
+        <div className="container-icons">
           <Link to="/meals">
-            <img
-              data-testid="meals-bottom-btn"
-              src={ mealIcon }
-              alt="Meals"
-            />
+            <GiMeal className="icon-footer" onClick={ () => playSound() } />
           </Link>
         </div>
       </div>
