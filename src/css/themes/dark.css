@@ -28,4 +28,12 @@
   .theme-dark .btn-toggle-theme {
     background-color: transparent;
   }
+
+  .theme-dark .container__measure-ingredient {
+    background-color: dimgray;
+  }
+
+  .theme-dark .instructions {
+    background-color: dimgray;
+  }
 }

@@ -13,6 +13,8 @@ import ButtonStartContinue from './ButtonStartContinue';
 import yellowShare from '../../images/yellowShare.svg';
 import yellowHeart from '../../images/yellowHeart.svg';
 import loginRedHeart from '../../images/loginRedHeart.svg';
+import '../../css/themes/light.css';
+import '../../css/themes/dark.css';
 
 function MealDetail({ meal, recommendation }) {
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
