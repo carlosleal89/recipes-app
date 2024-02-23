@@ -36,3 +36,10 @@
     background-color: white;
   }
 }
+
+@media ( max-width : 300px ) {
+
+  .theme-light .btn-toggle-theme {
+    background-color: white;
+  }
+}

@@ -422,7 +422,7 @@
 
   .btn-theme-container {
     left: 1%;
-    position: fixo;
+    position: fixed;
     top: 0%;
   }
 

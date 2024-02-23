@@ -83,6 +83,27 @@ function MealDetail({ meal, recommendation }) {
         <ThemeToggler />
       </div>
 
+      <button
+        className="share-recipe-btn"
+        data-testid="share-btn"
+        onClick={ () => clipboardShare(window.location.href) }
+      >
+        <img
+          src={ yellowShare }
+          alt=""
+        />
+      </button>
+      <button
+        className="favorite-recipe-btn"
+        onClick={ () => handleMealFavorites(meal[0]) }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorite ? loginRedHeart : yellowHeart }
+          alt="favorite icon"
+        />
+      </button>
+
       <Ingredients recipe={ meal } />
 
       <Instructions recipe={ meal } />
@@ -92,33 +113,9 @@ function MealDetail({ meal, recommendation }) {
       <Recommendation recommendation={ recommendation } />
 
       <ButtonStartContinue recipe={ meal } />
-
-      <div className="container__start-recipe-btn">
-
-        <button
-          className="share-recipe-btn"
-          data-testid="share-btn"
-          onClick={ () => clipboardShare(window.location.href) }
-        >
-          <img
-            src={ yellowShare }
-            alt=""
-          />
-        </button>
-        <button
-          className="favorite-recipe-btn"
-          onClick={ () => handleMealFavorites(meal[0]) }
-        >
-          <img
-            data-testid="favorite-btn"
-            src={ isFavorite ? loginRedHeart : yellowHeart }
-            alt="favorite icon"
-          />
-        </button>
-        {
-          clipBoardMsg && <p className="clipboard-msg">Link copied!</p>
-        }
-      </div>
+      {
+        clipBoardMsg && <p className="clipboard-msg">Link copied!</p>
+      }
 
     </div>
   );

@@ -37,3 +37,10 @@
     background-color: dimgray;
   }
 }
+
+@media ( max-width : 300px ) {
+
+  .theme-dark .btn-toggle-theme {
+    background-color: #222;
+  }
+}

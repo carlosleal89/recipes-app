@@ -29,17 +29,17 @@
 
   }
 
-  .share-recipe-btn {
+  /* .share-recipe-btn {
     background-color: rgba(0, 0, 0, 0.384);
     position: absolute;
     top: 25px;
-  }
+  } */
 
-  .favorite-recipe-btn {
+  /* .favorite-recipe-btn {
     background-color: rgba(0, 0, 0, 0.384);
     position: absolute;
     top: 25px;
-  }
+  } */
 
   input[ type = 'checkbox' ] {
     accent-color: #fcc436;
