@@ -2,9 +2,6 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import copy from 'clipboard-copy';
 import Recommendation from './Recommendation';
-// import shareIcon from '../../images/shareIcon.svg';
-// import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import ThemeToggler from '../ThemeToggler';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
@@ -75,7 +72,7 @@ function DrinkDetail({ drink, recommendation }) {
 
   return (
     <div>
-      <PhotoAndTitle recipe={ drink } />
+      <PhotoAndTitle recipe={ drink } meal={ drink } />
 
       <div className="btn-theme-container">
         <ThemeToggler />

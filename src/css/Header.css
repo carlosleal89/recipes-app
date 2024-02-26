@@ -34,6 +34,11 @@
   margin-top: 20px;
 }
 
+.container__header-logo-buttons .btn-theme-container {
+  left: 90%;
+  top: 7px;
+}
+
 .page-title {
   color: #260f4b;
   text-transform: uppercase;

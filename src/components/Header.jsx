@@ -3,6 +3,7 @@ import { useLocation, useHistory, Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import TitleContext from '../context/TitleContext';
+import ThemeToggler from './ThemeToggler';
 import logo from '../images/Logo_header.png';
 import SearchBar from './SearchBar';
 import '../css/Header.css';
@@ -50,6 +51,9 @@ function Header() {
               />
             </button>
           )}
+          <div className="btn-theme-container">
+            <ThemeToggler />
+          </div>
           <button
             type="button"
             className="header-buttons"

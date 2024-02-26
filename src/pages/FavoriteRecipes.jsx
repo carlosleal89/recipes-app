@@ -3,12 +3,14 @@ import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import TitleContext from '../context/TitleContext';
-import shareIcon from '../images/shareIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import loginRedHeart from '../images/loginRedHeart.svg';
+import yellowShare from '../images/yellowShare.svg';
+import '../css/FavoriteRecipes.css';
+// import ThemeToggler from '../components/ThemeToggler';
 
 function FavoriteRecipes() {
   const { setTitle } = useContext(TitleContext);
-  const [clipBoardmsg, setClipBoardMsg] = useState();
+  const [clipBoardmsg, setClipBoardMsg] = useState(false);
   const [products, setProducts] = useState(() => {
     const localStorageData = localStorage.getItem('favoriteRecipes');
     return localStorageData ? JSON.parse(localStorageData) : [];
@@ -27,7 +29,11 @@ function FavoriteRecipes() {
       link = `http://localhost:3000/drinks/${id}`;
     }
     copy(link);
-    setClipBoardMsg(id);
+    const SECONDS = 1500;
+    setClipBoardMsg(true);
+    setTimeout(() => {
+      setClipBoardMsg(false);
+    }, SECONDS);
   };
 
   const btn = ['All', 'Meal', 'Drink'];
@@ -60,8 +66,9 @@ function FavoriteRecipes() {
     }
     history.push(`/drinks/${id}`);
   };
+
   return (
-    <div>
+    <div className="container__main-favorite-recipes">
       <Header />
       {
         btn.map((element, index) => (
@@ -82,67 +89,80 @@ function FavoriteRecipes() {
           </button>
         ))
       }
-      <div data-testid="products-holder">
+      <div data-testid="products-holder" className="container__recipe-favorites">
         {
           products.map((element, index) => (
-            <div
-              key={ index }
-            >
-              <img
-                role="presentation"
+            <div key={ index } className="container__recipe">
+              <div
+                className="favorite-recipe"
+                role="button"
                 onClick={ () => handleNavigate(element.type, element.id) }
-                data-testid={ `${index}-horizontal-image` }
-                src={ element.image }
-                alt={ element.name }
-                key={ index }
-                style={ {
-                  width: '150px',
-                  height: '150px',
-                  marginBottom: '20px',
+                onKeyDown={ (event) => {
+                  if (event.key === 'Enter') {
+                    handleNavigate(element.type, element.id);
+                  }
                 } }
-              />
-              <h1
-                data-testid={ `${index}-horizontal-top-text` }
-              >
-                {element.type === 'meal'
-                  ? `${element.nationality} - ${element.category}`
-                  : `${element.alcoholicOrNot} - ${element.category}`}
-              </h1>
-              <h2
-                role="presentation"
-                data-testid={ `${index}-horizontal-name` }
-                onClick={ () => handleNavigate(element.type, element.id) }
-              >
-                {element.name}
-              </h2>
-              <button
-                onClick={ () => clipboardShare(element.type, element.id) }
+                tabIndex={ 0 } // Permitir foco em elementos não focaveis
               >
                 <img
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  src={ shareIcon }
-                  alt="share icon"
+                  role="presentation"
+                  data-testid={ `${index}-horizontal-image` }
+                  src={ element.image }
+                  alt={ element.name }
+                  key={ index }
+                  style={ {
+                    width: '150px',
+                    height: '150px',
+                    marginBottom: '20px',
+                  } }
                 />
-              </button>
+                <h4
+                  data-testid={ `${index}-horizontal-top-text` }
+                  className="favorite-recipe-category"
+                >
+                  {element.type === 'meal'
+                    ? `${element.nationality} - ${element.category}`
+                    : `${element.alcoholicOrNot} - ${element.category}`}
+                </h4>
+                <h2
+                  role="presentation"
+                  data-testid={ `${index}-horizontal-name` }
+                  className="favorite-recipe-name"
+                >
+                  {element.name}
+                </h2>
+              </div>
+              <div className="container__favorite-buttons bottom-aligned">
+                <button
+                  onClick={ () => clipboardShare(element.type, element.id) }
+                  className="recipe-share-btn"
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    src={ yellowShare }
+                    alt="share icon"
+                  />
+                </button>
+                <button
+                  onClick={ () => handleClickFavorite(element.id) }
+                  className="recipe-favorite-btn"
+                >
+                  <img
+                    data-testid={ `${index}-horizontal-favorite-btn` }
+                    src={ loginRedHeart }
+                    alt="black heart"
+                  />
+                </button>
+              </div>
               {
-                clipBoardmsg === element.id
-                && (
+                clipBoardmsg && (
                   <p
                     data-testid="copy-clipboard"
-                    className="clipboard-msg"
+                    className="favorite-clipboard-msg"
                   >
                     Link copied!
                   </p>)
               }
-              <button
-                onClick={ () => handleClickFavorite(element.id) }
-              >
-                <img
-                  data-testid={ `${index}-horizontal-favorite-btn` }
-                  src={ blackHeartIcon }
-                  alt="black heart"
-                />
-              </button>
             </div>
           ))
         }

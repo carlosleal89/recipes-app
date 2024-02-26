@@ -517,25 +517,15 @@
   }
 
   .share-recipe-btn {
-    background-color: rgba(0, 0, 0, 0.384);
-    top: 31%;
     width: 12%;
-    display: flex;
-    justify-content: center;
   }
 
   .clipboard-msg {
-    left: 81%;
-    top: 37%;
-    /* font-size: 1.1rem; */
+    font-size: 1.1rem;
   }
 
   .favorite-recipe-btn {
-    background-color: rgba(0, 0, 0, 0.384);
-    top: 31%;
     width: 12%;
-    display: flex;
-    justify-content: center;
   }
   
   .start-recipe-btn {
