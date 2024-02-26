@@ -2,12 +2,32 @@
   outline: 2px solid blue; /* Adiciona uma borda azul ao elemento focado */
 }
 
+.container__filter-buttons {
+  display: flex;
+  margin: 0 20px;
+  margin-top: 15px;
+}
+
+.filter-btn {
+  margin: auto;
+  padding: 10px;
+  width: 15%;
+  border-radius: 8px;
+  color:  #fcc436;
+  background-color: rgb(61, 61, 61);
+}
+
 .container__recipe {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 20%;
   max-width: 20%;
+}
+
+.favorite-recipe .recipe-img {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .container__recipe-favorites {
@@ -76,3 +96,4 @@
   margin-right: 15px;
   justify-content: center;
 }
+

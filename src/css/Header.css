@@ -37,6 +37,7 @@
 .container__header-logo-buttons .btn-theme-container {
   left: 90%;
   top: 7px;
+  width: 50px;
 }
 
 .page-title {

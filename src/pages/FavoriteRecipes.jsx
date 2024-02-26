@@ -6,7 +6,6 @@ import TitleContext from '../context/TitleContext';
 import loginRedHeart from '../images/loginRedHeart.svg';
 import yellowShare from '../images/yellowShare.svg';
 import '../css/FavoriteRecipes.css';
-// import ThemeToggler from '../components/ThemeToggler';
 
 function FavoriteRecipes() {
   const { setTitle } = useContext(TitleContext);
@@ -36,7 +35,7 @@ function FavoriteRecipes() {
     }, SECONDS);
   };
 
-  const btn = ['All', 'Meal', 'Drink'];
+  const filterButtons = ['All', 'Meal', 'Drink'];
 
   const handleClickFavorite = (id) => {
     const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -70,25 +69,20 @@ function FavoriteRecipes() {
   return (
     <div className="container__main-favorite-recipes">
       <Header />
-      {
-        btn.map((element, index) => (
-          <button
-            onClick={ () => handleClickFilter(element) }
-            style={ {
-              fontSize: 15,
-              fontStyle: 'italic',
-              padding: 0,
-              margin: 0,
-              marginLeft: '0.5rem',
-              marginRight: '0.5rem',
-            } }
-            key={ index }
-            data-testid={ `filter-by-${element.toLowerCase()}-btn` }
-          >
-            {element}
-          </button>
-        ))
-      }
+      <div className="container__filter-buttons">
+        {
+          filterButtons.map((element, index) => (
+            <button
+              onClick={ () => handleClickFilter(element) }
+              key={ index }
+              data-testid={ `filter-by-${element.toLowerCase()}-btn` }
+              className="filter-btn"
+            >
+              {element}
+            </button>
+          ))
+        }
+      </div>
       <div data-testid="products-holder" className="container__recipe-favorites">
         {
           products.map((element, index) => (
@@ -110,11 +104,7 @@ function FavoriteRecipes() {
                   src={ element.image }
                   alt={ element.name }
                   key={ index }
-                  style={ {
-                    width: '150px',
-                    height: '150px',
-                    marginBottom: '20px',
-                  } }
+                  className="recipe-img"
                 />
                 <h4
                   data-testid={ `${index}-horizontal-top-text` }
