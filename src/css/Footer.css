@@ -1,26 +1,24 @@
-@media screen and ( max-width : 360px ) {
-
-  .footer-bar {
-    background: linear-gradient(to top, #fcdb3658, #ffffff02);
-    bottom: 0;
-    display: flex;
-    justify-content: space-around;
-    left: 0;
-    padding: 0;
-    position: fixed;
-    width: 100%;
-  }
-
-  .footer-icons {
-    align-items: center;
-    bottom: 0;
-    display: flex;
-    justify-content: space-evenly;
-    left: 0;
-    margin-bottom: 3px;
-  }
-
-  .footer-icons img {
-    filter: drop-shadow(0 0 0.2rem #fcdc36);
-  }
+.footer {
+  background-color: #260f4b;
+  bottom: 0;
+  padding: 0.3em;
+  position: fixed;
+  width: 100%;
 }
+
+.footer-bar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon-footer {
+  color: #fcdc36;
+  font-size: 2em;
+}
+
+.icon-footer:hover {
+  color: white;
+  scale: 1.1;
+  transition: 0.5s;
+}
+
