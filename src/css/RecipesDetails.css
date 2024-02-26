@@ -1,11 +1,40 @@
 /* general styles */
+.btn-theme-container {
+  left: 95%;
+  top: 50px;
+}
+
+.recipe-category {
+  color: #fcc436;
+  font-size: 40px;
+  text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+  font-weight: 500;
+  left: 8%;
+  position: absolute;
+  top: 10%;
+}
+
+.recipe-title {
+  color: white;
+  font-size: 50px;
+  font-weight: 700;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: -2px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
 .container__recipe-details {
   height: 100vh;
 }
 
 .container__recipe-ingredients {
-  margin: 20px;
+  margin: auto;
   padding: 20px;
+  width: 95%;
 }
 
 .container__recipe-ingredients h3 {
@@ -44,26 +73,9 @@
   width: 100%;
 }
 
-.recipe-title {
-  color: white;
-  font-size: 50px;
-  font-weight: 700;
-  left: 50%;
-  position: absolute;
-  text-align: center;
-  text-transform: uppercase;
-  top: 70%;
-  transform: translate(-50%, -50%);
-  text-shadow: -2px 1px 1px rgba(0, 0, 0, 0.5);
-}
-
-.recipe-category {
-  color: #fcc436;
-  font-size: 24px;
-  font-weight: 500;
-  left: 8%;
-  position: absolute;
-  top: 10%;
+.container__recipe-instructions {
+  width: 92%;
+  margin: auto;
 }
 
 .container__recipe-instructions h3 {
@@ -97,16 +109,14 @@
 }
 
 .start-recipe-btn {
-  align-items: center;
-  background-color: rgba(200, 200, 200, 0.7);
-  border: none;
+  background-color: #fcc436;
   border-radius: 10px;
-  bottom: 0;
+  bottom: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-  display: flex;
-  height: 40px;
+  justify-content: center;
+  left: 80%;
   position: fixed;
-  z-index: 100;
+  width: 20%;
 }
 
 .share-recipe-btn {
@@ -116,33 +126,197 @@
   border-color: transparent;
   border-radius: 10px;
   display: flex;
+  justify-content: center;
   height: 40px;
   position: absolute;
-  right: 60px;
-  /* top: 80px; */
+  right: 75px;
+  top: 60%;
+  width: 3%;
 }
 
 .favorite-recipe-btn {
   align-items: center;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.384);
   border: none;
   border-color: transparent;
   border-radius: 10px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   display: flex;
+  justify-content: center;
+  width: 3%;
   height: 40px;
   position: absolute;
   right: 10px;
-  top: 67%;
+  top: 60%;
 }
 
 .clipboard-msg {
   position: absolute;
-  right: 110px;
-  top: 68%;
+  left: 91%;
+  top: 67%;
+  font-size: 1.8rem;
+  text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-@media ( min-width : 800px ) and ( max-width : 1000px ) {
+@media ( min-width : 1601px ) and ( max-width : 1680px ) {
+
+  .recipe-title {
+    top: 42%;
+  }
+
+  .share-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 60%;
+    left: 92%;
+    width: 3.2%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .clipboard-msg {
+    font-size: 1.7rem;
+  }
+
+  .favorite-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 60%;
+    left: 96%;
+    width: 3.2%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media ( min-width : 1441px ) and ( max-width : 1600px ) {
+  .recipe-title {
+    top: 42%;
+  }
+
+  .share-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 65%;
+    left: 92%;
+    width: 3.2%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .clipboard-msg {
+    top: 72%; 
+    font-size: 1.6rem;
+  }
+
+  .favorite-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 65%;
+    left: 96%;
+    width: 3.2%;
+    display: flex;
+    justify-content: center;
+  }
+  
+}
+
+@media ( min-width : 1221px ) and ( max-width : 1440px ) {
+
+
+  .recipe-title {
+    top: 40%;
+  }
+
+  .share-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 67%;
+    left: 90%;
+    width: 3.2%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .clipboard-msg {
+    left: 90%;
+    top: 75%;
+    font-size: 1.5rem;
+  }
+
+  .favorite-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 67%;
+    left: 94%;
+    width: 3.2%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media ( min-width : 1000px ) and ( max-width : 1220px ) {
+
+  .container__recipe-ingredients {
+    margin: auto;
+    width: 98%;
+  }
+
+  .btn-theme-container {
+    left: 90%;
+    top: 25px;
+  }
+
+  .recipe-title {
+    top: 60%;
+  }
+
+  .recipe-category {
+    font-size: 35px;
+    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+    top: 4%;
+  }
+
+  .container__recipe-instructions {
+    width: 95%;
+    margin: auto;
+  }
+
+  .share-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 68%;
+    left: 90%;
+    width: 3.5%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .clipboard-msg {
+    left: 90%;
+    top: 74%;
+    font-size: 1.4rem;
+  }
+
+  .favorite-recipe-btn {
+    background-color: rgba(0, 0, 0, 0.384);
+    top: 68%;
+    left: 94%;
+    width: 3.5%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container__recipe-recommended {
+    padding-bottom: 40px;
+  }
+
+  .start-recipe-btn {
+    background-color: #fcc436;
+    border-radius: 10px;
+    bottom: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    left: 80%;
+    position: fixed;
+    width: 20%;
+  }
+}
+
+@media ( min-width : 801px ) and ( max-width : 1000px ) {
 
   .container__recipe-ingredients {
     margin: auto;
@@ -178,16 +352,15 @@
   }
 
   .clipboard-msg {
-    position: absolute;
-    left: 30px;
-    top: 68%;
-    font-size: 1.8rem;
-    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+    left: 89%;
+    top: 74%;
+    font-size: 1.2rem;
   }
 
   .favorite-recipe-btn {
     background-color: rgba(0, 0, 0, 0.384);
     top: 68%;
+    left: 95%;
     width: 4.5%;
     display: flex;
     justify-content: center;
@@ -245,11 +418,9 @@
   }
 
   .clipboard-msg {
-    position: absolute;
-    left: 30px;
-    top: 68%;
-    font-size: 1.8rem;
-    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+    left: 85%;
+    top: 75%;
+    font-size: 1.2rem;
   }
 
   .favorite-recipe-btn {
@@ -330,11 +501,9 @@
   }
 
   .clipboard-msg {
-    position: absolute;
-    left: 30px;
-    top: 68%;
-    font-size: 1.3rem;
-    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+    left: 82%;
+    top: 75%;
+    font-size: 1.1rem;
   }
 
   .favorite-recipe-btn {
@@ -395,11 +564,9 @@
   }
 
   .clipboard-msg {
-    position: absolute;
-    left: 30px;
-    top: 39%;
-    font-size: 1.3rem;
-    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+    left: 82%;
+    top: 45%;
+    font-size: 1.1rem;
   }
 
   .favorite-recipe-btn {
@@ -441,11 +608,9 @@
   }
 
   .clipboard-msg {
-    position: absolute;
-    left: 30px;
-    top: 31%;
-    font-size: 1.2rem;
-    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
+    left: 81%;
+    top: 37%;
+    /* font-size: 1.1rem; */
   }
 
   .favorite-recipe-btn {

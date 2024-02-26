@@ -15,6 +15,29 @@
   background-color: #222;
 }
 
+.theme-dark .container__measure-ingredient {
+  background-color: dimgray;
+}
+
+.theme-dark .instructions {
+  background-color: dimgray;
+}
+
+/* @media ( min-width : 1000px ) and ( max-width : 1220px ) {
+
+  .theme-light .btn-toggle-theme {
+    background-color: #222;
+  }
+
+  .theme-dark .container__measure-ingredient {
+    background-color: dimgray;
+  }
+
+  .theme-dark .instructions {
+    background-color: dimgray;
+  }
+}
+
 @media ( min-width : 800px ) and ( max-width : 1000px ) {
 
   .theme-light .btn-toggle-theme {
@@ -82,4 +105,4 @@
   .theme-dark .btn-toggle-theme {
     background-color: #222;
   }
-}
+} */

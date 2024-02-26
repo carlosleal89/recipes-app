@@ -15,6 +15,21 @@
   background-color: white;
 }
 
+/* @media ( min-width : 1000px ) and ( max-width : 1220px ) {
+
+  .theme-light .btn-toggle-theme {
+    background-color: white;
+  }
+
+  .theme-light .container__measure-ingredient {
+    background-color: white;
+  }
+
+  .theme-light .instructions {
+    background-color: white;
+  }
+}
+
 @media ( min-width : 800px ) and ( max-width : 1000px ) {
 
   .theme-light .btn-toggle-theme {
@@ -84,4 +99,4 @@
   .theme-light .btn-toggle-theme {
     background-color: white;
   }
-}
+} */
