@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import '../../css/themes/dark.css';
+import '../../css/themes/light.css';
 
 function Ingredients({ recipe }) {
   const getMeasuresAndIngredients = (drinkOrMeal) => {

@@ -5,6 +5,7 @@ import Recommendation from './Recommendation';
 // import shareIcon from '../../images/shareIcon.svg';
 // import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import ThemeToggler from '../ThemeToggler';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import PhotoAndTitle from './PhotoAndTitle';
@@ -75,6 +76,10 @@ function DrinkDetail({ drink, recommendation }) {
   return (
     <div>
       <PhotoAndTitle recipe={ drink } />
+
+      <div className="btn-theme-container">
+        <ThemeToggler />
+      </div>
 
       <Ingredients recipe={ drink } />
 

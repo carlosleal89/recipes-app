@@ -5,6 +5,7 @@ import YoutubePlayer from './YoutubePlayer';
 // import shareIcon from '../../images/shareIcon.svg';
 // import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 // import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import ThemeToggler from '../ThemeToggler';
 import Ingredients from './Ingredients';
 import Instructions from './Instructions';
 import PhotoAndTitle from './PhotoAndTitle';
@@ -12,6 +13,8 @@ import ButtonStartContinue from './ButtonStartContinue';
 import yellowShare from '../../images/yellowShare.svg';
 import yellowHeart from '../../images/yellowHeart.svg';
 import loginRedHeart from '../../images/loginRedHeart.svg';
+import '../../css/themes/light.css';
+import '../../css/themes/dark.css';
 
 function MealDetail({ meal, recommendation }) {
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
@@ -76,6 +79,31 @@ function MealDetail({ meal, recommendation }) {
     <div>
       <PhotoAndTitle recipe={ meal } />
 
+      <div className="btn-theme-container">
+        <ThemeToggler />
+      </div>
+
+      <button
+        className="share-recipe-btn"
+        data-testid="share-btn"
+        onClick={ () => clipboardShare(window.location.href) }
+      >
+        <img
+          src={ yellowShare }
+          alt=""
+        />
+      </button>
+      <button
+        className="favorite-recipe-btn"
+        onClick={ () => handleMealFavorites(meal[0]) }
+      >
+        <img
+          data-testid="favorite-btn"
+          src={ isFavorite ? loginRedHeart : yellowHeart }
+          alt="favorite icon"
+        />
+      </button>
+
       <Ingredients recipe={ meal } />
 
       <Instructions recipe={ meal } />
@@ -84,34 +112,10 @@ function MealDetail({ meal, recommendation }) {
 
       <Recommendation recommendation={ recommendation } />
 
-      <div className="container__start-recipe-btn">
-
-        <ButtonStartContinue recipe={ meal } />
-
-        <button
-          className="share-recipe-btn"
-          data-testid="share-btn"
-          onClick={ () => clipboardShare(window.location.href) }
-        >
-          <img
-            src={ yellowShare }
-            alt=""
-          />
-        </button>
-        <button
-          className="favorite-recipe-btn"
-          onClick={ () => handleMealFavorites(meal[0]) }
-        >
-          <img
-            data-testid="favorite-btn"
-            src={ isFavorite ? loginRedHeart : yellowHeart }
-            alt="favorite icon"
-          />
-        </button>
-        {
-          clipBoardMsg && <p className="clipboard-msg">Link copied!</p>
-        }
-      </div>
+      <ButtonStartContinue recipe={ meal } />
+      {
+        clipBoardMsg && <p className="clipboard-msg">Link copied!</p>
+      }
 
     </div>
   );
