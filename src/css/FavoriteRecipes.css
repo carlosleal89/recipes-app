@@ -2,11 +2,23 @@
   outline: 2px solid blue; /* Adiciona uma borda azul ao elemento focado */
 }
 
+.container__main-favorite-recipes .container__header {
+  position: -webkit-sticky; /* Para compatibilidade com alguns navegadores */
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Para garantir que o cabeçalho esteja acima do conteúdo */  
+}
+
+.container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+  left: 92%;
+  top: 7px;
+  width: 50px;
+}
+
 .container__filter-buttons {
   display: flex;
   margin: 0 20%;
-  margin-top: 15px;
-  
+  margin-top: 15px;  
 }
 
 .filter-btn {
@@ -102,15 +114,218 @@
 }
 
 .favorite-clipboard-msg {
-  position: absolute;
+  position: fixed;
   right: 10%;
   top: 16%;
   font-size: 1.6rem;
   text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.5);
-  background-color: rgb(61, 61, 61);
-  color:  #fcc436;
   border-radius: 8px;
   margin-right: 15px;
   justify-content: center;
+  z-index: 1000;
 }
+
+@media ( min-width : 1601px ) and ( max-width : 1680px ) {
+
+  .favorite-clipboard-msg {
+    top: 3%;
+    right: 45%;
+    font-size: 1.5rem;
+  }
+}
+
+@media ( min-width : 1441px ) and ( max-width : 1600px ) {
+
+  .favorite-clipboard-msg {
+    top: 4%;
+    right: 45%;
+    font-size: 1.5rem;
+  }
+}
+
+@media ( min-width : 1221px ) and ( max-width : 1440px ) {
+
+  .favorite-clipboard-msg {
+    top: 5%;
+    right: 45%;
+    font-size: 1.5rem;
+  }
+}
+
+@media ( min-width : 1000px ) and ( max-width : 1220px ) {
+
+  .favorite-clipboard-msg {
+    top: 6%;
+    right: 43%;
+    font-size: 1.3rem;
+  }
+}
+
+@media ( min-width : 801px ) and ( max-width : 1000px ) {
+
+  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+    left: 90%;
+    top: 7px;
+    width: 50px;
+  }
+
+  .favorite-clipboard-msg {
+    top: 6%;
+    right: 43%;
+    font-size: 1.3rem;
+  }
+}
+
+@media ( max-width : 800px ) {
+
+  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+    left: 85%;
+    top: 7px;
+    width: 50px;
+  }
+
+  .favorite-clipboard-msg {
+    top: 6%;
+    right: 39.5%;
+    font-size: 1.3rem;
+  }
+
+  .container__recipe {
+    width: 30%;
+    max-width: 30%;
+  }
+  
+}
+
+@media ( max-width : 650px ) {
+
+  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+    left: 82%;
+    top: 7px;
+    width: 50px;
+  }
+
+  .filter-btn {
+    margin: auto;
+    padding: 5px;
+    width: 15%;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+
+  .favorite-clipboard-msg {
+    top: 6%;
+    right: 38.5%;
+    font-size: 1.3rem;
+  }
+
+  .container__recipe {
+    width: 30%;
+    max-width: 30%;
+  }
+
+  .container__filter-buttons {
+    display: flex;
+    margin: 0 20%;
+    margin-top: 15px;    
+  }
+}
+
+@media ( max-width : 480px) {
+
+  .container__favorite-buttons {
+    width: 75%;
+  }
+
+  .filter-btn {
+    width: 30%;
+    font-size: 1rem;
+  }
+
+  .container__recipe {
+    width: 45%;
+    max-width: 45%;
+  }
+
+  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+    left: 75%;
+    top: 7px;
+    width: 50px;
+  }
+}
+
+@media ( max-width : 360px ) {
+
+  .filter-btn {
+    width: 30%;
+    font-size: 1rem;
+  }
+
+  .favorite-clipboard-msg {
+    top: 6.5%;
+    right: 33%;
+    font-size: 1.2rem;
+  }
+
+  .container__recipe {
+    width: 45%;
+    max-width: 45%;
+  }
+
+  .container__filter-buttons {
+    display: flex;
+    margin: 0 20%;
+    margin-top: 15px;    
+  }
+
+  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+    left: 70%;
+    top: 7px;
+    width: 50px;
+  }
+
+  .container__favorite-buttons {
+    width: 75%;
+  }
+}
+
+@media ( max-width : 300px ) {
+
+  .container__main-favorite-recipes .container__header-logo-buttons .btn-toggle-theme {
+    width: 40px;
+    height: 40px;
+  }
+
+  .filter-btn {
+    margin: auto;
+    padding: 5px;
+    width: 30%;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .favorite-clipboard-msg {
+    top: 6.5%;
+    right: 33%;
+    font-size: 1.2rem;
+  }
+
+  .container__recipe {
+    width: 45%;
+    max-width: 45%;
+  }
+
+  .container__filter-buttons {
+    display: flex;
+    margin: 0 20%;
+    margin-top: 15px;    
+  }
+
+  .container__favorite-buttons {
+    width: 75%;
+  }
+}
+
 

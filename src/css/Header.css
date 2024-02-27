@@ -1,6 +1,6 @@
 .container__header {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 }
 
 .container__header-logo-buttons {

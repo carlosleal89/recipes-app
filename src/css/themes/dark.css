@@ -42,3 +42,7 @@
   background-color: rgb(61, 61, 61);
 }
 
+.theme-dark .container__header-title {
+  background-color: #252627;
+}
+

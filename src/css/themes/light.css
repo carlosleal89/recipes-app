@@ -28,3 +28,7 @@
   color:  #e7ad1a;
   background-color: rgb(221, 218, 218);
 }
+
+.theme-light .container__header-title {
+  background-color: white;
+}
