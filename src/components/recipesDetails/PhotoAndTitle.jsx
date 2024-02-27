@@ -1,14 +1,20 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import ThemeToggler from '../ThemeToggler';
 import yellowShare from '../../images/yellowShare.svg';
 import yellowHeart from '../../images/yellowHeart.svg';
 import loginRedHeart from '../../images/loginRedHeart.svg';
-import handleMealFavorites from '../../helpers/handleMealFavorites';
+import {
+  handleMealFavorites,
+  handleDrinkFavorites,
+  checkFavorites } from '../../helpers/handleFavorites';
 
 function PhotoAndTitle({ recipe }) {
+  const location = useLocation();
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isMealFavorite, setIsMealFavorite] = useState(false);
+  const [isDrinkFavorite, setIsDrinkFavorite] = useState(false);
 
   const clipboardShare = (link) => {
     const SECONDS = 1500;
@@ -19,20 +25,14 @@ function PhotoAndTitle({ recipe }) {
     }, SECONDS);
   };
 
-  const checkFavorites = () => {
-    if (localStorage.favoriteRecipes) {
-      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-      const isFavoriteMeal = newFavoriteRecipesArray
-        .some((recipeItem) => recipeItem.id === recipe[0].idMeal);
-      setIsFavorite(isFavoriteMeal);
-    }
-  };
-
   useEffect(() => {
-    checkFavorites();
+    if (location.pathname.includes('/meals')) {
+      checkFavorites(location, recipe, setIsMealFavorite);
+    } else if (location.pathname.includes('/drinks')) {
+      checkFavorites(location, recipe, setIsDrinkFavorite);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isFavorite]);
+  }, [isMealFavorite, isDrinkFavorite]);
 
   return (
     <div>
@@ -66,13 +66,27 @@ function PhotoAndTitle({ recipe }) {
             </button>
             <button
               className="favorite-recipe-btn"
-              onClick={
-                () => handleMealFavorites(recipe[0], isFavorite, setIsFavorite, recipe)
-              }
+              onClick={ () => {
+                if (location.pathname.includes('/meals')) {
+                  handleMealFavorites(
+                    recipe[0],
+                    isMealFavorite,
+                    setIsMealFavorite,
+                    recipe,
+                  );
+                } else {
+                  handleDrinkFavorites(
+                    recipe[0],
+                    isDrinkFavorite,
+                    setIsDrinkFavorite,
+                    recipe,
+                  );
+                }
+              } }
             >
               <img
                 data-testid="favorite-btn"
-                src={ isFavorite ? loginRedHeart : yellowHeart }
+                src={ isMealFavorite || isDrinkFavorite ? loginRedHeart : yellowHeart }
                 alt="favorite icon"
               />
             </button>
