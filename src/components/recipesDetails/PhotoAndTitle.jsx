@@ -4,6 +4,7 @@ import ThemeToggler from '../ThemeToggler';
 import yellowShare from '../../images/yellowShare.svg';
 import yellowHeart from '../../images/yellowHeart.svg';
 import loginRedHeart from '../../images/loginRedHeart.svg';
+import handleMealFavorites from '../../helpers/handleMealFavorites';
 
 function PhotoAndTitle({ recipe }) {
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
@@ -32,37 +33,6 @@ function PhotoAndTitle({ recipe }) {
     checkFavorites();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFavorite]);
-
-  const handleMealFavorites = (mealFav) => {
-    if (!isFavorite) {
-      setIsFavorite(true);
-      const newFavoriteMeal = {
-        id: mealFav.idMeal,
-        type: 'meal',
-        nationality: mealFav.strArea,
-        category: mealFav.strCategory,
-        alcoholicOrNot: '',
-        name: mealFav.strMeal,
-        image: mealFav.strMealThumb,
-      };
-      if (localStorage.favoriteRecipes) {
-        const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-        const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-        newFavoriteRecipesArray.push(newFavoriteMeal);
-        localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
-      } else {
-        localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteMeal]));
-      }
-    } else {
-      setIsFavorite(false);
-      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-      const favoriteArrayRemoved = newFavoriteRecipesArray
-        .filter((recipeItem) => recipeItem.id !== recipe[0].idMeal);
-      localStorage.setItem('favoriteRecipes', JSON
-        .stringify(favoriteArrayRemoved));
-    }
-  };
 
   return (
     <div>
@@ -96,7 +66,9 @@ function PhotoAndTitle({ recipe }) {
             </button>
             <button
               className="favorite-recipe-btn"
-              onClick={ () => handleMealFavorites(recipe[0]) }
+              onClick={
+                () => handleMealFavorites(recipe[0], isFavorite, setIsFavorite, recipe)
+              }
             >
               <img
                 data-testid="favorite-btn"
