@@ -23,86 +23,26 @@
   background-color: dimgray;
 }
 
-/* @media ( min-width : 1000px ) and ( max-width : 1220px ) {
+.theme-dark .page-title {
 
-  .theme-light .btn-toggle-theme {
-    background-color: #222;
-  }
-
-  .theme-dark .container__measure-ingredient {
-    background-color: dimgray;
-  }
-
-  .theme-dark .instructions {
-    background-color: dimgray;
-  }
+  color: blanchedalmond;
 }
 
-@media ( min-width : 800px ) and ( max-width : 1000px ) {
-
-  .theme-light .btn-toggle-theme {
-    background-color: #222;
-  }
-
-  .theme-dark .container__measure-ingredient {
-    background-color: dimgray;
-  }
-
-  .theme-dark .instructions {
-    background-color: dimgray;
-  }
+.theme-dark .container__recipe {
+  background-color: rgb(41, 41, 41);
 }
 
-@media ( max-width : 800px ) {
-
-  .theme-dark .btn-toggle-theme {
-    background-color: #222;
-  }
-
-  .theme-dark .container__measure-ingredient {
-    background-color: dimgray;
-  }
-
-  .theme-dark .instructions {
-    background-color: dimgray;
-  }
+.theme-dark .filter-btn {
+  color:  #fcc436;
+  background-color: rgb(61, 61, 61);
 }
 
-
-@media ( max-width : 650px ) {
-
-  .theme-dark .btn-toggle-theme {
-    background-color: #222;
-  }
-
-  .theme-dark .container__measure-ingredient {
-    background-color: dimgray;
-  }
-
-  .theme-dark .instructions {
-    background-color: dimgray;
-  }
+.theme-dark .favorite-clipboard-msg {
+  color:  #fcc436;
+  background-color: rgb(61, 61, 61);
 }
 
-
-@media ( max-width : 360px ) {
-
-  .theme-dark .btn-toggle-theme {
-    background-color: #222;
-  }
-
-  .theme-dark .container__measure-ingredient {
-    background-color: dimgray;
-  }
-
-  .theme-dark .instructions {
-    background-color: dimgray;
-  }
+.theme-dark .container__header-title {
+  background-color: #252627;
 }
 
-@media ( max-width : 300px ) {
-
-  .theme-dark .btn-toggle-theme {
-    background-color: #222;
-  }
-} */

@@ -1,6 +1,6 @@
 .container__header {
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  
 }
 
 .container__header-logo-buttons {
@@ -32,6 +32,12 @@
   display: flex;
   justify-content: center;
   margin-top: 20px;
+}
+
+.container__header-logo-buttons .btn-theme-container {
+  left: 90%;
+  top: 7px;
+  width: 50px;
 }
 
 .page-title {
