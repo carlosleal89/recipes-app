@@ -104,23 +104,33 @@ function FavoriteRecipes() {
                   src={ element.image }
                   alt={ element.name }
                   key={ index }
-                  className="recipe-img"
+                  className="favorite-recipe-img"
                 />
-                <h4
-                  data-testid={ `${index}-horizontal-top-text` }
-                  className="favorite-recipe-category"
-                >
-                  {element.type === 'meal'
-                    ? `${element.nationality} - ${element.category}`
-                    : `${element.alcoholicOrNot} - ${element.category}`}
-                </h4>
-                <h2
+                <h3
                   role="presentation"
                   data-testid={ `${index}-horizontal-name` }
                   className="favorite-recipe-name"
                 >
                   {element.name}
-                </h2>
+                </h3>
+                <h5
+                  data-testid={ `${index}-horizontal-top-text` }
+                  className="favorite-recipe-category"
+                >
+                  {element.type === 'meal' ? (
+                    <>
+                      <span>{element.nationality}</span>
+                      <br />
+                      <span>{element.category}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{element.alcoholicOrNot}</span>
+                      <br />
+                      <span>{element.category}</span>
+                    </>
+                  )}
+                </h5>
               </div>
               <div className="container__favorite-buttons bottom-aligned">
                 <button

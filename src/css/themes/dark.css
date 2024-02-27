@@ -27,3 +27,18 @@
 
   color: blanchedalmond;
 }
+
+.theme-dark .container__recipe {
+  background-color: rgb(41, 41, 41);
+}
+
+.theme-dark .filter-btn {
+  color:  #fcc436;
+  background-color: rgb(61, 61, 61);
+}
+
+.theme-dark .favorite-clipboard-msg {
+  color:  #fcc436;
+  background-color: rgb(61, 61, 61);
+}
+

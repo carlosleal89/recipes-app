@@ -14,3 +14,17 @@
 .theme-light .btn-toggle-theme {
   background-color: white;
 }
+
+.theme-light .container__recipe {
+  background-color: rgb(221, 218, 218);
+}
+
+.theme-light .filter-btn {
+  color:  #e7ad1a;
+  background-color: rgb(221, 218, 218);
+}
+
+.theme-light .favorite-clipboard-msg {
+  color:  #e7ad1a;
+  background-color: rgb(221, 218, 218);
+}
