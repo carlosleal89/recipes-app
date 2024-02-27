@@ -12,7 +12,7 @@ import '../../css/themes/dark.css';
 function MealDetail({ meal, recommendation }) {
   return (
     <div>
-      <PhotoAndTitle recipe={ meal } meal={ meal } />
+      <PhotoAndTitle recipe={ meal } />
 
       <Ingredients recipe={ meal } />
 

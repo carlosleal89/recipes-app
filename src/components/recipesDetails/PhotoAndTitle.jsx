@@ -5,7 +5,7 @@ import yellowShare from '../../images/yellowShare.svg';
 import yellowHeart from '../../images/yellowHeart.svg';
 import loginRedHeart from '../../images/loginRedHeart.svg';
 
-function PhotoAndTitle({ recipe, meal }) {
+function PhotoAndTitle({ recipe }) {
   const [clipBoardMsg, setClipBoardMsg] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -23,7 +23,7 @@ function PhotoAndTitle({ recipe, meal }) {
       const favoriteRecipes = localStorage.getItem('favoriteRecipes');
       const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
       const isFavoriteMeal = newFavoriteRecipesArray
-        .some((recipeItem) => recipeItem.id === meal[0].idMeal);
+        .some((recipeItem) => recipeItem.id === recipe[0].idMeal);
       setIsFavorite(isFavoriteMeal);
     }
   };
@@ -58,7 +58,7 @@ function PhotoAndTitle({ recipe, meal }) {
       const favoriteRecipes = localStorage.getItem('favoriteRecipes');
       const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
       const favoriteArrayRemoved = newFavoriteRecipesArray
-        .filter((recipeItem) => recipeItem.id !== meal[0].idMeal);
+        .filter((recipeItem) => recipeItem.id !== recipe[0].idMeal);
       localStorage.setItem('favoriteRecipes', JSON
         .stringify(favoriteArrayRemoved));
     }
@@ -96,7 +96,7 @@ function PhotoAndTitle({ recipe, meal }) {
             </button>
             <button
               className="favorite-recipe-btn"
-              onClick={ () => handleMealFavorites(meal[0]) }
+              onClick={ () => handleMealFavorites(recipe[0]) }
             >
               <img
                 data-testid="favorite-btn"
@@ -130,7 +130,6 @@ function PhotoAndTitle({ recipe, meal }) {
 
 PhotoAndTitle.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
-  meal: PropTypes.instanceOf(Object).isRequired,
 };
 
 export default PhotoAndTitle;
