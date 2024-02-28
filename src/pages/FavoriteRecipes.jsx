@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import Header from '../components/Header';
+import FilterButtons from '../components/FilterButtons';
 import TitleContext from '../context/TitleContext';
 import loginRedHeart from '../images/loginRedHeart.svg';
 import yellowShare from '../images/yellowShare.svg';
@@ -35,28 +36,11 @@ function FavoriteRecipes() {
     }, SECONDS);
   };
 
-  const filterButtons = ['All', 'Meal', 'Drink'];
-
   const handleClickFavorite = (id) => {
     const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const removedId = localStorageData.filter((e) => e.id !== id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(removedId));
     setProducts(removedId);
-  };
-
-  const handleClickFilter = (filter) => {
-    if (filter === 'All') {
-      const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      return setProducts(localStorageData);
-    }
-    if (filter === 'Meal') {
-      const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
-      const mealFilter = localStorageData.filter((e) => e.type === 'meal');
-      return setProducts(mealFilter);
-    }
-    const localStorageData = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const drinkFilter = localStorageData.filter((e) => e.type === 'drink');
-    setProducts(drinkFilter);
   };
 
   const handleNavigate = (type, id) => {
@@ -69,20 +53,7 @@ function FavoriteRecipes() {
   return (
     <div className="container__main-favorite-recipes">
       <Header />
-      <div className="container__filter-buttons">
-        {
-          filterButtons.map((element, index) => (
-            <button
-              onClick={ () => handleClickFilter(element) }
-              key={ index }
-              data-testid={ `filter-by-${element.toLowerCase()}-btn` }
-              className="filter-btn"
-            >
-              {element}
-            </button>
-          ))
-        }
-      </div>
+      <FilterButtons setStateFunction={ setProducts } />
       <div data-testid="products-holder" className="container__recipe-favorites">
         {
           products.map((element, index) => (

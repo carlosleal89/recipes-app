@@ -30,7 +30,7 @@ function DoneRecipes() {
   };
 
   return (
-    <div>
+    <div className="container__main-done-recipes">
       <Header />
       <div className="button-container">
         <button

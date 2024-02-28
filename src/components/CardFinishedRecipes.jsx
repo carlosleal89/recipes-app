@@ -73,7 +73,7 @@ function CardFinishedRecipes({ recipe, index }) {
             className="card-done-recipe-info"
             data-testid={ `${index}-horizontal-done-date` }
           >
-            { recipe.doneDate }
+            {`Finalizado em: ${recipe.doneDate}`}
           </p>
         </div>
       </div>
