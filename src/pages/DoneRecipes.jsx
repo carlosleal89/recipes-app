@@ -25,9 +25,11 @@ function DoneRecipes() {
       />
       {doneRecipes
       && doneRecipes.map((recipe, index) => (
-        <div key={ `${index}${recipe.name}` }>
-          <CardFinishedRecipes recipe={ recipe } index={ index } />
-        </div>
+        <CardFinishedRecipes
+          key={ `${index}${Math.floor(Math.random() * 100)}` }
+          recipe={ recipe }
+          index={ index }
+        />
       ))}
     </div>
   );
