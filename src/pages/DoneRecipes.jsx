@@ -29,6 +29,7 @@ function DoneRecipes() {
           key={ `${index}${Math.floor(Math.random() * 100)}` }
           recipe={ recipe }
           index={ index }
+          recipesList={ doneRecipes }
         />
       ))}
     </div>

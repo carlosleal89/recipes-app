@@ -1,13 +1,22 @@
 /* eslint-disable react/jsx-max-depth */
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
-import shareIcon from '../images/shareIcon.svg';
+import yellowShare from '../images/yellowShare.svg';
+import yellowHeart from '../images/yellowHeart.svg';
+import loginRedHeart from '../images/loginRedHeart.svg';
+import {
+  handleMealFavorites,
+  handleDrinkFavorites,
+  checkFavorites,
+} from '../helpers/handleFavorites';
 import '../css/CardFinishedRecipes.css';
 
 function CardFinishedRecipes({ recipe, index }) {
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
+  const [isMealFavorite, setIsMealFavorite] = useState(false);
+  const [isDrinkFavorite, setIsDrinkFavorite] = useState(false);
 
   const clipboardShare = (link) => {
     const SECONDS = 1500;
@@ -17,6 +26,12 @@ function CardFinishedRecipes({ recipe, index }) {
       setClipBoardMsg(false);
     }, SECONDS);
   };
+
+  useEffect(() => {
+    checkFavorites(recipe, setIsMealFavorite);
+    checkFavorites(recipe, setIsDrinkFavorite);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMealFavorite, isDrinkFavorite]);
 
   return (
     <>
@@ -38,16 +53,39 @@ function CardFinishedRecipes({ recipe, index }) {
           >
             { recipe.name }
             <div>
-
               <button
                 className="share-recipe-button"
                 data-testid={ `${index}-horizontal-share-btn` }
                 onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
-                src={ shareIcon }
+                src={ yellowShare }
               >
                 <img
-                  src={ shareIcon }
+                  src={ yellowShare }
                   alt="share icon"
+                />
+              </button>
+              <button
+                className="TSTfavorite-recipe-btn"
+                onClick={ () => {
+                  if (recipe.type === 'meal') {
+                    handleMealFavorites(
+                      recipe,
+                      isMealFavorite,
+                      setIsMealFavorite,
+                    );
+                  } else {
+                    handleDrinkFavorites(
+                      recipe,
+                      isDrinkFavorite,
+                      setIsDrinkFavorite,
+                    );
+                  }
+                } }
+              >
+                <img
+                  data-testid="favorite-btn"
+                  src={ isMealFavorite || isDrinkFavorite ? loginRedHeart : yellowHeart }
+                  alt="favorite icon"
                 />
               </button>
             </div>
@@ -62,13 +100,24 @@ function CardFinishedRecipes({ recipe, index }) {
           {tag}
         </p>
       ))}
-          <p
+          <h5
             className="card-done-recipe-info"
             data-testid={ `${index}-horizontal-top-text` }
           >
-            {recipe.category && recipe.nationality
-              ? `${recipe.nationality} - ${recipe.category}` : recipe.alcoholicOrNot}
-          </p>
+            {recipe.category && recipe.nationality ? (
+              <>
+                <span>{recipe.nationality}</span>
+                <br />
+                <span>{recipe.category}</span>
+              </>
+            ) : (
+              <>
+                <span>{recipe.alcoholicOrNot}</span>
+                <br />
+                <span>{recipe.category}</span>
+              </>
+            )}
+          </h5>
           <p
             className="card-done-recipe-info"
             data-testid={ `${index}-horizontal-done-date` }
