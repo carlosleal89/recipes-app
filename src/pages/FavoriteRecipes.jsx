@@ -53,7 +53,10 @@ function FavoriteRecipes() {
   return (
     <div className="container__main-favorite-recipes">
       <Header />
-      <FilterButtons setStateFunction={ setProducts } />
+      <FilterButtons
+        setStateFunction={ setProducts }
+        localStorageKey="favoriteRecipes"
+      />
       <div data-testid="products-holder" className="container__recipe-favorites">
         {
           products.map((element, index) => (
