@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useMemo, useState, useEffect } from 'react';
 import MealsContext from './MealsContext';
+import formatRecipeKeys from '../helpers/formatRecipeKeys';
 
 export default function MealsProvider({ children }) {
   const [mealList, setMealList] = useState([]);
@@ -16,7 +17,8 @@ export default function MealsProvider({ children }) {
     const MEALS_LIST_MAX_LENGTH = 12;
     const MEALS_CATEGORIES_MAX_LENGTH = 5;
     if (mealList.meals) {
-      setMealListArray(mealList.meals.slice(0, MEALS_LIST_MAX_LENGTH));
+      const formatedArray = formatRecipeKeys(mealList.meals, 'meal');
+      setMealListArray(formatedArray.slice(0, MEALS_LIST_MAX_LENGTH));
     }
     if (mealsCategories.meals) {
       setMealsCategories(mealsCategories.meals.slice(0, MEALS_CATEGORIES_MAX_LENGTH));

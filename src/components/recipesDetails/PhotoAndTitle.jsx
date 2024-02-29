@@ -6,8 +6,7 @@ import yellowShare from '../../images/yellowShare.svg';
 import yellowHeart from '../../images/yellowHeart.svg';
 import loginRedHeart from '../../images/loginRedHeart.svg';
 import {
-  handleMealFavorites,
-  handleDrinkFavorites,
+  handleFavorites,
   checkFavorites } from '../../helpers/handleFavorites';
 
 function PhotoAndTitle({ recipe }) {
@@ -68,13 +67,13 @@ function PhotoAndTitle({ recipe }) {
               className="favorite-recipe-btn"
               onClick={ () => {
                 if (location.pathname.includes('/meals')) {
-                  handleMealFavorites(
+                  handleFavorites(
                     recipe[0],
                     isMealFavorite,
                     setIsMealFavorite,
                   );
                 } else {
-                  handleDrinkFavorites(
+                  handleFavorites(
                     recipe[0],
                     isDrinkFavorite,
                     setIsDrinkFavorite,

@@ -1,14 +1,14 @@
-const handleMealFavorites = (mealFav, isFavorite, setIsFavorite) => {
+const handleFavorites = (mealFav, isFavorite, setIsFavorite) => {
   if (!isFavorite) {
     setIsFavorite(true);
     const newFavoriteMeal = {
-      id: mealFav.idMeal || mealFav.id,
+      id: mealFav.id,
       type: 'meal',
-      nationality: mealFav.strArea || mealFav.nationality,
-      category: mealFav.strCategory || mealFav.category,
+      nationality: mealFav.nationality,
+      category: mealFav.category,
       alcoholicOrNot: '',
-      name: mealFav.strMeal || mealFav.name,
-      image: mealFav.strMealThumb || mealFav.image,
+      name: mealFav.name,
+      image: mealFav.image,
     };
     if (localStorage.favoriteRecipes) {
       const favoriteRecipes = localStorage.getItem('favoriteRecipes');
@@ -23,38 +23,7 @@ const handleMealFavorites = (mealFav, isFavorite, setIsFavorite) => {
     const favoriteRecipes = localStorage.getItem('favoriteRecipes');
     const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
     const favoriteArrayRemoved = newFavoriteRecipesArray
-      .filter((recipeItem) => recipeItem.id !== mealFav.idMeal || mealFav.id);
-    localStorage.setItem('favoriteRecipes', JSON
-      .stringify(favoriteArrayRemoved));
-  }
-};
-
-const handleDrinkFavorites = (drinkFav, isFavorite, setIsFavorite) => {
-  if (!isFavorite) {
-    setIsFavorite(true);
-    const newFavoriteDrink = {
-      id: drinkFav.idDrink || drinkFav.id,
-      type: 'drink',
-      nationality: '',
-      category: drinkFav.strCategory || drinkFav.category,
-      alcoholicOrNot: drinkFav.strAlcoholic || drinkFav.alcoholicOrNot,
-      name: drinkFav.strDrink || drinkFav.name,
-      image: drinkFav.strDrinkThumb || drinkFav.image,
-    };
-    if (localStorage.favoriteRecipes) {
-      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-      newFavoriteRecipesArray.push(newFavoriteDrink);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteDrink]));
-    }
-  } else {
-    setIsFavorite(false);
-    const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-    const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-    const favoriteArrayRemoved = newFavoriteRecipesArray
-      .filter((recipeItem) => recipeItem.id !== drinkFav.idDrink);
+      .filter((recipeItem) => recipeItem.id !== mealFav.id);
     localStorage.setItem('favoriteRecipes', JSON
       .stringify(favoriteArrayRemoved));
   }
@@ -74,4 +43,4 @@ const checkFavorites = (recipe, setFavorite) => {
   }
 };
 
-export { handleMealFavorites, handleDrinkFavorites, checkFavorites };
+export { handleFavorites, checkFavorites };

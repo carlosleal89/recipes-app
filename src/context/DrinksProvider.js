@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useMemo, useEffect } from 'react';
 import DrinksContext from './DrinksContext';
+import formatRecipeKeys from '../helpers/formatRecipeKeys';
 
 export default function DrinksProvider({ children }) {
   const [drinkList, setDrinkList] = useState([]);
@@ -16,7 +17,8 @@ export default function DrinksProvider({ children }) {
     const DRINKS_LIST_MAX_LENGTH = 12;
     const DRINKS_CATEGORIES_MAX_LENGTH = 5;
     if (drinkList.drinks) {
-      setDrinkListArray(drinkList.drinks.slice(0, DRINKS_LIST_MAX_LENGTH));
+      const formatedArray = formatRecipeKeys(drinkList.drinks, 'drink');
+      setDrinkListArray(formatedArray.slice(0, DRINKS_LIST_MAX_LENGTH));
     }
     if (drinksCategories.drinks) {
       setDrinksCategories(drinksCategories.drinks.slice(0, DRINKS_CATEGORIES_MAX_LENGTH));

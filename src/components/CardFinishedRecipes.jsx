@@ -7,8 +7,7 @@ import yellowShare from '../images/yellowShare.svg';
 import yellowHeart from '../images/yellowHeart.svg';
 import loginRedHeart from '../images/loginRedHeart.svg';
 import {
-  handleMealFavorites,
-  handleDrinkFavorites,
+  handleFavorites,
   checkFavorites,
 } from '../helpers/handleFavorites';
 import '../css/CardFinishedRecipes.css';
@@ -68,13 +67,13 @@ function CardFinishedRecipes({ recipe, index }) {
                 className="TSTfavorite-recipe-btn"
                 onClick={ () => {
                   if (recipe.type === 'meal') {
-                    handleMealFavorites(
+                    handleFavorites(
                       recipe,
                       isMealFavorite,
                       setIsMealFavorite,
                     );
                   } else {
-                    handleDrinkFavorites(
+                    handleFavorites(
                       recipe,
                       isDrinkFavorite,
                       setIsDrinkFavorite,

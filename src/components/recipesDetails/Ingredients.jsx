@@ -4,6 +4,7 @@ import '../../css/themes/dark.css';
 import '../../css/themes/light.css';
 
 function Ingredients({ recipe }) {
+  console.log(recipe);
   const getMeasuresAndIngredients = (drinkOrMeal) => {
     const ingredientsList = drinkOrMeal.map((obj) => {
       const measures = Object.keys(obj)
