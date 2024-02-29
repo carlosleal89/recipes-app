@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import MealDetail from '../components/recipesDetails/MealDetail';
 import DrinkDetail from '../components/recipesDetails/DrinkDetail';
-import { fetchMealsById,
+import {
+  fetchMealsById,
   fetchDrinksById,
   fetchRecommendationDrinks,
   fetchRecommendationMeals } from '../helpers/API_URL';
 import '../css/RecipesDetails.css';
 import Loading from '../components/recipesDetails/Loading';
+import formatRecipeKeys from '../helpers/formatRecipeKeys';
 
 function RecipeDetails() {
   const [meal, setMeal] = useState(null);
@@ -23,14 +25,16 @@ function RecipeDetails() {
     const getMealOrDrink = async () => {
       if (location.pathname === `/meals/${id}`) {
         const mealById = await fetchMealsById(id);
-        setMeal(mealById);
+        const formatedMeal = formatRecipeKeys(mealById.meals);
+        setMeal(formatedMeal);
         const recommendation = await fetchRecommendationDrinks();
         setRecommendationDrinks(recommendation);
       }
 
       if (location.pathname === `/drinks/${id}`) {
         const drinkById = await fetchDrinksById(id);
-        setDrink(drinkById);
+        const formatedDrink = formatRecipeKeys(drinkById.drinks);
+        setDrink(formatedDrink);
         const recommendation = await fetchRecommendationMeals();
         setRecommendationMeals(recommendation);
       }
@@ -46,14 +50,14 @@ function RecipeDetails() {
         <>
           {meal && (
             <MealDetail
-              meal={ meal.meals }
+              meal={ meal }
               recommendation={ recommendationDrinks.drinks }
             />
           )}
 
           {drink && (
             <DrinkDetail
-              drink={ drink.drinks }
+              drink={ drink }
               recommendation={ recommendationMeals.meals }
             />
           )}

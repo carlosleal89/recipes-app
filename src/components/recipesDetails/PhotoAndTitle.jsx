@@ -6,8 +6,7 @@ import yellowShare from '../../images/yellowShare.svg';
 import yellowHeart from '../../images/yellowHeart.svg';
 import loginRedHeart from '../../images/loginRedHeart.svg';
 import {
-  handleMealFavorites,
-  handleDrinkFavorites,
+  handleFavorites,
   checkFavorites } from '../../helpers/handleFavorites';
 
 function PhotoAndTitle({ recipe }) {
@@ -27,9 +26,9 @@ function PhotoAndTitle({ recipe }) {
 
   useEffect(() => {
     if (location.pathname.includes('/meals')) {
-      checkFavorites(location, recipe, setIsMealFavorite);
+      checkFavorites(recipe[0], setIsMealFavorite);
     } else if (location.pathname.includes('/drinks')) {
-      checkFavorites(location, recipe, setIsDrinkFavorite);
+      checkFavorites(recipe[0], setIsDrinkFavorite);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMealFavorite, isDrinkFavorite]);
@@ -68,18 +67,16 @@ function PhotoAndTitle({ recipe }) {
               className="favorite-recipe-btn"
               onClick={ () => {
                 if (location.pathname.includes('/meals')) {
-                  handleMealFavorites(
+                  handleFavorites(
                     recipe[0],
                     isMealFavorite,
                     setIsMealFavorite,
-                    recipe,
                   );
                 } else {
-                  handleDrinkFavorites(
+                  handleFavorites(
                     recipe[0],
                     isDrinkFavorite,
                     setIsDrinkFavorite,
-                    recipe,
                   );
                 }
               } }

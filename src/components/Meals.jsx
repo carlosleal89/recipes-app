@@ -4,7 +4,6 @@ import TitleContext from '../context/TitleContext';
 import MealsContext from '../context/MealsContext';
 import useFetch from '../hooks/useFetch';
 import MealsCategories from './MealsCategories';
-// import '../css/Meals.css';
 
 function Meals() {
   const {

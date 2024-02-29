@@ -1,14 +1,14 @@
-const handleMealFavorites = (mealFav, isFavorite, setIsFavorite, recipe) => {
+const handleFavorites = (mealFav, isFavorite, setIsFavorite) => {
   if (!isFavorite) {
     setIsFavorite(true);
     const newFavoriteMeal = {
-      id: mealFav.idMeal,
-      type: 'meal',
-      nationality: mealFav.strArea,
-      category: mealFav.strCategory,
-      alcoholicOrNot: '',
-      name: mealFav.strMeal,
-      image: mealFav.strMealThumb,
+      id: mealFav.id,
+      type: mealFav.type || (mealFav.idMeal && 'meal') || (mealFav.idDrink && 'drink'),
+      nationality: mealFav.nationality,
+      category: mealFav.category,
+      alcoholicOrNot: mealFav.alcoholicOrNot || '',
+      name: mealFav.name,
+      image: mealFav.image,
     };
     if (localStorage.favoriteRecipes) {
       const favoriteRecipes = localStorage.getItem('favoriteRecipes');
@@ -23,57 +23,24 @@ const handleMealFavorites = (mealFav, isFavorite, setIsFavorite, recipe) => {
     const favoriteRecipes = localStorage.getItem('favoriteRecipes');
     const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
     const favoriteArrayRemoved = newFavoriteRecipesArray
-      .filter((recipeItem) => recipeItem.id !== recipe[0].idMeal);
+      .filter((recipeItem) => recipeItem.id !== mealFav.id);
     localStorage.setItem('favoriteRecipes', JSON
       .stringify(favoriteArrayRemoved));
   }
 };
 
-const handleDrinkFavorites = (drinkFav, isFavorite, setIsFavorite, recipe) => {
-  if (!isFavorite) {
-    setIsFavorite(true);
-    const newFavoriteDrink = {
-      id: drinkFav.idDrink,
-      type: 'drink',
-      nationality: '',
-      category: drinkFav.strCategory,
-      alcoholicOrNot: drinkFav.strAlcoholic,
-      name: drinkFav.strDrink,
-      image: drinkFav.strDrinkThumb,
-    };
-    if (localStorage.favoriteRecipes) {
-      const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-      const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-      newFavoriteRecipesArray.push(newFavoriteDrink);
-      localStorage.setItem('favoriteRecipes', JSON.stringify(newFavoriteRecipesArray));
-    } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify([newFavoriteDrink]));
-    }
-  } else {
-    setIsFavorite(false);
+const checkFavorites = (recipe, setFavorite) => {
+  if (localStorage.favoriteRecipes) {
     const favoriteRecipes = localStorage.getItem('favoriteRecipes');
     const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-    const favoriteArrayRemoved = newFavoriteRecipesArray
-      .filter((recipeItem) => recipeItem.id !== recipe[0].idDrink);
-    localStorage.setItem('favoriteRecipes', JSON
-      .stringify(favoriteArrayRemoved));
+    const isFavoriteRecipe = newFavoriteRecipesArray
+      .some((favoriteItem) => {
+        if (recipe.idMeal) {
+          return favoriteItem.id === recipe.idMeal || favoriteItem.id === recipe.id;
+        } return favoriteItem.id === recipe.idDrink || favoriteItem.id === recipe.id;
+      });
+    setFavorite(isFavoriteRecipe);
   }
 };
 
-const checkFavorites = (location, recipe, setFavorite) => {
-  if (localStorage.favoriteRecipes && location.pathname.includes('/meals')) {
-    const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-    const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-    const isFavoriteMeal = newFavoriteRecipesArray
-      .some((recipeItem) => recipeItem.id === recipe[0].idMeal);
-    setFavorite(isFavoriteMeal);
-  } else if (localStorage.favoriteRecipes && location.pathname.includes('/drinks')) {
-    const favoriteRecipes = localStorage.getItem('favoriteRecipes');
-    const newFavoriteRecipesArray = JSON.parse(favoriteRecipes);
-    const isFavoriteDrink = newFavoriteRecipesArray
-      .some((recipeItem) => recipeItem.id === recipe[0].idDrink);
-    setFavorite(isFavoriteDrink);
-  }
-};
-
-export { handleMealFavorites, handleDrinkFavorites, checkFavorites };
+export { handleFavorites, checkFavorites };
