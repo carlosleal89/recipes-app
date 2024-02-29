@@ -117,6 +117,7 @@
   left: 80%;
   position: fixed;
   width: 20%;
+  z-index: 1000;
 }
 
 .share-recipe-btn {

@@ -11,9 +11,8 @@ import {
   checkFavorites,
 } from '../helpers/handleFavorites';
 import '../css/FavoriteRecipes.css';
-// import '../css/CardFinishedRecipes.css';
 
-function CardFinishedRecipes({ recipe, index }) {
+function CardRecipes({ recipe, index }) {
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
   const [isMealFavorite, setIsMealFavorite] = useState(false);
   const [isDrinkFavorite, setIsDrinkFavorite] = useState(false);
@@ -36,8 +35,8 @@ function CardFinishedRecipes({ recipe, index }) {
   }, [isMealFavorite, isDrinkFavorite]);
 
   return (
-    <>
-      <div className="container__recipe">
+    <div className="container__recipe">
+      <div className="favorite-recipe">
         <Link to={ `/${recipe.type}s/${recipe.id}` }>
           <img
             alt="recipe"
@@ -122,7 +121,7 @@ function CardFinishedRecipes({ recipe, index }) {
           // eslint-disable-next-line operator-linebreak
           &&
             <p
-              className="card-done-recipe-info"
+              className="recipe-finished-date"
               data-testid={ `${index}-horizontal-done-date` }
             >
               {`Finalizado em: ${recipe.doneDate}`}
@@ -130,15 +129,23 @@ function CardFinishedRecipes({ recipe, index }) {
         }
       </div>
       {
-        clipBoardmsg && <p className="clipboard-message">Link copied!</p>
+        clipBoardmsg
+        // eslint-disable-next-line operator-linebreak
+        &&
+          <p
+            data-testid="copy-clipboard"
+            className="favorite-clipboard-msg"
+          >
+            Link copied!
+          </p>
       }
-    </>
+    </div>
   );
 }
 
-CardFinishedRecipes.propTypes = {
+CardRecipes.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
   index: PropTypes.number.isRequired,
 };
 
-export default CardFinishedRecipes;
+export default CardRecipes;

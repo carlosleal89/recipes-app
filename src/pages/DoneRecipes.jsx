@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import TitleContext from '../context/TitleContext';
-import CardFinishedRecipes from '../components/CardFinishedRecipes';
+import CardRecipes from '../components/CardRecipes';
 import FilterButtons from '../components/FilterButtons';
 import '../css/DoneRecipes.css';
 
@@ -23,14 +23,16 @@ function DoneRecipes() {
         setStateFunction={ setDoneRecipes }
         localStorageKey="doneRecipes"
       />
-      {doneRecipes
-      && doneRecipes.map((recipe, index) => (
-        <CardFinishedRecipes
-          key={ `${index}${Math.floor(Math.random() * 100)}` }
-          recipe={ recipe }
-          index={ index }
-        />
-      ))}
+      <div data-testid="products-holder" className="container__recipe-favorites">
+        {doneRecipes
+        && doneRecipes.map((recipe, index) => (
+          <CardRecipes
+            key={ `${index}${Math.floor(Math.random() * 100)}` }
+            recipe={ recipe }
+            index={ index }
+          />
+        ))}
+      </div>
     </div>
   );
 }
