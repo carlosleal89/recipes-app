@@ -10,7 +10,6 @@ import '../../css/themes/light.css';
 import '../../css/themes/dark.css';
 
 function MealDetail({ meal, recommendation }) {
-  console.log(meal);
   return (
     <div>
       <PhotoAndTitle recipe={ meal } />
