@@ -3,10 +3,10 @@ const handleFavorites = (mealFav, isFavorite, setIsFavorite) => {
     setIsFavorite(true);
     const newFavoriteMeal = {
       id: mealFav.id,
-      type: 'meal',
+      type: mealFav.type || (mealFav.idMeal && 'meal') || (mealFav.idDrink && 'drink'),
       nationality: mealFav.nationality,
       category: mealFav.category,
-      alcoholicOrNot: '',
+      alcoholicOrNot: mealFav.alcoholicOrNot || '',
       name: mealFav.name,
       image: mealFav.image,
     };

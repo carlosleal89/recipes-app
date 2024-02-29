@@ -10,12 +10,15 @@ import {
   handleFavorites,
   checkFavorites,
 } from '../helpers/handleFavorites';
-import '../css/CardFinishedRecipes.css';
+import '../css/FavoriteRecipes.css';
+// import '../css/CardFinishedRecipes.css';
 
 function CardFinishedRecipes({ recipe, index }) {
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
   const [isMealFavorite, setIsMealFavorite] = useState(false);
   const [isDrinkFavorite, setIsDrinkFavorite] = useState(false);
+
+  const location = useLocation();
 
   const clipboardShare = (link) => {
     const SECONDS = 1500;
@@ -34,96 +37,97 @@ function CardFinishedRecipes({ recipe, index }) {
 
   return (
     <>
-      <div className="card-recipe">
-        <div className="image-recipe">
-          <Link to={ `/${recipe.type}s/${recipe.id}` }>
-            <img
-              alt="recipe"
-              src={ recipe.image }
-              data-testid={ `${index}-horizontal-image` }
-              className="recipe-image"
-            />
-          </Link>
-        </div>
-        <div className="recipe-info">
-          <h6
-            className="title-recipes"
-            data-testid={ `${index}-horizontal-name` }
-          >
-            { recipe.name }
-            <div>
-              <button
-                className="share-recipe-button"
-                data-testid={ `${index}-horizontal-share-btn` }
-                onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
-                src={ yellowShare }
-              >
-                <img
-                  src={ yellowShare }
-                  alt="share icon"
-                />
-              </button>
-              <button
-                className="TSTfavorite-recipe-btn"
-                onClick={ () => {
-                  if (recipe.type === 'meal') {
-                    handleFavorites(
-                      recipe,
-                      isMealFavorite,
-                      setIsMealFavorite,
-                    );
-                  } else {
-                    handleFavorites(
-                      recipe,
-                      isDrinkFavorite,
-                      setIsDrinkFavorite,
-                    );
-                  }
-                } }
-              >
-                <img
-                  data-testid="favorite-btn"
-                  src={ isMealFavorite || isDrinkFavorite ? loginRedHeart : yellowHeart }
-                  alt="favorite icon"
-                />
-              </button>
-            </div>
-          </h6>
-          { recipe.tags
-      && recipe.tags.splice(0, 2).map((tag, tagIndex) => (
-        <p
-          className="card-done-recipe-info"
-          data-testid={ `${index}-${tag}-horizontal-tag` }
-          key={ `${index}${tag}${tagIndex}` }
+      <div className="container__recipe">
+        <Link to={ `/${recipe.type}s/${recipe.id}` }>
+          <img
+            alt="recipe"
+            src={ recipe.image }
+            data-testid={ `${index}-horizontal-image` }
+            className="favorite-recipe-img"
+          />
+        </Link>
+        <h3
+          role="presentation"
+          className="favorite-recipe-name"
+          data-testid={ `${index}-horizontal-name` }
         >
-          {tag}
-        </p>
-      ))}
-          <h5
-            className="card-done-recipe-info"
-            data-testid={ `${index}-horizontal-top-text` }
+          { recipe.name }
+        </h3>
+        <h5
+          className="card-done-recipe-info"
+          data-testid={ `${index}-horizontal-top-text` }
+        >
+          {recipe.category && recipe.nationality ? (
+            <>
+              <span>{recipe.nationality}</span>
+              <br />
+              <span>{recipe.category}</span>
+            </>
+          ) : (
+            <>
+              <span>{recipe.alcoholicOrNot}</span>
+              <br />
+              <span>{recipe.category}</span>
+            </>
+          )}
+        </h5>
+        <div className="container__favorite-buttons bottom-aligned">
+          <button
+            className="recipe-share-btn"
+            data-testid={ `${index}-horizontal-share-btn` }
+            onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
           >
-            {recipe.category && recipe.nationality ? (
-              <>
-                <span>{recipe.nationality}</span>
-                <br />
-                <span>{recipe.category}</span>
-              </>
-            ) : (
-              <>
-                <span>{recipe.alcoholicOrNot}</span>
-                <br />
-                <span>{recipe.category}</span>
-              </>
-            )}
-          </h5>
-          <p
-            className="card-done-recipe-info"
-            data-testid={ `${index}-horizontal-done-date` }
+            <img
+              src={ yellowShare }
+              alt="share icon"
+            />
+          </button>
+          <button
+            className="recipe-favorite-btn"
+            onClick={ () => {
+              if (recipe.type === 'meal') {
+                handleFavorites(
+                  recipe,
+                  isMealFavorite,
+                  setIsMealFavorite,
+                );
+              } else {
+                handleFavorites(
+                  recipe,
+                  isDrinkFavorite,
+                  setIsDrinkFavorite,
+                );
+              }
+            } }
           >
-            {`Finalizado em: ${recipe.doneDate}`}
-          </p>
+            <img
+              data-testid="favorite-btn"
+              src={ isMealFavorite || isDrinkFavorite ? loginRedHeart : yellowHeart }
+              alt="favorite icon"
+            />
+          </button>
         </div>
+        { recipe.tags
+    && recipe.tags.splice(0, 2).map((tag, tagIndex) => (
+      <p
+        className="card-done-recipe-info"
+        data-testid={ `${index}-${tag}-horizontal-tag` }
+        key={ `${index}${tag}${tagIndex}` }
+      >
+        {tag}
+      </p>
+    ))}
+        {
+          location.pathname === '/done-recipes'
+          // eslint-disable-next-line operator-linebreak
+          &&
+            <p
+              className="card-done-recipe-info"
+              data-testid={ `${index}-horizontal-done-date` }
+            >
+              {`Finalizado em: ${recipe.doneDate}`}
+            </p>
+        }
       </div>
       {
         clipBoardmsg && <p className="clipboard-message">Link copied!</p>

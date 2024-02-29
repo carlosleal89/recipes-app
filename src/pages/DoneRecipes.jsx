@@ -17,7 +17,7 @@ function DoneRecipes() {
   }, [setTitle]);
 
   return (
-    <div className="container__main-done-recipes">
+    <div className="container__main-favorite-recipes">
       <Header />
       <FilterButtons
         setStateFunction={ setDoneRecipes }
@@ -29,7 +29,6 @@ function DoneRecipes() {
           key={ `${index}${Math.floor(Math.random() * 100)}` }
           recipe={ recipe }
           index={ index }
-          recipesList={ doneRecipes }
         />
       ))}
     </div>
