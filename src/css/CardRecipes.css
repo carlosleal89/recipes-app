@@ -2,14 +2,14 @@
   outline: 2px solid blue; /* Adiciona uma borda azul ao elemento focado */
 }
 
-.container__main-favorite-recipes .container__header {
+.container__main-card-recipes .container__header {
   position: -webkit-sticky; /* Para compatibilidade com alguns navegadores */
   position: sticky;
   top: 0;
   z-index: 1000; /* Para garantir que o cabeçalho esteja acima do conteúdo */  
 }
 
-.container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+.container__main-card-recipes .container__header-logo-buttons .btn-theme-container {
   left: 92%;
   top: 7px;
   width: 50px;
@@ -44,7 +44,7 @@
   transform: scale(1.05);
 }
 
-.favorite-recipe {
+.card-recipe {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,12 +57,12 @@
   margin-bottom: 5px;
 }
 
-.favorite-recipe-img {
+.card-recipe-img {
   width: 90%;
   margin-bottom: 20px;
 }
 
-.container__recipe-favorites {
+.container__recipe-card {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
@@ -70,17 +70,17 @@
   max-width: 95%;
 }
 
-.container__favorite-buttons {
-  margin-bottom: 0;
+.container__card-buttons {
+  /* margin-bottom: 0; */
   width: 50%;
   display: flex;
   flex-direction: row;
 }
 
-.bottom-aligned {
-  margin-top: auto;
-  margin-bottom: 5px;
-}
+/* .bottom-aligned {
+  position: relative;
+  bottom: 0;
+} */
 
 .recipe-share-btn {
   margin: auto;
@@ -109,7 +109,7 @@
   width: 40%;
 }
 
-.favorite-clipboard-msg {
+.card-clipboard-msg {
   position: fixed;
   right: 10%;
   top: 16%;
@@ -123,7 +123,7 @@
 
 @media ( min-width : 1601px ) and ( max-width : 1680px ) {
 
-  .favorite-clipboard-msg {
+  .card-clipboard-msg {
     top: 3%;
     right: 45%;
     font-size: 1.5rem;
@@ -132,7 +132,7 @@
 
 @media ( min-width : 1441px ) and ( max-width : 1600px ) {
 
-  .favorite-clipboard-msg {
+  .card-clipboard-msg {
     top: 4%;
     right: 45%;
     font-size: 1.5rem;
@@ -141,7 +141,7 @@
 
 @media ( min-width : 1221px ) and ( max-width : 1440px ) {
 
-  .favorite-clipboard-msg {
+  .card-clipboard-msg {
     top: 5%;
     right: 45%;
     font-size: 1.5rem;
@@ -150,7 +150,7 @@
 
 @media ( min-width : 1000px ) and ( max-width : 1220px ) {
 
-  .favorite-clipboard-msg {
+  .card-clipboard-msg {
     top: 6%;
     right: 43%;
     font-size: 1.3rem;
@@ -159,7 +159,7 @@
 
 @media ( min-width : 801px ) and ( max-width : 1000px ) {
 
-  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+  .container__main-card-recipes .container__header-logo-buttons .btn-theme-container {
     left: 90%;
     top: 7px;
     width: 50px;
@@ -174,7 +174,7 @@
 
 @media ( max-width : 800px ) {
 
-  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+  .container__main-card-recipes .container__header-logo-buttons .btn-theme-container {
     left: 85%;
     top: 7px;
     width: 50px;
@@ -195,7 +195,7 @@
 
 @media ( max-width : 650px ) {
 
-  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+  .container__main-card-recipes .container__header-logo-buttons .btn-theme-container {
     left: 82%;
     top: 7px;
     width: 50px;
@@ -230,7 +230,7 @@
 
 @media ( max-width : 480px) {
 
-  .container__favorite-buttons {
+  .container__card-buttons {
     width: 75%;
   }
 
@@ -244,7 +244,7 @@
     max-width: 45%;
   }
 
-  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+  .container__main-card-recipes .container__header-logo-buttons .btn-theme-container {
     left: 75%;
     top: 7px;
     width: 50px;
@@ -275,20 +275,20 @@
     margin-top: 15px;    
   }
 
-  .container__main-favorite-recipes .container__header-logo-buttons .btn-theme-container {
+  .container__main-card-recipes .container__header-logo-buttons .btn-theme-container {
     left: 70%;
     top: 7px;
     width: 50px;
   }
 
-  .container__favorite-buttons {
+  .container__card-buttons {
     width: 75%;
   }
 }
 
 @media ( max-width : 300px ) {
 
-  .container__main-favorite-recipes .container__header-logo-buttons .btn-toggle-theme {
+  .container__main-card-recipes .container__header-logo-buttons .btn-toggle-theme {
     width: 40px;
     height: 40px;
   }
@@ -319,7 +319,7 @@
     margin-top: 15px;    
   }
 
-  .container__favorite-buttons {
+  .container__card-buttons {
     width: 75%;
   }
 }

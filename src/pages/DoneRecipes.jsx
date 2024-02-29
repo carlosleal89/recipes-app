@@ -3,7 +3,6 @@ import Header from '../components/Header';
 import TitleContext from '../context/TitleContext';
 import CardRecipes from '../components/CardRecipes';
 import FilterButtons from '../components/FilterButtons';
-import '../css/DoneRecipes.css';
 
 function DoneRecipes() {
   const { setTitle } = useContext(TitleContext);
@@ -17,13 +16,13 @@ function DoneRecipes() {
   }, [setTitle]);
 
   return (
-    <div className="container__main-favorite-recipes">
+    <div className="container__main-card-recipes">
       <Header />
       <FilterButtons
         setStateFunction={ setDoneRecipes }
         localStorageKey="doneRecipes"
       />
-      <div data-testid="products-holder" className="container__recipe-favorites">
+      <div data-testid="products-holder" className="container__recipe-card">
         {doneRecipes
         && doneRecipes.map((recipe, index) => (
           <CardRecipes

@@ -10,7 +10,7 @@ import {
   handleFavorites,
   checkFavorites,
 } from '../helpers/handleFavorites';
-import '../css/FavoriteRecipes.css';
+import '../css/CardRecipes.css';
 
 function CardRecipes({ recipe, index }) {
   const [clipBoardmsg, setClipBoardMsg] = useState(false);
@@ -36,24 +36,24 @@ function CardRecipes({ recipe, index }) {
 
   return (
     <div className="container__recipe">
-      <div className="favorite-recipe">
+      <div className="card-recipe">
         <Link to={ `/${recipe.type}s/${recipe.id}` }>
           <img
             alt="recipe"
             src={ recipe.image }
             data-testid={ `${index}-horizontal-image` }
-            className="favorite-recipe-img"
+            className="card-recipe-img"
           />
         </Link>
         <h3
           role="presentation"
-          className="favorite-recipe-name"
+          className="card-recipe-name"
           data-testid={ `${index}-horizontal-name` }
         >
           { recipe.name }
         </h3>
         <h5
-          className="card-done-recipe-info"
+          className="card-recipe-info"
           data-testid={ `${index}-horizontal-top-text` }
         >
           {recipe.category && recipe.nationality ? (
@@ -70,7 +70,7 @@ function CardRecipes({ recipe, index }) {
             </>
           )}
         </h5>
-        <div className="container__favorite-buttons bottom-aligned">
+        <div className="container__card-buttons bottom-aligned">
           <button
             className="recipe-share-btn"
             data-testid={ `${index}-horizontal-share-btn` }
@@ -109,7 +109,7 @@ function CardRecipes({ recipe, index }) {
         { recipe.tags
     && recipe.tags.splice(0, 2).map((tag, tagIndex) => (
       <p
-        className="card-done-recipe-info"
+        className="card-recipe-info"
         data-testid={ `${index}-${tag}-horizontal-tag` }
         key={ `${index}${tag}${tagIndex}` }
       >
@@ -134,7 +134,7 @@ function CardRecipes({ recipe, index }) {
         &&
           <p
             data-testid="copy-clipboard"
-            className="favorite-clipboard-msg"
+            className="card-clipboard-msg"
           >
             Link copied!
           </p>

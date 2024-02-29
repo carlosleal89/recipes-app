@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import FilterButtons from '../components/FilterButtons';
 import TitleContext from '../context/TitleContext';
-import '../css/FavoriteRecipes.css';
 import CardRecipes from '../components/CardRecipes';
 
 function FavoriteRecipes() {
@@ -17,13 +16,13 @@ function FavoriteRecipes() {
   }, [setTitle]);
 
   return (
-    <div className="container__main-favorite-recipes">
+    <div className="container__main-card-recipes">
       <Header />
       <FilterButtons
         setStateFunction={ setProducts }
         localStorageKey="favoriteRecipes"
       />
-      <div data-testid="products-holder" className="container__recipe-favorites">
+      <div data-testid="products-holder" className="container__recipe-card">
         {
           products.map((element, index) => (
             <CardRecipes
