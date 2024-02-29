@@ -71,16 +71,16 @@
 }
 
 .container__card-buttons {
-  /* margin-bottom: 0; */
+  margin-bottom: 0;
   width: 50%;
   display: flex;
   flex-direction: row;
 }
 
-/* .bottom-aligned {
-  position: relative;
-  bottom: 0;
-} */
+.bottom-aligned {
+  margin-bottom: 5px;
+  margin-top: auto;
+}
 
 .recipe-share-btn {
   margin: auto;

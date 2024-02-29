@@ -70,42 +70,6 @@ function CardRecipes({ recipe, index }) {
             </>
           )}
         </h5>
-        <div className="container__card-buttons bottom-aligned">
-          <button
-            className="recipe-share-btn"
-            data-testid={ `${index}-horizontal-share-btn` }
-            onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
-          >
-            <img
-              src={ yellowShare }
-              alt="share icon"
-            />
-          </button>
-          <button
-            className="recipe-favorite-btn"
-            onClick={ () => {
-              if (recipe.type === 'meal') {
-                handleFavorites(
-                  recipe,
-                  isMealFavorite,
-                  setIsMealFavorite,
-                );
-              } else {
-                handleFavorites(
-                  recipe,
-                  isDrinkFavorite,
-                  setIsDrinkFavorite,
-                );
-              }
-            } }
-          >
-            <img
-              data-testid="favorite-btn"
-              src={ isMealFavorite || isDrinkFavorite ? loginRedHeart : yellowHeart }
-              alt="favorite icon"
-            />
-          </button>
-        </div>
         { recipe.tags
     && recipe.tags.splice(0, 2).map((tag, tagIndex) => (
       <p
@@ -116,7 +80,7 @@ function CardRecipes({ recipe, index }) {
         {tag}
       </p>
     ))}
-        {
+        {/* {
           location.pathname === '/done-recipes'
           // eslint-disable-next-line operator-linebreak
           &&
@@ -126,8 +90,55 @@ function CardRecipes({ recipe, index }) {
             >
               {`Finalizado em: ${recipe.doneDate}`}
             </p>
-        }
+        } */}
       </div>
+      <div className="container__card-buttons bottom-aligned">
+        <button
+          className="recipe-share-btn"
+          data-testid={ `${index}-horizontal-share-btn` }
+          onClick={ () => clipboardShare(`http://localhost:3000/${recipe.type}s/${recipe.id}`) }
+        >
+          <img
+            src={ yellowShare }
+            alt="share icon"
+          />
+        </button>
+        <button
+          className="recipe-favorite-btn"
+          onClick={ () => {
+            if (recipe.type === 'meal') {
+              handleFavorites(
+                recipe,
+                isMealFavorite,
+                setIsMealFavorite,
+              );
+            } else {
+              handleFavorites(
+                recipe,
+                isDrinkFavorite,
+                setIsDrinkFavorite,
+              );
+            }
+          } }
+        >
+          <img
+            data-testid="favorite-btn"
+            src={ isMealFavorite || isDrinkFavorite ? loginRedHeart : yellowHeart }
+            alt="favorite icon"
+          />
+        </button>
+      </div>
+      {
+        location.pathname === '/done-recipes'
+        // eslint-disable-next-line operator-linebreak
+        &&
+          <p
+            className="recipe-finished-date"
+            data-testid={ `${index}-horizontal-done-date` }
+          >
+            {`Finalizado em: ${recipe.doneDate}`}
+          </p>
+      }
       {
         clipBoardmsg
         // eslint-disable-next-line operator-linebreak
